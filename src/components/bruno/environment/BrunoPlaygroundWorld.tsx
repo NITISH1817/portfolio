@@ -406,3 +406,4 @@ export default function BrunoPlaygroundWorld() {
     </group>
   );
 }
+
