@@ -1,17 +1,17 @@
 {
-  "url": "http://localhost:5173",
-  "timestamp": "2026-11-05T08:43:45.978Z",
+  "url": "https://portfolio-nitish1817.vercel.app",
+  "timestamp": "2026-11-05T08:50:37.650Z",
   "performance": {
     "httpStatus": 200,
-    "loadDoneMs": 1256,
+    "loadDoneMs": 2079,
     "fcpMs": null,
-    "domContentLoadedMs": 1249,
-    "loadEventMs": 1251
+    "domContentLoadedMs": 2074,
+    "loadEventMs": 2074
   },
   "tests": {
     "http_load": {
       "pass": true,
-      "loadTime": 1256
+      "loadTime": 2079
     },
     "intro_terminal": {
       "pass": true
