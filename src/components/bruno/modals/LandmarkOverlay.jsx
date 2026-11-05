@@ -144,6 +144,11 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
       subtitle: 'ACADEMIC FOUNDATION & VERIFIED CREDENTIALS',
       badge: 'HONORS VERIFIED'
     },
+    education: {
+      title: 'EDUCATION CENTER',
+      subtitle: 'ACADEMIC FOUNDATION & UNIVERSITY HIGHLIGHTS',
+      badge: 'ACADEMIC VERIFIED'
+    },
     resume: {
       title: 'DOSSIER ARCHIVE',
       subtitle: 'OFFICIAL CURRICULUM VITAE & SUMMARY',
@@ -842,9 +847,9 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
           )}
 
           {/* ============================================================== */}
-          {/* 5. ACHIEVEMENTS — HONORS VAULT                                 */}
+          {/* 5. ACHIEVEMENTS & EDUCATION — HONORS VAULT                     */}
           {/* ============================================================== */}
-          {landmarkId === 'experience' && (
+          {(landmarkId === 'experience' || landmarkId === 'education') && (
             <div className="space-y-6">
               <div className="flex items-center justify-between pb-3 border-b border-purple-500/25">
                 <div>
