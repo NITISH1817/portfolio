@@ -1,79 +1,79 @@
 export default [
     {
-        title: 'Black Hole',
-        url: 'https://awwwards-2022-workshop.vercel.app',
+        title: 'Binary Search Simulator',
+        url: 'https://github.com/NITISH1817',
         image: 'black-hole.ktx',
         imageMini: 'black-hole-mini.ktx'
     },
     {
-        title: 'Infinite World',
-        url: 'https://infinite-world.vercel.app',
+        title: 'Gradient Descent Visualizer',
+        url: 'https://github.com/NITISH1817',
         image: 'infinite-world.ktx',
         imageMini: 'infinite-world-mini.ktx'
     },
     {
-        title: 'My Room in 3D',
-        url: 'https://my-room-in-3d.vercel.app',
+        title: 'CLAHE Vision Diagnostics',
+        url: 'https://github.com/NITISH1817/Diabetic-Retinopathy-Classification',
         image: 'my-room-in-3d.ktx',
         imageMini: 'my-room-in-3d-mini.ktx',
     },
     {
-        title: 'Particles System',
-        url: 'https://three-js-tsl-particles-system.vercel.app',
+        title: 'ChromaDB HNSW Vector Index',
+        url: 'https://github.com/NITISH1817/LEXORA-AI',
         image: 'particles-system.ktx',
         imageMini: 'particles-system-mini.ktx'
     },
     {
-        title: 'Stylized Low Poly',
-        url: 'https://stylized-low-poly.vercel.app',
+        title: 'Hierarchical Clause Chunking',
+        url: 'https://github.com/NITISH1817/LEXORA-AI',
         image: 'stylized-low-poly.ktx',
         imageMini: 'stylized-low-poly-mini.ktx'
     },
     {
-        title: 'Holographic terrain',
-        url: 'https://experiment-holographic-terrain.vercel.app',
+        title: 'MLOps Drift Monitoring',
+        url: 'https://github.com/NITISH1817/Student-Performance-MLOps',
         image: 'holographic-terrain.ktx',
         imageMini: 'holographic-terrain-mini.ktx'
     },
     {
-        title: 'Woodkid Volcano Robot',
-        url: 'https://experiment-woodkid-volcano-robot.vercel.app',
+        title: 'Multi-Output Classifier',
+        url: 'https://github.com/NITISH1817/AI-Govt-Scheme-Recommender',
         image: 'woodkid-volcano-robot.ktx',
         imageMini: 'woodkid-volcano-robot-mini.ktx'
     },
     {
-        title: 'Bounce Friday',
-        url: 'https://threejs-journey.com/apps/bounce-friday/',
+        title: 'EfficientNet-B3 Feature Backbone',
+        url: 'https://github.com/NITISH1817/Diabetic-Retinopathy-Classification',
         image: 'bounce-friday.ktx',
         imageMini: 'bounce-friday-mini.ktx'
     },
     {
-        title: 'VFX flames',
-        url: 'https://threejs.org/examples/webgpu_tsl_vfx_flames.html',
+        title: 'Java 17 Event Orchestrator',
+        url: 'https://github.com/NITISH1817/SETU-Interoperability-Platform',
         image: 'vfx-flames.ktx',
         imageMini: 'vfx-flames-mini.ktx'
     },
     {
-        title: 'VFX tornado',
-        url: 'https://threejs.org/examples/webgpu_tsl_vfx_tornado.html',
+        title: 'Automated SLA Escalation Worker',
+        url: 'https://github.com/NITISH1817/WaterGrievance-Portal',
         image: 'vfx-tornado.ktx',
         imageMini: 'vfx-tornado-mini.ktx'
     },
     {
-        title: 'DOOM Portal',
-        url: 'https://doom-portal-in-webgl.vercel.app',
+        title: 'Hybrid Matrix Recommender',
+        url: 'https://github.com/NITISH1817/Movie-Recommendation-System',
         image: 'doom-portal.ktx',
         imageMini: 'doom-portal-mini.ktx'
     },
     {
-        title: 'Organic Sphere',
-        url: 'https://organic-sphere.vercel.app',
+        title: '170+ LeetCode DSA Java Solvers',
+        url: 'https://leetcode.com/u/NITISH1817/',
         image: 'organic-sphere.ktx',
         imageMini: 'organic-sphere-mini.ktx'
     },
     {
-        title: 'Attractors',
-        url: 'https://threejs.org/examples/webgpu_tsl_compute_attractors_particles.html',
+        title: 'SIH 2025 Architecture Gateway',
+        url: 'https://github.com/NITISH1817',
         image: 'attractors.ktx',
         imageMini: 'attractors-mini.ktx'
     }

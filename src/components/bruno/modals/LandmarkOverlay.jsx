@@ -59,6 +59,14 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   useEffect(() => {
+    if (initialProject) {
+      setSelectedProject(initialProject);
+    } else if (landmarkId === 'projects') {
+      setSelectedProject(projects[0]);
+    }
+  }, [initialProject, landmarkId]);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
     };

@@ -184,8 +184,10 @@ export class Menu
         {
             if(this.current)
                 _name = this.current.name
-            else
+            else if(this.default)
                 _name = this.default.name
+            else
+                return
         }
 
         const item = this.items.get(_name)
@@ -275,8 +277,11 @@ export class Menu
 
         this.state = Menu.CLOSING
         this.events.trigger('close')
-        this.current.isOpen = false
-        this.current.events.trigger('close')
+        if(this.current)
+        {
+            this.current.isOpen = false
+            this.current.events.trigger('close')
+        }
     }
 
     preopen()
