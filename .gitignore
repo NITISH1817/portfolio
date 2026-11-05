@@ -36,3 +36,6 @@ test-screenshots/
 *.cjs
 *-results.json
 portfolio4_test_results.json
+
+.vercel
+.env*
