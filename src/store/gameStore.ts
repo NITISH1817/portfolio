@@ -250,6 +250,8 @@ interface SavedState {
   unlockedAchievements: string[];
   discoveredLandmarks: Record<string, boolean>;
   timeOfDay: 'day' | 'sunset' | 'night';
+  weather: 'clear' | 'rain' | 'mist';
+  vehicleColor: string;
   audioEnabled: boolean;
   xp: number;
 }
@@ -261,6 +263,8 @@ const getDefaultState = (): SavedState => ({
   unlockedAchievements: [],
   discoveredLandmarks: {},
   timeOfDay: 'night', // signature dark purple neon aesthetic by default
+  weather: 'clear',
+  vehicleColor: '#DC2626',
   audioEnabled: false,
   xp: 0
 });
@@ -278,6 +282,8 @@ const loadInitialState = (): SavedState => {
       unlockedAchievements: Array.isArray(parsed.unlockedAchievements) ? parsed.unlockedAchievements : [],
       discoveredLandmarks: parsed.discoveredLandmarks || {},
       timeOfDay: ['day', 'sunset', 'night'].includes(parsed.timeOfDay) ? parsed.timeOfDay : 'night',
+      weather: ['clear', 'rain', 'mist'].includes(parsed.weather) ? parsed.weather : 'clear',
+      vehicleColor: parsed.vehicleColor || '#DC2626',
       audioEnabled: Boolean(parsed.audioEnabled),
       xp: typeof parsed.xp === 'number' ? parsed.xp : 0
     };
@@ -299,6 +305,8 @@ const persistState = (state: SavedState) => {
         unlockedAchievements: state.unlockedAchievements,
         discoveredLandmarks: state.discoveredLandmarks,
         timeOfDay: state.timeOfDay,
+        weather: state.weather,
+        vehicleColor: state.vehicleColor,
         audioEnabled: state.audioEnabled,
         xp: state.xp
       })
@@ -316,6 +324,8 @@ export interface GameStoreState {
   unlockedAchievements: string[];
   discoveredLandmarks: Record<string, boolean>;
   timeOfDay: 'day' | 'sunset' | 'night';
+  weather: 'clear' | 'rain' | 'mist';
+  vehicleColor: string;
   audioEnabled: boolean;
   xp: number;
 
@@ -330,6 +340,14 @@ export interface GameStoreState {
   missionToast: string | null;
   isAchievementsModalOpen: boolean;
 
+  // Portfolio 4.0 Interactive Modals & Engines
+  isCommandPaletteOpen: boolean;
+  isAiAssistantOpen: boolean;
+  isDevDashboardOpen: boolean;
+  isTechLabOpen: boolean;
+  performanceTier: 'high' | 'medium' | 'low';
+  reducedMotion: boolean;
+
   // Actions
   completeMission: (missionId: string) => void;
   setCurrentMission: (missionId: string) => void;
@@ -338,6 +356,15 @@ export interface GameStoreState {
   discoverLandmark: (landmarkId: string) => void;
   setTimeOfDay: (time: 'day' | 'sunset' | 'night') => void;
   cycleTimeOfDay: () => void;
+  setWeather: (weather: 'clear' | 'rain' | 'mist') => void;
+  cycleWeather: () => void;
+  setVehicleColor: (color: string) => void;
+  setCommandPaletteOpen: (open: boolean) => void;
+  setAiAssistantOpen: (open: boolean) => void;
+  setDevDashboardOpen: (open: boolean) => void;
+  setTechLabOpen: (open: boolean) => void;
+  setPerformanceTier: (tier: 'high' | 'medium' | 'low') => void;
+  setReducedMotion: (rm: boolean) => void;
   setAudioEnabled: (enabled: boolean) => void;
   setNitroEnergy: (energy: number) => void;
   setIsNitroActive: (active: boolean) => void;
@@ -362,6 +389,14 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
   crystalToast: null,
   missionToast: null,
   isAchievementsModalOpen: false,
+
+  // Portfolio 4.0 Interactive Modals & Engines
+  isCommandPaletteOpen: false,
+  isAiAssistantOpen: false,
+  isDevDashboardOpen: false,
+  isTechLabOpen: false,
+  performanceTier: 'high',
+  reducedMotion: false,
 
   completeMission: (missionId: string) => {
     const { completedMissions, currentMissionId } = get();
@@ -600,6 +635,51 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
 
   setAchievementsModalOpen: (open: boolean) => set({ isAchievementsModalOpen: open }),
 
+  setWeather: (weather: 'clear' | 'rain' | 'mist') => {
+    set({ weather });
+    persistState({
+      completedMissions: get().completedMissions,
+      currentMissionId: get().currentMissionId,
+      collectedCrystals: get().collectedCrystals,
+      unlockedAchievements: get().unlockedAchievements,
+      discoveredLandmarks: get().discoveredLandmarks,
+      timeOfDay: get().timeOfDay,
+      weather,
+      vehicleColor: get().vehicleColor,
+      audioEnabled: get().audioEnabled,
+      xp: get().xp
+    });
+  },
+
+  cycleWeather: () => {
+    const current = get().weather;
+    const next = current === 'clear' ? 'rain' : current === 'rain' ? 'mist' : 'clear';
+    get().setWeather(next);
+  },
+
+  setVehicleColor: (vehicleColor: string) => {
+    set({ vehicleColor });
+    persistState({
+      completedMissions: get().completedMissions,
+      currentMissionId: get().currentMissionId,
+      collectedCrystals: get().collectedCrystals,
+      unlockedAchievements: get().unlockedAchievements,
+      discoveredLandmarks: get().discoveredLandmarks,
+      timeOfDay: get().timeOfDay,
+      weather: get().weather,
+      vehicleColor,
+      audioEnabled: get().audioEnabled,
+      xp: get().xp
+    });
+  },
+
+  setCommandPaletteOpen: (open: boolean) => set({ isCommandPaletteOpen: open }),
+  setAiAssistantOpen: (open: boolean) => set({ isAiAssistantOpen: open }),
+  setDevDashboardOpen: (open: boolean) => set({ isDevDashboardOpen: open }),
+  setTechLabOpen: (open: boolean) => set({ isTechLabOpen: open }),
+  setPerformanceTier: (tier: 'high' | 'medium' | 'low') => set({ performanceTier: tier }),
+  setReducedMotion: (rm: boolean) => set({ reducedMotion: rm }),
+
   resetProgress: () => {
     if (typeof window !== 'undefined') {
       try {
@@ -618,7 +698,14 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
       activeToast: null,
       crystalToast: null,
       missionToast: null,
-      isAchievementsModalOpen: false
+      isAchievementsModalOpen: false,
+      isCommandPaletteOpen: false,
+      isAiAssistantOpen: false,
+      isDevDashboardOpen: false,
+      isTechLabOpen: false,
+      performanceTier: 'high',
+      reducedMotion: false
     });
   }
 }));
+

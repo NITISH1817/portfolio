@@ -22,3 +22,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment & local secrets
+.env
+.env.*.local
+.env.local
+
+# Vercel deployment cache
+.vercel
+
+# QA Test scripts and screenshot artifacts
+test-screenshots/
+*.cjs
+*-results.json
+portfolio4_test_results.json

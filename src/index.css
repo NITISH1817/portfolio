@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 @layer base {
   :root {
@@ -19,6 +25,8 @@
   }
 
   body {
+    margin: 0;
+    padding: 0;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -114,4 +122,28 @@
   pointer-events: none;
   z-index: 5; /* Above WebGL, below content */
   mix-blend-mode: screen;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Modal Custom Scrollbar */
+.game-modal-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.game-modal-scroll::-webkit-scrollbar-track {
+  background: rgba(10, 5, 20, 0.5);
+  border-radius: 4px;
+}
+.game-modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.35);
+  border-radius: 4px;
+}
+.game-modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
 }

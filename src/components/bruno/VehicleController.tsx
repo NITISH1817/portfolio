@@ -32,8 +32,19 @@ export const useVehicleController = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore keystrokes when typing in text inputs or textareas
-      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
+      // Ignore keystrokes when typing in text inputs or textareas, or when a modal is open
+      const isInput = ['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName);
+      const isModalOpen = Boolean(document.querySelector('[data-modal-active="true"]'));
+
+      if (isInput || (isModalOpen && e.code !== 'Escape')) {
+        inputsRef.current.forward = false;
+        inputsRef.current.backward = false;
+        inputsRef.current.left = false;
+        inputsRef.current.right = false;
+        inputsRef.current.brake = false;
+        inputsRef.current.nitro = false;
+        return;
+      }
 
       const key = (e.key || '').toLowerCase();
       if (key === 'r' || e.code === 'KeyR') {

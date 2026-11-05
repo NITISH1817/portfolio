@@ -14,9 +14,11 @@ export default function LandmarkBeacon({
   onLeave,
   isDiscovered = false
 }) {
-  const groupRef = useRef();
-  const ringRef = useRef();
-  const beamRef = useRef();
+  const groupRef = useRef(null);
+  const ringRef = useRef(null);
+  const orbitRingRef = useRef(null);
+  const beamRef = useRef(null);
+  const prismRef = useRef(null);
   const isInside = useRef(false);
   const worldPosRef = useRef(new THREE.Vector3());
 
@@ -25,16 +27,27 @@ export default function LandmarkBeacon({
 
     // Pulse the ground ring
     if (ringRef.current) {
-      ringRef.current.scale.setScalar(1 + Math.sin(t * 3.5) * 0.08);
-      ringRef.current.rotation.z += 0.01;
+      ringRef.current.scale.setScalar(1 + Math.sin(t * 3.2) * 0.08);
     }
 
-    // Shimmer vertical beacon beam
-    if (beamRef.current) {
-      beamRef.current.material.opacity = 0.18 + Math.sin(t * 2) * 0.08;
+    // Rotating holographic orbital ring
+    if (orbitRingRef.current) {
+      orbitRingRef.current.rotation.z = t * 1.2;
+      orbitRingRef.current.rotation.x = Math.PI / 2 + Math.sin(t * 1.8) * 0.25;
     }
 
-    // Distance check to car using authoritative physics position and beacon world position
+    // Shimmer vertical holographic beam
+    if (beamRef.current && beamRef.current.material) {
+      beamRef.current.material.opacity = 0.2 + Math.sin(t * 2.2) * 0.1;
+    }
+
+    // Floating rotating crystal prism atop the beacon
+    if (prismRef.current) {
+      prismRef.current.rotation.y = t * 1.5;
+      prismRef.current.position.y = 2.4 + Math.sin(t * 2.5) * 0.15;
+    }
+
+    // World position proximity check to authoritative vehicle
     if (groupRef.current) {
       groupRef.current.getWorldPosition(worldPosRef.current);
     } else {
@@ -65,86 +78,99 @@ export default function LandmarkBeacon({
 
   return (
     <group ref={groupRef} position={position}>
-      {/* 1. Ground Trigger Pad */}
+      {/* 1. Ground Energy Disc */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.03, 0]}>
         <circleGeometry args={[radius * 0.72, 32]} />
         <meshStandardMaterial
           color={color}
           transparent
-          opacity={0.18}
-          roughness={0.5}
+          opacity={0.15}
+          roughness={0.6}
         />
       </mesh>
 
-      {/* Pulsing Outer Ring */}
+      {/* Pulsing Outer Neon Ring */}
       <mesh
         ref={ringRef}
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, 0.04, 0]}
       >
-        <ringGeometry args={[radius * 0.7, radius * 0.76, 32]} />
+        <ringGeometry args={[radius * 0.68, radius * 0.75, 36]} />
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={1.8}
+          emissiveIntensity={2.2}
           transparent
           opacity={0.85}
         />
       </mesh>
 
-      {/* 2. Vertical Beacon Light Column */}
-      <mesh ref={beamRef} position={[0, 8, 0]}>
-        <cylinderGeometry args={[0.15, radius * 0.35, 16, 16, 1, true]} />
+      {/* 2. Vertical Beacon Holographic Column */}
+      <mesh ref={beamRef} position={[0, 7.5, 0]}>
+        <cylinderGeometry args={[0.2, radius * 0.35, 15, 20, 1, true]} />
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={1.4}
+          emissiveIntensity={1.2}
           transparent
-          opacity={0.2}
+          opacity={0.25}
           side={THREE.DoubleSide}
           depthWrite={false}
         />
       </mesh>
 
-      {/* 3. Proportioned Landmark Waypoint Signage (Height ~2.6m - Does NOT obstruct driving) */}
-      <group position={[0, 0, 0]}>
-        {/* Sleek Dark Pedestal Base */}
-        <mesh position={[0, 0.3, 0]} castShadow>
-          <cylinderGeometry args={[0.3, 0.42, 0.6, 8]} />
-          <meshStandardMaterial color="#1E232A" metalness={0.7} roughness={0.3} />
-        </mesh>
-        {/* Central Stem */}
-        <mesh position={[0, 1.2, 0]} castShadow>
-          <cylinderGeometry args={[0.1, 0.1, 1.4, 8]} />
-          <meshStandardMaterial color="#334155" metalness={0.8} roughness={0.2} />
-        </mesh>
-        {/* Glowing Waypoint Emblem Core */}
-        <mesh position={[0, 2.1, 0]}>
-          <octahedronGeometry args={[0.35]} />
-          <meshStandardMaterial
-            color={color}
-            emissive={color}
-            emissiveIntensity={2.5}
-            roughness={0.1}
-          />
-        </mesh>
-        {/* Point light accentuating the emblem */}
-        <pointLight position={[0, 2.1, 0]} color={color} intensity={1.8} distance={6} />
+      {/* 3. Sleek Low-Poly Waypoint Pillar Base (Dark Chrome & Neon Accents) */}
+      <mesh position={[0, 0.7, 0]} castShadow>
+        <cylinderGeometry args={[0.3, 0.45, 1.4, 8]} />
+        <meshStandardMaterial color="#0F172A" roughness={0.3} metalness={0.8} />
+      </mesh>
+      <mesh position={[0, 1.42, 0]} castShadow>
+        <boxGeometry args={[0.65, 0.12, 0.65]} />
+        <meshStandardMaterial color="#1E293B" roughness={0.2} metalness={0.9} />
+      </mesh>
 
-        {/* Compact Proportioned Landmark Sign Tag */}
-        <group position={[0, 2.75, 0]}>
-          <Text
-            fontSize={0.36}
-            color="#FFFFFF"
-            anchorX="center"
-            anchorY="middle"
-            fontWeight="bold"
-            outlineWidth={0.04}
-            outlineColor="#0F172A"
-          >
-            {name}
-          </Text>
-        </group>
+      {/* Floating Holographic Kinetic Ring */}
+      <mesh ref={orbitRingRef} position={[0, 2.4, 0]}>
+        <torusGeometry args={[0.65, 0.025, 8, 24]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={2.5}
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
+
+      {/* Floating Crystal Prism Marker */}
+      <mesh ref={prismRef} position={[0, 2.4, 0]} castShadow>
+        <octahedronGeometry args={[0.38, 0]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={2.8}
+          roughness={0.1}
+          metalness={0.7}
+          transparent
+          opacity={0.9}
+        />
+      </mesh>
+
+      {/* Dynamic Colored Point Light Illuminating Ground and Approaching Car */}
+      <pointLight color={color} intensity={2.8} distance={10} decay={2} position={[0, 2.0, 0]} />
+
+      {/* Elegant Waypoint Label Sign */}
+      <group position={[0, 3.4, 0]}>
+        <Text
+          fontSize={0.4}
+          color="#FFFFFF"
+          anchorX="center"
+          anchorY="middle"
+          fontWeight="bold"
+          outlineWidth={0.04}
+          outlineColor="#0F172A"
+        >
+          {name}
+        </Text>
       </group>
     </group>
   );

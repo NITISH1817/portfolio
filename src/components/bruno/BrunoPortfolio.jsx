@@ -23,7 +23,18 @@ import WorldMap from './WorldMap';
 import LandmarkOverlay from './modals/LandmarkOverlay';
 import IntroScreen from './IntroScreen';
 import ClassicPortfolio from './ClassicPortfolio';
+import Crystals from './collectibles/Crystals';
+import TireTracks from './effects/TireTracks';
+import TireSmoke from './effects/TireSmoke';
+import MissionWaypoint from './effects/MissionWaypoint';
+import CommandPalette from './modals/CommandPalette';
+import NexusAiModal from './modals/NexusAiModal';
+import DevDashboardModal from './modals/DevDashboardModal';
+import TechLabModal from './modals/TechLabModal';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import { carAudio } from './CarAudio';
+import { useGameStore } from '../../store/gameStore';
+import { hasWebGL } from '../../utils';
 
 export default function BrunoPortfolio() {
   const [isIntro, setIsIntro] = useState(true);
@@ -32,8 +43,27 @@ export default function BrunoPortfolio() {
   const [activeLandmarkId, setActiveLandmarkId] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [nearLandmark, setNearLandmark] = useState(null);
-  const [discoveredLandmarks, setDiscoveredLandmarks] = useState({});
   const [isClassicMode, setIsClassicMode] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(true);
+
+  useEffect(() => {
+    if (!hasWebGL()) {
+      setWebglSupported(false);
+      setIsClassicMode(true);
+    }
+  }, []);
+
+  // Sync discovered landmarks & Portfolio 4.0 modals with store
+  const storeDiscovered = useGameStore((s) => s.discoveredLandmarks);
+  const discoverLandmark = useGameStore((s) => s.discoverLandmark);
+  const isCommandPaletteOpen = useGameStore((s) => s.isCommandPaletteOpen);
+  const setCommandPaletteOpen = useGameStore((s) => s.setCommandPaletteOpen);
+  const isAiAssistantOpen = useGameStore((s) => s.isAiAssistantOpen);
+  const setAiAssistantOpen = useGameStore((s) => s.setAiAssistantOpen);
+  const isDevDashboardOpen = useGameStore((s) => s.isDevDashboardOpen);
+  const setDevDashboardOpen = useGameStore((s) => s.setDevDashboardOpen);
+  const isTechLabOpen = useGameStore((s) => s.isTechLabOpen);
+  const setTechLabOpen = useGameStore((s) => s.setTechLabOpen);
 
   // Initialize frame-rate independent vehicle inputs
   useVehicleController();
@@ -41,7 +71,7 @@ export default function BrunoPortfolio() {
   // Handle landmark approach
   const handleLandmarkEnter = (landmark) => {
     setNearLandmark(landmark);
-    setDiscoveredLandmarks((prev) => ({ ...prev, [landmark.id]: true }));
+    discoverLandmark(landmark.id);
   };
 
   const handleLandmarkLeave = (landmarkId) => {
@@ -52,7 +82,7 @@ export default function BrunoPortfolio() {
     carAudio.playChime();
     setActiveLandmarkId(landmarkId);
     setSelectedProject(project);
-    setDiscoveredLandmarks((prev) => ({ ...prev, [landmarkId]: true }));
+    discoverLandmark(landmarkId);
   };
 
   // Listen for keyboard 'E' or 'Enter' or direct open events to explore landmarks
@@ -75,6 +105,26 @@ export default function BrunoPortfolio() {
     };
   }, [nearLandmark, activeLandmarkId, isMapOpen, isIntro]);
 
+  // Listen for custom modal triggers
+  useEffect(() => {
+    const handleOpenCmd = () => setCommandPaletteOpen(true);
+    const handleOpenAi = () => setAiAssistantOpen(true);
+    const handleOpenDash = () => setDevDashboardOpen(true);
+    const handleOpenTech = () => setTechLabOpen(true);
+
+    window.addEventListener('open-command-palette', handleOpenCmd);
+    window.addEventListener('open-ai-assistant', handleOpenAi);
+    window.addEventListener('open-dev-dashboard', handleOpenDash);
+    window.addEventListener('open-tech-lab', handleOpenTech);
+
+    return () => {
+      window.removeEventListener('open-command-palette', handleOpenCmd);
+      window.removeEventListener('open-ai-assistant', handleOpenAi);
+      window.removeEventListener('open-dev-dashboard', handleOpenDash);
+      window.removeEventListener('open-tech-lab', handleOpenTech);
+    };
+  }, [setCommandPaletteOpen, setAiAssistantOpen, setDevDashboardOpen, setTechLabOpen]);
+
   // Listen for 'M' to toggle world map
   useEffect(() => {
     const handleToggleMap = () => {
@@ -86,12 +136,21 @@ export default function BrunoPortfolio() {
     return () => window.removeEventListener('toggle-map', handleToggleMap);
   }, [isIntro, activeLandmarkId]);
 
-  const discoveredCount = Object.keys(discoveredLandmarks).length;
+  const discoveredCount = Object.keys(storeDiscovered).length;
+
+  const isAnyModalActive = Boolean(
+    activeLandmarkId ||
+    isMapOpen ||
+    isCommandPaletteOpen ||
+    isAiAssistantOpen ||
+    isDevDashboardOpen ||
+    isTechLabOpen
+  );
 
   return (
-    <div className="relative w-full h-screen overflow-hidden select-none bg-[#171222]">
-      {/* 1. Introduction Screen (Matching Reference Screenshot 1) */}
-      {isIntro && !isClassicMode && (
+    <div className="relative w-full h-full overflow-hidden bg-[#171222] select-none">
+      {/* 1. Cinematic Intro Screen */}
+      {isIntro && (
         <IntroScreen
           onStart={() => {
             setIsIntro(false);
@@ -99,7 +158,7 @@ export default function BrunoPortfolio() {
         />
       )}
 
-      {/* 2. Overhead World Map (Pressed with 'M' or HUD) */}
+      {/* 2. Tactical Overhead Radar & World Map */}
       <WorldMap
         isOpen={isMapOpen}
         onClose={() => setIsMapOpen(false)}
@@ -107,11 +166,39 @@ export default function BrunoPortfolio() {
           window.dispatchEvent(new CustomEvent('car-teleport', { detail: coords }));
           carAudio.playChime();
         }}
-        discoveredLandmarks={discoveredLandmarks}
+        discoveredLandmarks={storeDiscovered}
       />
 
-      {/* 3. Game HUD (Only visible once started) */}
-      {!isIntro && (
+      {/* 3. Command Palette (Ctrl + K) */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+        onOpenLandmark={handleOpenLandmark}
+        onToggleMap={() => setIsMapOpen((prev) => !prev)}
+        isClassicMode={isClassicMode}
+        setIsClassicMode={setIsClassicMode}
+      />
+
+      {/* 4. NEXUS AI Portfolio Assistant */}
+      <NexusAiModal
+        isOpen={isAiAssistantOpen}
+        onClose={() => setAiAssistantOpen(false)}
+      />
+
+      {/* 5. Live Developer Analytics Dashboard */}
+      <DevDashboardModal
+        isOpen={isDevDashboardOpen}
+        onClose={() => setDevDashboardOpen(false)}
+      />
+
+      {/* 6. Interactive Technology Laboratory */}
+      <TechLabModal
+        isOpen={isTechLabOpen}
+        onClose={() => setTechLabOpen(false)}
+      />
+
+      {/* 7. Game HUD (Only visible during active gameplay, hidden during modal/map exploration) */}
+      {!isIntro && !isAnyModalActive && (
         <BrunoHUD
           cameraMode={cameraMode}
           setCameraMode={setCameraMode}
@@ -125,7 +212,7 @@ export default function BrunoPortfolio() {
         />
       )}
 
-      {/* 4. Interactive Landmark Glassmorphic Overlay Modal */}
+      {/* 8. Interactive Landmark Overlay Modal */}
       {activeLandmarkId && (
         <LandmarkOverlay
           landmarkId={activeLandmarkId}
@@ -137,13 +224,20 @@ export default function BrunoPortfolio() {
         />
       )}
 
-      {/* 5. 2D Reader Mode (Document Layout for Accessibility) */}
-      {isClassicMode ? (
+      {/* WebGL Fallback Banner if unsupported */}
+      {!webglSupported && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-amber-950/90 border border-amber-400 text-amber-200 text-xs font-mono shadow-2xl flex items-center gap-2">
+          <span>WebGL acceleration unavailable. Active mode: Accessible 2D Portfolio.</span>
+        </div>
+      )}
+
+      {/* 9. 2D Reader Mode (Document Layout for Accessibility) */}
+      {isClassicMode || !webglSupported ? (
         <div className="w-full h-full overflow-y-auto bg-slate-950 text-white pt-16">
           <ClassicPortfolio />
         </div>
       ) : (
-        /* 6. Full 3D Stylized Game World (Matching Reference Screenshots) */
+        /* 10. Full 3D Stylized Game World */
         <Canvas
           shadows={{ type: THREE.PCFShadowMap }}
           dpr={[1, 2]}
@@ -153,7 +247,7 @@ export default function BrunoPortfolio() {
           }}
           camera={{ position: [11, 13, 11], fov: 45, near: 0.1, far: 350 }}
         >
-          {/* Atmosphere: Dark Purple Sky (#171222), Neon Lights & Fireflies */}
+          {/* Dynamic Atmosphere: Day / Sunset / Night, Rain & Mist */}
           <Atmosphere />
 
           <Suspense fallback={null}>
@@ -169,7 +263,17 @@ export default function BrunoPortfolio() {
               {/* Authoritative Red Off-Road Vehicle Model & Rapier RigidBody */}
               <VehiclePhysics initialPosition={[0, 1.2, 0]} />
 
-              {/* Stylized Island: Warm Orange & Peach Terrain, Racing Track with Red/White Curbs, Cyan Lakes, Wooden Bridges */}
+              {/* Real-Time Tire Marks & Tire Smoke under wheels */}
+              <TireTracks />
+              <TireSmoke />
+
+              {/* 7 Collectible Glowing Technology Crystals */}
+              <Crystals />
+
+              {/* Active Mission Destination Beacon & Target Ring */}
+              <MissionWaypoint />
+
+              {/* Stylized Island: Warm Orange & Peach Terrain, Racing Track, Cyan Lakes */}
               <StylizedIsland />
 
               {/* Cherry Blossom Trees & Falling Sakura Petals */}
@@ -186,46 +290,57 @@ export default function BrunoPortfolio() {
               <LandmarkAbout
                 onEnter={handleLandmarkEnter}
                 onLeave={handleLandmarkLeave}
-                isDiscovered={!!discoveredLandmarks['about']}
+                isDiscovered={!!storeDiscovered['about']}
               />
 
               <LandmarkSkills
                 onEnter={handleLandmarkEnter}
                 onLeave={handleLandmarkLeave}
-                isDiscovered={!!discoveredLandmarks['skills']}
+                isDiscovered={!!storeDiscovered['skills']}
               />
 
               <LandmarkProjects
                 onEnter={handleLandmarkEnter}
                 onLeave={handleLandmarkLeave}
                 onSelectProject={(proj) => handleOpenLandmark('projects', proj)}
-                isDiscovered={!!discoveredLandmarks['projects']}
+                isDiscovered={!!storeDiscovered['projects']}
               />
 
               <LandmarkExperience
                 onEnter={handleLandmarkEnter}
                 onLeave={handleLandmarkLeave}
-                isDiscovered={!!discoveredLandmarks['experience']}
+                isDiscovered={!!storeDiscovered['experience']}
               />
 
               <LandmarkResume
                 onEnter={handleLandmarkEnter}
                 onLeave={handleLandmarkLeave}
-                isDiscovered={!!discoveredLandmarks['resume']}
+                isDiscovered={!!storeDiscovered['resume']}
               />
 
               <LandmarkContact
                 onEnter={handleLandmarkEnter}
                 onLeave={handleLandmarkLeave}
-                isDiscovered={!!discoveredLandmarks['contact']}
+                isDiscovered={!!storeDiscovered['contact']}
               />
 
               {/* Vintage Streetlights, Benches, Rocks, Stunt Ramps & Cones */}
               <Decorations />
             </Physics>
 
-            {/* Dedicated Third-Person Follow Camera System with Intro Transition */}
+            {/* Dedicated Third-Person Follow Camera System with Multi-Mode Support */}
             <FollowCamera cameraMode={cameraMode} isIntro={isIntro} />
+
+            {/* Cinematic Post-Processing: Selective Bloom & Subtle Vignette */}
+            <EffectComposer multisampling={4} disableNormalPass>
+              <Bloom
+                luminanceThreshold={0.85}
+                luminanceSmoothing={0.2}
+                intensity={0.75}
+                mipmapBlur
+              />
+              <Vignette eskil={false} offset={0.28} darkness={0.42} />
+            </EffectComposer>
           </Suspense>
         </Canvas>
       )}

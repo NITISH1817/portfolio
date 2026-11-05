@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, Navigation, Compass, Sparkles, CheckCircle2, ChevronRight, MapPin } from 'lucide-react';
+import { X, Navigation, Compass, Sparkles, CheckCircle2, ChevronRight, MapPin, Target, Gem, Trophy } from 'lucide-react';
 import { vehicleState } from './VehiclePhysics';
 import { carAudio } from './CarAudio';
+import { MISSIONS, CRYSTALS, useGameStore } from '../../store/gameStore';
 
 interface LandmarkData {
   id: string;
@@ -29,6 +30,13 @@ export default function WorldMap({
 }: WorldMapProps) {
   const [carCoords, setCarCoords] = useState({ x: 50, y: 50, heading: 0 });
   const [selectedLandmark, setSelectedLandmark] = useState<LandmarkData | null>(null);
+  const [activeTab, setActiveTab] = useState<'landmarks' | 'missions' | 'crystals'>('landmarks');
+
+  // Game store data
+  const currentMissionId = useGameStore((s) => s.currentMissionId);
+  const completedMissions = useGameStore((s) => s.completedMissions);
+  const collectedCrystals = useGameStore((s) => s.collectedCrystals);
+  const activeMission = MISSIONS.find((m) => m.id === currentMissionId);
 
   // Authoritative 6 portfolio landmarks with exact 3D coordinates & non-overlapping label alignments
   const landmarks: LandmarkData[] = [
@@ -98,6 +106,7 @@ export default function WorldMap({
   const toSvgX = (x: number) => ((x + 70) / 140) * 100;
   const toSvgY = (z: number) => ((z + 70) / 140) * 100;
 
+  // Real-time Vehicle Position Synchronization
   useEffect(() => {
     if (!isOpen) return;
 
@@ -140,9 +149,15 @@ export default function WorldMap({
     onClose();
   };
 
+  const handleTeleportCoords = (coords: [number, number, number]) => {
+    carAudio.playChime();
+    onTeleportTo(coords);
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200 select-none">
-      {/* Main Map Card occupying 85-90% of viewport width */}
+      {/* Main Map Card occupying 94vw / max-w-5xl */}
       <div className="relative w-[94vw] max-w-5xl h-[88vh] bg-slate-900/95 border-2 border-purple-500/40 rounded-3xl shadow-[0_0_60px_rgba(168,85,247,0.35)] overflow-hidden flex flex-col">
         {/* Header Bar */}
         <div className="flex items-center justify-between px-6 py-3.5 border-b border-slate-800 bg-slate-950/70 shrink-0">
@@ -150,19 +165,48 @@ export default function WorldMap({
             <div className="w-3.5 h-3.5 rounded-full bg-blue-500 animate-ping" />
             <div>
               <h2 className="text-sm md:text-base font-black text-white uppercase tracking-wider font-mono flex items-center gap-2">
-                WORLD MAP <span className="text-xs text-purple-400 font-sans">[M]</span>
+                TACTICAL RADAR & MAP <span className="text-xs text-purple-400 font-sans">[M]</span>
               </h2>
               <p className="text-[11px] text-slate-400 font-sans hidden sm:block">
-                Top-down tactical radar • Click any landmark or station to fast-travel
+                Top-down tactical radar • Click any landmark, mission waypoint or crystal to fast-travel
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono">
-              <Compass className="w-4 h-4 text-orange-400 animate-spin" style={{ animationDuration: '10s' }} />
-              EXPLORATION RADAR
+            <div className="flex items-center rounded-xl bg-slate-800/80 p-1 border border-slate-700 text-xs font-mono">
+              <button
+                onClick={() => setActiveTab('landmarks')}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  activeTab === 'landmarks'
+                    ? 'bg-purple-600 text-white shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                Landmarks
+              </button>
+              <button
+                onClick={() => setActiveTab('missions')}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  activeTab === 'missions'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                Missions
+              </button>
+              <button
+                onClick={() => setActiveTab('crystals')}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  activeTab === 'crystals'
+                    ? 'bg-amber-600 text-white shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                Crystals ({collectedCrystals.length}/7)
+              </button>
             </div>
+
             <button
               onClick={onClose}
               className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-all active:scale-95 border border-slate-700"
@@ -193,6 +237,7 @@ export default function WorldMap({
                 <circle cx="50" cy="50" r="34" fill="#FFB66D" />
 
                 {/* 3. Glowing Neon Blue & Purple Perimeter Border */}
+                <circle cx="50" cy="44" r="44" fill="none" stroke="#61A5FF" strokeWidth="1.2" />
                 <circle cx="50" cy="50" r="44" fill="none" stroke="#61A5FF" strokeWidth="1.2" />
                 <circle cx="50" cy="50" r="43.2" fill="none" stroke="#A855F7" strokeWidth="0.8" opacity="0.8" />
 
@@ -218,155 +263,381 @@ export default function WorldMap({
                 <line x1="12" y1="50" x2="88" y2="50" stroke="#21252F" strokeWidth="7" />
 
                 {/* Center Plaza Roundabout */}
-                <circle cx="50" cy="50" r="8" fill="#21252F" stroke="#61A5FF" strokeWidth="0.8" />
+                <circle cx="50" cy="50" r="9" fill="#21252F" stroke="#334155" strokeWidth="1" />
+                <circle cx="50" cy="50" r="4.5" fill="#FF9A45" stroke="#61A5FF" strokeWidth="0.8" />
 
-                {/* Wooden Bridge at South */}
-                <rect x="47" y="68" width="6" height="3" fill="#78350F" rx="0.5" />
+                {/* 7. Cherry Blossom Trees (Pink Groves) */}
+                <circle cx="48" cy="22" r="3.2" fill="#FF70A6" opacity="0.95" />
+                <circle cx="52" cy="23" r="2.8" fill="#FF70A6" opacity="0.95" />
+                <circle cx="50" cy="78" r="3.5" fill="#FF70A6" opacity="0.95" />
+                <circle cx="78" cy="48" r="3.2" fill="#FF70A6" opacity="0.95" />
+                <circle cx="22" cy="52" r="3.2" fill="#FF70A6" opacity="0.95" />
 
-                {/* 7. Cherry Blossom Groves (Pink dots) */}
-                {[
-                  [37, 65], [34, 69], [40, 70],
-                  [61, 35], [66, 33], [68, 38],
-                  [27, 30], [24, 34], [72, 65], [76, 68]
-                ].map(([cx, cy], i) => (
-                  <circle key={i} cx={cx} cy={cy} r="1.5" fill="#FF70A6" opacity="0.9" />
-                ))}
+                {/* 8. Active Mission Waypoint Pulse Ring */}
+                {activeMission && (
+                  <g>
+                    <circle
+                      cx={toSvgX(activeMission.targetCoords[0])}
+                      cy={toSvgY(activeMission.targetCoords[2])}
+                      r="6.5"
+                      fill="none"
+                      stroke="#F59E0B"
+                      strokeWidth="1.2"
+                      className="animate-ping"
+                      style={{ transformOrigin: `${toSvgX(activeMission.targetCoords[0])}px ${toSvgY(activeMission.targetCoords[2])}px` }}
+                    />
+                    <circle
+                      cx={toSvgX(activeMission.targetCoords[0])}
+                      cy={toSvgY(activeMission.targetCoords[2])}
+                      r="3.5"
+                      fill="#F59E0B"
+                      stroke="#FFFFFF"
+                      strokeWidth="0.8"
+                    />
+                  </g>
+                )}
+
+                {/* 9. Technology Crystals Markers */}
+                {CRYSTALS.map((crystal) => {
+                  const cx = toSvgX(crystal.position[0]);
+                  const cy = toSvgY(crystal.position[2]);
+                  const isCol = collectedCrystals.includes(crystal.id);
+                  return (
+                    <g key={crystal.id} className="cursor-pointer" onClick={() => handleTeleportCoords(crystal.position)}>
+                      {isCol ? (
+                        <circle cx={cx} cy={cy} r="1.4" fill="#22C55E" stroke="#FFFFFF" strokeWidth="0.4" opacity="0.8" />
+                      ) : (
+                        <g>
+                          <polygon
+                            points={`${cx},${cy - 2.2} ${cx + 1.8},${cy} ${cx},${cy + 2.2} ${cx - 1.8},${cy}`}
+                            fill={crystal.color}
+                            stroke="#FFFFFF"
+                            strokeWidth="0.5"
+                          />
+                        </g>
+                      )}
+                    </g>
+                  );
+                })}
+
+                {/* 10. Six Authoritative Landmark Pins & Labels */}
+                {landmarks.map((lm) => {
+                  const cx = toSvgX(lm.worldPos[0]);
+                  const cy = toSvgY(lm.worldPos[2]);
+                  const isDiscovered = !!discoveredLandmarks[lm.id];
+                  const isSelected = selectedLandmark?.id === lm.id;
+
+                  const textAnchor =
+                    lm.labelOffset.align === 'center'
+                      ? 'middle'
+                      : lm.labelOffset.align === 'left'
+                      ? 'start'
+                      : 'end';
+
+                  return (
+                    <g
+                      key={lm.id}
+                      className="cursor-pointer group"
+                      onClick={() => setSelectedLandmark(lm)}
+                    >
+                      {/* Pulsing selection aura */}
+                      {isSelected && (
+                        <circle
+                          cx={cx}
+                          cy={cy}
+                          r="6"
+                          fill="none"
+                          stroke={lm.color}
+                          strokeWidth="1.2"
+                          strokeDasharray="2, 2"
+                          className="animate-spin"
+                          style={{ transformOrigin: `${cx}px ${cy}px` }}
+                        />
+                      )}
+
+                      {/* Landmark Ground Pin */}
+                      <circle
+                        cx={cx}
+                        cy={cy}
+                        r="3.6"
+                        fill={lm.color}
+                        stroke="#FFFFFF"
+                        strokeWidth="1.0"
+                        className="transition-transform duration-200 group-hover:scale-125"
+                        style={{ transformOrigin: `${cx}px ${cy}px` }}
+                      />
+
+                      {/* Icon Glyph in Pin */}
+                      <text
+                        x={cx}
+                        y={cy + 1.2}
+                        textAnchor="middle"
+                        fontSize="2.4"
+                        fill="#FFFFFF"
+                        className="pointer-events-none select-none font-bold"
+                      >
+                        {lm.icon}
+                      </text>
+
+                      {/* Landmark Name Label */}
+                      <text
+                        x={cx + lm.labelOffset.x}
+                        y={cy + lm.labelOffset.y}
+                        textAnchor={textAnchor}
+                        fontSize="2.6"
+                        fontWeight="bold"
+                        fill="#FFFFFF"
+                        stroke="#0F172A"
+                        strokeWidth="0.8"
+                        paintOrder="stroke fill"
+                        className="pointer-events-none select-none font-sans drop-shadow-md tracking-wide"
+                      >
+                        {lm.name}
+                      </text>
+                    </g>
+                  );
+                })}
+
+                {/* 11. Real-Time Player Vehicle Marker & Heading Pointer */}
+                <g
+                  transform={`translate(${carCoords.x}, ${carCoords.y}) rotate(${(carCoords.heading * 180) / Math.PI})`}
+                  style={{ transition: 'transform 0.05s linear' }}
+                >
+                  {/* Subtle Pulse Halo */}
+                  <circle cx="0" cy="0" r="4.2" fill="#38BDF8" opacity="0.3" className="animate-ping" />
+
+                  {/* Red Car Representation */}
+                  <rect
+                    x="-1.6"
+                    y="-2.4"
+                    width="3.2"
+                    height="4.8"
+                    rx="0.8"
+                    fill="#EF4444"
+                    stroke="#FFFFFF"
+                    strokeWidth="0.6"
+                  />
+
+                  {/* Forward Heading Direction Cone */}
+                  <polygon points="0,3.8 -1.2,1.8 1.2,1.8" fill="#FACC15" />
+                  {/* Windshield */}
+                  <rect x="-1.1" y="-0.8" width="2.2" height="1.2" rx="0.3" fill="#38BDF8" opacity="0.9" />
+                </g>
               </svg>
 
-              {/* 8. Six Distinct Landmark Pins on the Map */}
-              {landmarks.map((lm) => {
-                const svgX = toSvgX(lm.worldPos[0]);
-                const svgY = toSvgY(lm.worldPos[2]);
-                const isDiscovered = !!discoveredLandmarks[lm.id];
-                const isSelected = selectedLandmark?.id === lm.id;
-
-                return (
-                  <div
-                    key={lm.id}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10 transition-transform duration-150 hover:scale-110"
-                    style={{ left: `${svgX}%`, top: `${svgY}%` }}
-                    onClick={() => {
-                      setSelectedLandmark(lm);
-                      handleTeleport(lm);
-                    }}
-                  >
-                    {/* Pulsing Target Ring */}
-                    <div
-                      className="w-5 h-5 rounded-full flex items-center justify-center animate-ping absolute opacity-60 pointer-events-none"
-                      style={{ backgroundColor: lm.color }}
-                    />
-
-                    {/* Interactive Marker Pin */}
-                    <div
-                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shadow-lg text-[9px] font-bold text-white transition-all ${
-                        isSelected ? 'border-white scale-125 ring-2 ring-white' : 'border-slate-200'
-                      }`}
-                      style={{ backgroundColor: lm.color }}
-                    >
-                      ★
-                    </div>
-
-                    {/* Landmark Name Label (Carefully positioned to never overlap other landmarks) */}
-                    <div
-                      className={`absolute whitespace-nowrap text-[9px] font-mono font-bold px-1.5 py-0.5 rounded shadow-lg border border-slate-700 bg-slate-900/90 text-white pointer-events-none transition-all ${
-                        lm.labelOffset.align === 'center'
-                          ? '-translate-x-1/2 left-1/2'
-                          : lm.labelOffset.align === 'left'
-                          ? 'left-4'
-                          : 'right-4'
-                      }`}
-                      style={{
-                        top: `${lm.labelOffset.y * 3.5}px`
-                      }}
-                    >
-                      {lm.name}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* 9. Live Player Vehicle Position & Heading Indicator */}
-              <div
-                className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 transition-all duration-75"
-                style={{
-                  left: `${carCoords.x}%`,
-                  top: `${carCoords.y}%`,
-                  transform: `translate(-50%, -50%) rotate(${carCoords.heading}rad)`
-                }}
-              >
-                {/* Forward Headlight Cones */}
-                <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[24px] border-b-yellow-300/30 -mt-6 -ml-[6px] blur-[1px]" />
-                {/* Outer Ping */}
-                <div className="w-6 h-6 rounded-full bg-orange-500/40 animate-ping absolute -inset-0.5" />
-                {/* Off-Road Car Icon Marker */}
-                <div className="w-5 h-5 bg-gradient-to-tr from-red-600 to-orange-500 rounded-md border-2 border-white shadow-[0_0_15px_#FF5722] flex items-center justify-center">
-                  <div className="w-0 h-0 border-l-[3.5px] border-l-transparent border-r-[3.5px] border-r-transparent border-b-[8px] border-b-white -mt-0.5" />
-                </div>
+              {/* Live Coordinates Readout Overlay */}
+              <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-700/60 backdrop-blur-md text-[10px] font-mono text-slate-300 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                POS: [X: {vehicleState.position.x.toFixed(1)}, Z: {vehicleState.position.z.toFixed(1)}]
               </div>
             </div>
           </div>
 
-          {/* Right Landmark Navigation Dock */}
-          <div className="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-slate-800 bg-slate-950/70 p-4 md:p-5 flex flex-col justify-between shrink-0 overflow-y-auto">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-                  Landmark Navigation
-                </span>
-                <span className="text-[10px] font-mono text-purple-400">
-                  {Object.keys(discoveredLandmarks).length} / 6 DISCOVERED
-                </span>
-              </div>
+          {/* Right Navigation / Fast-Travel Inspection Sidebar */}
+          <div className="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-slate-800 bg-slate-950/70 p-4 md:p-5 flex flex-col justify-between overflow-y-auto">
+            {activeTab === 'landmarks' && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    SELECT DESTINATION
+                  </h3>
+                  <span className="text-[11px] font-mono text-purple-400">
+                    {Object.keys(discoveredLandmarks).length}/6 DISCOVERED
+                  </span>
+                </div>
 
-              {/* Landmark Fast-Travel List */}
-              <div className="space-y-2">
-                {landmarks.map((lm) => {
-                  const isDiscovered = !!discoveredLandmarks[lm.id];
+                {/* Landmark Selection List */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                  {landmarks.map((lm) => {
+                    const isSelected = selectedLandmark?.id === lm.id;
+                    const isDiscovered = !!discoveredLandmarks[lm.id];
 
-                  return (
-                    <button
-                      key={lm.id}
-                      onClick={() => handleTeleport(lm)}
-                      className="w-full group flex items-center justify-between p-2.5 rounded-2xl bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 hover:border-purple-500/50 text-left transition-all active:scale-[0.98]"
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div
-                          className="w-8 h-8 rounded-xl flex items-center justify-center text-sm shrink-0 border border-white/10 shadow"
-                          style={{ backgroundColor: `${lm.color}30`, borderColor: lm.color }}
-                        >
-                          {lm.icon}
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
-                            {lm.name}
+                    return (
+                      <button
+                        key={lm.id}
+                        onClick={() => setSelectedLandmark(lm)}
+                        className={`w-full p-2.5 rounded-xl border text-left transition-all flex items-center justify-between group ${
+                          isSelected
+                            ? 'bg-purple-950/40 border-purple-500/70 shadow-[0_0_20px_rgba(168,85,247,0.2)]'
+                            : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-800/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span
+                            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold shrink-0"
+                            style={{ backgroundColor: `${lm.color}25`, color: lm.color }}
+                          >
+                            {lm.icon}
+                          </span>
+                          <div className="min-w-0">
+                            <h4 className="text-xs font-bold text-white truncate group-hover:text-purple-300 transition-colors">
+                              {lm.name}
+                            </h4>
+                            <p className="text-[10px] text-slate-400 truncate">{lm.category}</p>
                           </div>
-                          <div className="text-[10px] text-slate-400 truncate">
-                            {lm.category}
-                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex items-center gap-2 shrink-0">
                         {isDiscovered ? (
-                          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">
-                            VISITED
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-slate-400 shrink-0" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Selected Landmark Details Card */}
+                {selectedLandmark ? (
+                  <div className="mt-3 p-3.5 rounded-2xl bg-purple-950/30 border border-purple-500/30 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">{selectedLandmark.icon}</span>
+                      <div>
+                        <h4 className="text-sm font-bold text-white">{selectedLandmark.name}</h4>
+                        <span className="text-[10px] font-mono text-purple-300 uppercase">
+                          {selectedLandmark.category}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed font-sans">
+                      {selectedLandmark.description}
+                    </p>
+                    <button
+                      onClick={() => handleTeleport(selectedLandmark)}
+                      className="w-full mt-2 py-2 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-mono text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95"
+                    >
+                      <Navigation className="w-3.5 h-3.5" />
+                      FAST TRAVEL TO LOCATION
+                    </button>
+                  </div>
+                ) : (
+                  <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800 text-center text-xs text-slate-400">
+                    Click any marker on the radar or list above to preview and fast-travel.
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'missions' && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    EXPLORATION MISSIONS
+                  </h3>
+                  <span className="text-[11px] font-mono text-blue-400">
+                    {completedMissions.length}/6 COMPLETED
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  {MISSIONS.map((mission) => {
+                    const isDone = completedMissions.includes(mission.id);
+                    const isCurrent = currentMissionId === mission.id;
+
+                    return (
+                      <div
+                        key={mission.id}
+                        className={`p-2.5 rounded-xl border text-left transition-all ${
+                          isCurrent
+                            ? 'bg-blue-950/40 border-blue-500/70 shadow-md'
+                            : isDone
+                            ? 'bg-emerald-950/20 border-emerald-500/40 opacity-80'
+                            : 'bg-slate-900/60 border-slate-800'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] font-mono font-bold text-slate-400 flex items-center gap-1.5">
+                            {mission.badge} MISSION 0{mission.order}
+                          </span>
+                          {isDone ? (
+                            <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                              <CheckCircle2 className="w-3 h-3" /> DONE
+                            </span>
+                          ) : isCurrent ? (
+                            <span className="text-[10px] font-mono text-amber-400 animate-pulse flex items-center gap-1">
+                              <Target className="w-3 h-3" /> ACTIVE
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-mono text-slate-500">QUEUED</span>
+                          )}
+                        </div>
+                        <h4 className="text-xs font-bold text-white">{mission.title}</h4>
+                        <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-2">{mission.description}</p>
+                        <button
+                          onClick={() => handleTeleportCoords(mission.targetCoords)}
+                          className="mt-2 text-[10px] font-mono text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                        >
+                          <Navigation className="w-3 h-3" /> Drive / Fast-Travel to Mission &rarr;
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'crystals' && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    TECH CRYSTALS
+                  </h3>
+                  <span className="text-[11px] font-mono text-amber-400">
+                    {collectedCrystals.length}/7 COLLECTED
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  {CRYSTALS.map((crystal) => {
+                    const isCollected = collectedCrystals.includes(crystal.id);
+                    return (
+                      <div
+                        key={crystal.id}
+                        className={`p-2 rounded-xl border flex items-center justify-between ${
+                          isCollected
+                            ? 'bg-emerald-950/30 border-emerald-500/40'
+                            : 'bg-slate-900/60 border-slate-800'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span
+                            className="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold"
+                            style={{ backgroundColor: `${crystal.color}25`, color: crystal.color }}
+                          >
+                            💎
+                          </span>
+                          <div>
+                            <h4 className="text-xs font-bold text-white">{crystal.name}</h4>
+                            <p className="text-[10px] text-slate-400">{crystal.category}</p>
+                          </div>
+                        </div>
+
+                        {isCollected ? (
+                          <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                            <CheckCircle2 className="w-3.5 h-3.5" /> FOUND
                           </span>
                         ) : (
-                          <span className="text-[10px] font-mono text-slate-500">
-                            DRIVE
-                          </span>
+                          <button
+                            onClick={() => handleTeleportCoords(crystal.position)}
+                            className="text-[10px] font-mono text-purple-400 hover:text-purple-300 flex items-center gap-1"
+                          >
+                            Locate &rarr;
+                          </button>
                         )}
-                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
                       </div>
-                    </button>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Quick Helper at Bottom */}
-            <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] font-mono text-slate-400 flex items-center justify-between">
-              <span>Press <strong className="text-white">[M]</strong> or <strong className="text-white">[ESC]</strong> to return to driving</span>
+            {/* Bottom Footer Teleport Tip */}
+            <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+              <span className="flex items-center gap-1.5">
+                <Navigation className="w-3.5 h-3.5 text-blue-400" />
+                Press [M] to return to vehicle
+              </span>
+              <span className="text-purple-400">UPGRADE 2.0</span>
             </div>
           </div>
         </div>
