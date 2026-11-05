@@ -4,7 +4,7 @@ import BrunoLoadingScreen from './components/bruno/BrunoLoadingScreen';
 import { carAudio } from './components/bruno/CarAudio';
 
 // Dynamic lazy imports for Tier 2: 3D Engine, Modals & 2D Reader Mode
-const BrunoPlaygroundEngine = React.lazy(() => import('./components/bruno/BrunoPlaygroundEngine'));
+const BrunoSimonEngine = React.lazy(() => import('./components/bruno/BrunoSimonEngine'));
 const ClassicPortfolio = React.lazy(() => import('./components/bruno/ClassicPortfolio'));
 const RecruiterModal = React.lazy(() => import('./components/bruno/modals/RecruiterModal'));
 
@@ -91,7 +91,7 @@ export default function App() {
             />
           }
         >
-          <BrunoPlaygroundEngine
+          <BrunoSimonEngine
             onOpenRecruiter={() => setRecruiterModalOpen(true)}
             onSwitchClassic={() => {
               setIsGameActive(false);

@@ -42,3 +42,6 @@ live_production_test_results.json
 
 .vercel
 .env*
+
+folio_integration_test_results.json
+temp-folio-2025/

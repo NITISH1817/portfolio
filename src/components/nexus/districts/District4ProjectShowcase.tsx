@@ -160,7 +160,7 @@ function CyberProjectPedestal({
         maxWidth={4.2}
         fontWeight="bold"
       >
-        {project.title.split('—')[0].trim()}
+        {(project.title ? (project.title.includes('—') ? project.title.split('—')[0] : (project.title.includes('-') ? project.title.split('-')[0] : project.title)) : '').trim()}
       </Text>
 
       {/* Technology Stack Pill */}

@@ -15,9 +15,11 @@ export default function Identity() {
             {identityData.name}
           </div>
           <div className="text-lg md:text-xl text-[#F4F7FB] leading-relaxed">
-            {identityData.summary.split('\n').map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
+            {identityData.aboutStory?.map((line, i) => (
+              <p key={i} className="mb-2">{line}</p>
+            )) || (
+              <p>{identityData.introduction || identityData.summary || ''}</p>
+            )}
           </div>
         </div>
 

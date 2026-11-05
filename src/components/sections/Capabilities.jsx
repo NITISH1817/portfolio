@@ -24,7 +24,9 @@ export default function Capabilities() {
                 {activeCap.id === cap.id && (
                   <div className="absolute left-[-2px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-[#5C6CFF] shadow-[0_0_10px_#5C6CFF]" />
                 )}
-                <span className="text-xl md:text-3xl font-light tracking-tight">{cap.title.split('—')[1].trim()}</span>
+                <span className="text-xl md:text-3xl font-light tracking-tight">
+                  {cap.title?.includes('—') ? cap.title.split('—')[1]?.trim() : (cap.title?.includes('-') ? cap.title.split('-')[1]?.trim() : cap.title)}
+                </span>
               </button>
             ))}
           </div>
@@ -42,15 +44,17 @@ export default function Capabilities() {
                 ))}
               </div>
               
-              <div className="flex flex-col gap-4 mt-8">
-                <h3 className="text-[#8B94A5] text-xs tracking-widest">EVIDENCE</h3>
-                {Object.entries(activeCap.hoverEvidence).map(([key, value], i) => (
-                  <div key={i} className="flex flex-col gap-1">
-                    <span className="text-[#F4F7FB]">{key}</span>
-                    <span className="text-[#8B94A5] text-sm">{value}</span>
-                  </div>
-                ))}
-              </div>
+              {activeCap.hoverEvidence && (
+                <div className="flex flex-col gap-4 mt-8">
+                  <h3 className="text-[#8B94A5] text-xs tracking-widest">EVIDENCE</h3>
+                  {Object.entries(activeCap.hoverEvidence).map(([key, value], i) => (
+                    <div key={i} className="flex flex-col gap-1">
+                      <span className="text-[#F4F7FB]">{key}</span>
+                      <span className="text-[#8B94A5] text-sm">{value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

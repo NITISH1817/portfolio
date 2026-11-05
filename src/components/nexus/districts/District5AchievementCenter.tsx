@@ -115,7 +115,7 @@ export default function District5AchievementCenter({ onEnter, onLeave, onInterac
                 maxWidth={2.8}
                 fontWeight="bold"
               >
-                {cert.title.split(':')[0]}
+                {cert.title ? (cert.title.includes(':') ? cert.title.split(':')[0] : cert.title) : ''}
               </Text>
             </group>
           );
