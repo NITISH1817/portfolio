@@ -18,12 +18,37 @@ export default function FollowCamera({
   const { camera } = useThree();
 
   // Internal smooth camera vectors
-  const currentCamPos = useRef(new THREE.Vector3(3.8, 2.8, 4.6));
-  const currentLookAt = useRef(new THREE.Vector3(0, 0.75, 0));
-  const smoothHeading = useRef(0);
+  const currentCamPos = useRef(new THREE.Vector3(0, 5.8, 33.5));
+  const currentLookAt = useRef(new THREE.Vector3(0, 2.2, 19.6));
+  const smoothHeading = useRef(Math.PI);
   const wasIntro = useRef(isIntro);
   const currentFov = useRef(45);
   const currentRoll = useRef(0);
+  const isFirstFrame = useRef(true);
+
+  // Instantly snap camera on car teleport / respawn
+  useEffect(() => {
+    const handleTeleport = (e: CustomEvent<[number, number, number]>) => {
+      const [tx, ty, tz] = e.detail;
+      const heading = vehicleState.heading || Math.PI;
+      smoothHeading.current = heading;
+      currentCamPos.current.set(
+        tx - Math.sin(heading) * 9.5,
+        ty + 4.6,
+        tz - Math.cos(heading) * 9.5
+      );
+      currentLookAt.current.set(
+        tx + Math.sin(heading) * 4.4,
+        ty + 1.0,
+        tz + Math.cos(heading) * 4.4
+      );
+      camera.position.copy(currentCamPos.current);
+      camera.lookAt(currentLookAt.current);
+    };
+
+    window.addEventListener('car-teleport', handleTeleport as EventListener);
+    return () => window.removeEventListener('car-teleport', handleTeleport as EventListener);
+  }, [camera]);
 
   useEffect(() => {
     if (isIntro) {
@@ -31,6 +56,7 @@ export default function FollowCamera({
       currentLookAt.current.set(0, 0.75, 0);
       camera.position.copy(currentCamPos.current);
       camera.lookAt(currentLookAt.current);
+      isFirstFrame.current = true;
     }
   }, [camera, isIntro]);
 
@@ -69,10 +95,23 @@ export default function FollowCamera({
     const isNitro = vehicleState.isNitroActive;
     const isDrift = vehicleState.isDrifting;
 
-    // Seamless fly-in when transitioning out of Intro
-    if (wasIntro.current) {
+    // Seamless fly-in when transitioning out of Intro or initial spawn
+    if (wasIntro.current || isFirstFrame.current) {
       wasIntro.current = false;
+      isFirstFrame.current = false;
       smoothHeading.current = carHeading;
+      currentCamPos.current.set(
+        carPos.x - Math.sin(carHeading) * 9.5,
+        carPos.y + 4.6,
+        carPos.z - Math.cos(carHeading) * 9.5
+      );
+      currentLookAt.current.set(
+        carPos.x,
+        carPos.y + 1.0,
+        carPos.z + Math.cos(carHeading) * 4.0
+      );
+      perspectiveCam.position.copy(currentCamPos.current);
+      perspectiveCam.lookAt(currentLookAt.current);
     }
 
     // =========================================================================

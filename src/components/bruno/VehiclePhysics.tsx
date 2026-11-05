@@ -22,14 +22,14 @@ export interface VehicleState {
 }
 
 export const vehicleState: VehicleState = {
-  position: new THREE.Vector3(0, 1.2, 0),
-  quaternion: new THREE.Quaternion(),
-  heading: 0,
-  headingDegrees: 0,
+  position: new THREE.Vector3(0, 1.2, 24),
+  quaternion: new THREE.Quaternion().setFromEuler(new THREE.Euler(0, Math.PI, 0)),
+  heading: Math.PI,
+  headingDegrees: 180,
   speed: 0,
   acceleration: 0,
-  forward: new THREE.Vector3(0, 0, 1),
-  right: new THREE.Vector3(1, 0, 0),
+  forward: new THREE.Vector3(0, 0, -1),
+  right: new THREE.Vector3(-1, 0, 0),
   rigidBodyRef: null,
   isDrifting: false,
   isNitroActive: false,

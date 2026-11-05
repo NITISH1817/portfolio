@@ -1,0 +1,25 @@
+{
+  "url": "http://localhost:5173",
+  "timestamp": "2026-11-05T14:03:55.275Z",
+  "tests": {
+    "intro_screen": {
+      "pass": true
+    },
+    "recruiter_instant": {
+      "pass": true
+    },
+    "canvas_active": {
+      "pass": true
+    },
+    "vehicle_physics": {
+      "pass": true
+    },
+    "project_links": {
+      "pass": true
+    },
+    "mobile_viewport": {
+      "pass": true
+    }
+  },
+  "consoleErrors": []
+}

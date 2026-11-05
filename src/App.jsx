@@ -1,9 +1,10 @@
 import React, { useState, Suspense } from 'react';
-import NexusIntroTerminal from './components/nexus/NexusIntroTerminal';
-import NexusTelemetryLoader from './components/nexus/NexusTelemetryLoader';
+import BrunoIntroScreen from './components/bruno/BrunoIntroScreen';
+import BrunoLoadingScreen from './components/bruno/BrunoLoadingScreen';
+import { carAudio } from './components/bruno/CarAudio';
 
-// Dynamic lazy import of Tier 2: 3D WebGL & Rapier WASM Engine
-const NexusCityEngine = React.lazy(() => import('./components/nexus/NexusCityEngine'));
+// Dynamic lazy imports for Tier 2: 3D Engine, Modals & 2D Reader Mode
+const BrunoPlaygroundEngine = React.lazy(() => import('./components/bruno/BrunoPlaygroundEngine'));
 const ClassicPortfolio = React.lazy(() => import('./components/bruno/ClassicPortfolio'));
 const RecruiterModal = React.lazy(() => import('./components/bruno/modals/RecruiterModal'));
 
@@ -14,19 +15,26 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   const toggleSound = () => {
-    setSoundEnabled((prev) => !prev);
+    const isMuted = carAudio.toggleMute();
+    setSoundEnabled(!isMuted);
+  };
+
+  const handleStartExploring = () => {
+    carAudio.unlock();
+    setSoundEnabled(true);
+    setIsGameActive(true);
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#080A12] text-slate-100">
-      {/* 1. RECRUITER FAST-TRACK MODAL (AVAILABLE FROM ANY VIEW) */}
+    <div className="relative w-full h-screen overflow-hidden bg-[#0D111A] text-slate-100">
+      {/* 1. GLOBAL RECRUITER FAST-TRACK MODAL */}
       <Suspense fallback={null}>
         <RecruiterModal
           isOpen={isRecruiterModalOpen}
           onClose={() => setRecruiterModalOpen(false)}
           onOpenProject={() => {
             setRecruiterModalOpen(false);
-            setIsGameActive(true);
+            handleStartExploring();
           }}
           onSwitchClassic={() => {
             setRecruiterModalOpen(false);
@@ -43,15 +51,15 @@ export default function App() {
             <button
               onClick={() => {
                 setIsClassicMode(false);
-                setIsGameActive(true);
+                handleStartExploring();
               }}
-              className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#FF8A3D] to-[#A855F7] text-slate-950 font-space font-bold text-xs shadow-md active:scale-95 transition-all"
+              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#FF9A45] to-[#A855F7] text-slate-950 font-space font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
             >
-              LAUNCH 3D NEXUS CITY &rarr;
+              LAUNCH 3D PLAYGROUND &rarr;
             </button>
             <button
               onClick={() => setIsClassicMode(false)}
-              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs transition-all"
+              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs transition-all cursor-pointer"
             >
               EXIT 2D MODE
             </button>
@@ -62,19 +70,19 @@ export default function App() {
           </Suspense>
         </div>
       ) : !isGameActive ? (
-        /* 3. TIER 1: ZERO-WASM 2D CYBERPUNK MISSION TERMINAL (ULTRA-FAST PAINT) */
-        <NexusIntroTerminal
-          onStartMission={() => setIsGameActive(true)}
+        /* 3. TIER 1: ZERO-WASM 2D STYLIZED INTRO SCREEN (ULTRA-FAST LOAD & PAINT) */
+        <BrunoIntroScreen
+          onStartExploring={handleStartExploring}
           onOpenRecruiter={() => setRecruiterModalOpen(true)}
           onSwitchClassic={() => setIsClassicMode(true)}
           soundEnabled={soundEnabled}
           onToggleSound={toggleSound}
         />
       ) : (
-        /* 4. TIER 2: 3D WEBGL ENGINE & RAPIER WASM (DYNAMICALLY STREAMED) */
+        /* 4. TIER 2: 3D THREE.JS & RAPIER WASM PLAYGROUND (DYNAMICALLY STREAMED) */
         <Suspense
           fallback={
-            <NexusTelemetryLoader
+            <BrunoLoadingScreen
               onCancel={() => setIsGameActive(false)}
               onSwitchClassic={() => {
                 setIsGameActive(false);
@@ -83,12 +91,14 @@ export default function App() {
             />
           }
         >
-          <NexusCityEngine
+          <BrunoPlaygroundEngine
             onOpenRecruiter={() => setRecruiterModalOpen(true)}
             onSwitchClassic={() => {
               setIsGameActive(false);
               setIsClassicMode(true);
             }}
+            soundEnabled={soundEnabled}
+            onToggleSound={toggleSound}
           />
         </Suspense>
       )}
