@@ -469,17 +469,34 @@ export default function BrunoHUD({
               <button
                 onTouchStart={() => handleTouchStart('left')}
                 onTouchEnd={() => handleTouchEnd('left')}
-                className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-purple-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center"
+                className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-purple-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center select-none"
               >
                 ◀
               </button>
               <button
                 onTouchStart={() => handleTouchStart('right')}
                 onTouchEnd={() => handleTouchEnd('right')}
-                className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-purple-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center"
+                className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-purple-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center select-none"
               >
                 ▶
               </button>
+            </div>
+
+            {/* Mobile Center Telemetry Pill */}
+            <div className="px-3 py-1.5 rounded-2xl bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 shadow-xl flex items-center gap-2 text-white mb-2">
+              <span className={`font-mono text-xs font-black ${gear === 'S' ? 'text-cyan-400 animate-pulse' : gear === 'R' ? 'text-amber-400' : 'text-purple-300'}`}>
+                {gear}
+              </span>
+              <div className="flex items-baseline gap-1 font-mono">
+                <span className="text-xl font-black text-white">{speedKmh}</span>
+                <span className="text-[9px] font-bold text-purple-400">KM/H</span>
+              </div>
+              <div className="w-10 h-1.5 rounded-full bg-slate-900 overflow-hidden border border-slate-800">
+                <div
+                  className="h-full bg-gradient-to-r from-cyan-400 to-blue-500"
+                  style={{ width: `${nitroEnergy}%` }}
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-2 items-end">
@@ -487,13 +504,13 @@ export default function BrunoHUD({
                 <button
                   onTouchStart={() => handleTouchStart('nitro')}
                   onTouchEnd={() => handleTouchEnd('nitro')}
-                  className="w-12 h-12 rounded-xl text-xs font-mono font-bold flex items-center justify-center border shadow-xl bg-slate-900/80 border-blue-500/40 text-blue-400"
+                  className="w-12 h-12 rounded-xl text-xs font-mono font-bold flex items-center justify-center border shadow-xl bg-slate-900/80 border-blue-500/40 text-blue-400 select-none"
                 >
                   <Zap className="w-5 h-5" />
                 </button>
                 <button
                   onClick={toggleHeadlights}
-                  className="w-12 h-12 rounded-xl text-xs font-mono font-bold flex items-center justify-center border shadow-xl bg-slate-900/80 border-slate-700 text-slate-400"
+                  className="w-12 h-12 rounded-xl text-xs font-mono font-bold flex items-center justify-center border shadow-xl bg-slate-900/80 border-slate-700 text-slate-400 select-none"
                 >
                   <Lightbulb className="w-5 h-5" />
                 </button>
@@ -503,14 +520,14 @@ export default function BrunoHUD({
                 <button
                   onTouchStart={() => handleTouchStart('backward')}
                   onTouchEnd={() => handleTouchEnd('backward')}
-                  className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-orange-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center"
+                  className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-orange-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center select-none"
                 >
                   ▼
                 </button>
                 <button
                   onTouchStart={() => handleTouchStart('forward')}
                   onTouchEnd={() => handleTouchEnd('forward')}
-                  className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-emerald-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center"
+                  className="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-emerald-600 text-white font-mono font-black text-xl border border-slate-700 backdrop-blur-md shadow-xl flex items-center justify-center select-none"
                 >
                   ▲
                 </button>
@@ -519,8 +536,8 @@ export default function BrunoHUD({
           </div>
         )}
 
-        {/* Real-time Physics Telemetry Cluster */}
-        <div className="flex flex-col items-end gap-2 shrink-0">
+        {/* Real-time Physics Telemetry Cluster (Desktop / Tablet) */}
+        <div className="hidden lg:flex flex-col items-end gap-2 shrink-0">
           <div className="p-4 rounded-3xl bg-slate-950/85 backdrop-blur-xl border border-purple-500/40 shadow-2xl flex flex-col items-end gap-2 text-white">
             <div className="flex items-center gap-3">
               {/* Dynamic Gear Indicator Pill */}

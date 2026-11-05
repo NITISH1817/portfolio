@@ -76,48 +76,14 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
   };
 
   const handleDownloadResume = () => {
-    const resumeContent = `NITISH PRIYAN R S
-Full Stack Developer | AI/ML Engineer | Software Developer
-Email: ${identityData.email} | Phone: ${identityData.phone}
-Location: ${identityData.location}
-GitHub: ${identityData.github} | LinkedIn: ${identityData.linkedin}
-
-==================================================
-1. PROFESSIONAL PROFILE
-==================================================
-${identityData.introduction}
-
-==================================================
-2. EDUCATION
-==================================================
-${educationList.map((e) => `* ${e.degree}\n  ${e.institution} (${e.period}) | Result: ${e.result}\n  ${e.description}`).join('\n\n')}
-
-==================================================
-3. TECHNICAL CAPABILITIES
-==================================================
-${skillCategories.map((cat) => `* ${cat.category.toUpperCase()}:\n  ${cat.skills.map((s) => `${s.name} (${s.level})`).join(', ')}`).join('\n\n')}
-
-==================================================
-4. FEATURED PROJECTS
-==================================================
-${projects.map((p) => `* ${p.title} (${p.type})\n  Tech Stack: ${p.technologies.join(', ')}\n  GitHub: ${p.githubUrl}\n  Description: ${p.description}`).join('\n\n')}
-
-==================================================
-5. CERTIFICATIONS & HONORS
-==================================================
-${certificationsList.map((c) => `* ${c.title} — ${c.issuer} (${c.date})`).join('\n')}
-${achievementsList.map((a) => `* ${a.title} — ${a.subtitle}\n  ${a.description}`).join('\n')}
-`;
-
-    const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = url;
-    link.download = `Nitish_Priyan_Resume.txt`;
+    link.href = '/resume/Nitish_Priyan_RS_Resume.pdf';
+    link.download = 'Nitish_Priyan_RS_Resume.pdf';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
   };
 
   const handleSendMessage = (e) => {
@@ -946,12 +912,22 @@ ${achievementsList.map((a) => `* ${a.title} — ${a.subtitle}\n  ${a.description
                     Official developer curriculum vitae document.
                   </p>
                 </div>
-                <button
-                  onClick={handleDownloadResume}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-xl active:scale-95 transition-all shrink-0"
-                >
-                  <Download className="w-4 h-4" /> DOWNLOAD CV DOCUMENT
-                </button>
+                <div className="flex items-center gap-2 shrink-0">
+                  <a
+                    href="/resume/Nitish_Priyan_RS_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-500/40 text-purple-200 hover:text-white font-space font-bold text-xs shadow-lg transition-all"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 text-cyan-400" /> VIEW PDF ↗
+                  </a>
+                  <button
+                    onClick={handleDownloadResume}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-xl active:scale-95 transition-all"
+                  >
+                    <Download className="w-4 h-4" /> DOWNLOAD CV (.PDF)
+                  </button>
+                </div>
               </div>
 
               {/* Document Console Preview */}

@@ -100,12 +100,20 @@ export default function CherryBlossoms({
   );
 }
 
-// Low-poly Stylized Cherry Blossom Tree
+// Low-poly Stylized Cherry Blossom Tree with Wind Sway
 function CherryTree({ position, scale = 1, seed = 0 }: { position: [number, number, number]; scale?: number; seed?: number }) {
   const trunkColor = '#5C3826';
   const blossomPink1 = '#FF70A6';
   const blossomPink2 = '#F472B6';
   const blossomPink3 = '#FDA4AF';
+  const canopyRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (!canopyRef.current) return;
+    const t = state.clock.elapsedTime * 1.2 + seed * 1.5;
+    canopyRef.current.rotation.z = Math.sin(t) * 0.035;
+    canopyRef.current.rotation.x = Math.cos(t * 0.8) * 0.025;
+  });
 
   return (
     <group position={position} scale={scale}>
@@ -120,23 +128,25 @@ function CherryTree({ position, scale = 1, seed = 0 }: { position: [number, numb
         <meshStandardMaterial color={trunkColor} roughness={0.85} flatShading />
       </mesh>
 
-      {/* Tiered Foliage Blobs in Vibrant Stylized Pinks */}
-      <mesh position={[0, 3.6, 0]} castShadow>
-        <dodecahedronGeometry args={[2.2, 1]} />
-        <meshStandardMaterial color={blossomPink1} roughness={0.6} flatShading />
-      </mesh>
-      <mesh position={[1.2, 4.2, 0.6]} castShadow>
-        <dodecahedronGeometry args={[1.7, 1]} />
-        <meshStandardMaterial color={blossomPink2} roughness={0.6} flatShading />
-      </mesh>
-      <mesh position={[-1.0, 4.4, -0.5]} castShadow>
-        <dodecahedronGeometry args={[1.6, 1]} />
-        <meshStandardMaterial color={blossomPink3} roughness={0.6} flatShading />
-      </mesh>
-      <mesh position={[0, 5.2, 0]} castShadow>
-        <dodecahedronGeometry args={[1.4, 1]} />
-        <meshStandardMaterial color={blossomPink1} roughness={0.6} flatShading />
-      </mesh>
+      {/* Tiered Foliage Blobs with Wind Sway */}
+      <group ref={canopyRef}>
+        <mesh position={[0, 3.6, 0]} castShadow>
+          <dodecahedronGeometry args={[2.2, 1]} />
+          <meshStandardMaterial color={blossomPink1} roughness={0.6} flatShading />
+        </mesh>
+        <mesh position={[1.2, 4.2, 0.6]} castShadow>
+          <dodecahedronGeometry args={[1.7, 1]} />
+          <meshStandardMaterial color={blossomPink2} roughness={0.6} flatShading />
+        </mesh>
+        <mesh position={[-1.0, 4.4, -0.5]} castShadow>
+          <dodecahedronGeometry args={[1.6, 1]} />
+          <meshStandardMaterial color={blossomPink3} roughness={0.6} flatShading />
+        </mesh>
+        <mesh position={[0, 5.2, 0]} castShadow>
+          <dodecahedronGeometry args={[1.4, 1]} />
+          <meshStandardMaterial color={blossomPink1} roughness={0.6} flatShading />
+        </mesh>
+      </group>
     </group>
   );
 }

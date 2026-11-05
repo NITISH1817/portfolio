@@ -161,10 +161,13 @@ export default function Atmosphere() {
       <color attach="background" args={[config.bg]} />
       <fog attach="fog" args={[config.bg, config.fogNear, config.fogFar]} />
 
-      {/* Ambient Lighting */}
-      <ambientLight intensity={config.ambientInt} color={config.ambientColor} />
+      {/* Ambient Lighting & Chromatic Hemisphere Sky/Ground Bounce */}
+      <ambientLight intensity={config.ambientInt * 0.6} color={config.ambientColor} />
+      <hemisphereLight
+        args={[config.ambientColor, timeOfDay === 'sunset' ? '#F97316' : '#FF9A45', config.ambientInt * 0.7]}
+      />
 
-      {/* Key Directional Light (Sun / Horizon Moon) with Soft Shadows */}
+      {/* Key Directional Light (Sun / Horizon Moon) with Soft Contact Shadows */}
       <directionalLight
         position={config.sunPos}
         intensity={config.sunInt}
@@ -178,6 +181,7 @@ export default function Atmosphere() {
         shadow-camera-top={75}
         shadow-camera-bottom={-75}
         shadow-bias={-0.0003}
+        shadow-radius={2.8}
       />
 
       {/* Electric Blue Secondary Fill Light */}

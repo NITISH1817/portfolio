@@ -36,6 +36,7 @@ test-screenshots/
 *.cjs
 *-results.json
 portfolio4_test_results.json
+live_audit_report.json
 
 .vercel
 .env*
