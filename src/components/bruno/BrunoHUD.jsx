@@ -228,7 +228,7 @@ export default function BrunoHUD({
             onClick={() => setCameraMode('thirdperson')}
             className={`px-3 py-1 rounded-xl transition-all ${
               cameraMode === 'thirdperson'
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md font-bold'
+                ? 'bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-md font-bold'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -238,7 +238,7 @@ export default function BrunoHUD({
             onClick={() => setCameraMode('showcase')}
             className={`px-3 py-1 rounded-xl transition-all flex items-center gap-1 ${
               cameraMode === 'showcase'
-                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md font-bold'
+                ? 'bg-linear-to-r from-purple-600 to-pink-600 text-white shadow-md font-bold'
                 : 'text-slate-400 hover:text-white'
             }`}
             title="360 Orbit Showcase"
@@ -273,7 +273,7 @@ export default function BrunoHUD({
           {/* Recruiter Fast-Track Brief Trigger */}
           <button
             onClick={() => setRecruiterModalOpen(true)}
-            className="px-3 py-2 rounded-2xl bg-gradient-to-r from-amber-500/20 via-purple-600/30 to-cyan-500/20 hover:from-amber-500/35 hover:to-cyan-500/35 backdrop-blur-xl text-amber-300 border border-amber-400/50 shadow-xl transition-all active:scale-95 flex items-center gap-1.5 text-xs font-mono font-bold"
+            className="px-3 py-2 rounded-2xl bg-linear-to-r from-amber-500/20 via-purple-600/30 to-cyan-500/20 hover:from-amber-500/35 hover:to-cyan-500/35 backdrop-blur-xl text-amber-300 border border-amber-400/50 shadow-xl transition-all active:scale-95 flex items-center gap-1.5 text-xs font-mono font-bold"
             title="Recruiter Fast-Track Executive Brief"
           >
             <Briefcase className="w-4 h-4 text-amber-400" />
@@ -358,7 +358,7 @@ export default function BrunoHUD({
           {/* World Map Button */}
           <button
             onClick={onToggleMap}
-            className="py-2.5 px-3 md:px-4 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-mono text-xs font-bold shadow-2xl border border-blue-400/30 flex items-center gap-2 transition-all active:scale-95"
+            className="py-2.5 px-3 md:px-4 rounded-2xl bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-mono text-xs font-bold shadow-2xl border border-blue-400/30 flex items-center gap-2 transition-all active:scale-95"
             title="Open Tactical Radar Map [M]"
           >
             <Map className="w-4 h-4" />
@@ -403,7 +403,7 @@ export default function BrunoHUD({
 
             <div className="w-full bg-slate-800/80 h-1.5 rounded-full overflow-hidden mt-1">
               <div
-                className="bg-gradient-to-r from-blue-500 to-purple-500 h-full transition-all duration-300"
+                className="bg-linear-to-r from-blue-500 to-purple-500 h-full transition-all duration-300"
                 style={{ width: `${(completedMissions.length / 6) * 100}%` }}
               />
             </div>
@@ -425,7 +425,7 @@ export default function BrunoHUD({
       {/* 3. Center Notification Toasts (Slide Down) */}
       <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-auto flex flex-col items-center gap-2 max-w-md w-full px-4">
         {activeToast && (
-          <div className="w-full p-4 rounded-2xl bg-gradient-to-r from-amber-950/90 to-purple-950/90 border-2 border-amber-400/80 shadow-[0_0_40px_rgba(245,158,11,0.4)] backdrop-blur-xl flex items-center gap-3 animate-in slide-in-from-top-6 duration-300">
+          <div className="w-full p-4 rounded-2xl bg-linear-to-r from-amber-950/90 to-purple-950/90 border-2 border-amber-400/80 shadow-[0_0_40px_rgba(245,158,11,0.4)] backdrop-blur-xl flex items-center gap-3 animate-in slide-in-from-top-6 duration-300">
             <span className="text-3xl">{activeToast.icon}</span>
             <div>
               <div className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">
@@ -438,13 +438,13 @@ export default function BrunoHUD({
         )}
 
         {crystalToast && (
-          <div className="p-3.5 rounded-xl bg-gradient-to-r from-cyan-950/90 to-blue-950/90 border border-cyan-400 text-cyan-200 text-xs font-mono font-bold shadow-xl animate-in slide-in-from-top-4">
+          <div className="p-3.5 rounded-xl bg-linear-to-r from-cyan-950/90 to-blue-950/90 border border-cyan-400 text-cyan-200 text-xs font-mono font-bold shadow-xl animate-in slide-in-from-top-4">
             {crystalToast}
           </div>
         )}
 
         {missionToast && (
-          <div className="p-3.5 rounded-xl bg-gradient-to-r from-emerald-950/90 to-purple-950/90 border border-emerald-400 text-emerald-200 text-xs font-mono font-bold shadow-xl animate-in slide-in-from-top-4">
+          <div className="p-3.5 rounded-xl bg-linear-to-r from-emerald-950/90 to-purple-950/90 border border-emerald-400 text-emerald-200 text-xs font-mono font-bold shadow-xl animate-in slide-in-from-top-4">
             {missionToast}
           </div>
         )}
@@ -506,7 +506,7 @@ export default function BrunoHUD({
               </div>
               <div className="w-10 h-1.5 rounded-full bg-slate-900 overflow-hidden border border-slate-800">
                 <div
-                  className="h-full bg-gradient-to-r from-cyan-400 to-blue-500"
+                  className="h-full bg-linear-to-r from-cyan-400 to-blue-500"
                   style={{ width: `${nitroEnergy}%` }}
                 />
               </div>
@@ -589,8 +589,8 @@ export default function BrunoHUD({
                 <div
                   className={`h-full transition-all duration-100 ${
                     isNitroActive
-                      ? 'bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse shadow-[0_0_12px_#38BDF8]'
-                      : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                      ? 'bg-linear-to-r from-cyan-400 to-blue-500 animate-pulse shadow-[0_0_12px_#38BDF8]'
+                      : 'bg-linear-to-r from-blue-500 to-purple-500'
                   }`}
                   style={{ width: `${nitroEnergy}%` }}
                 />

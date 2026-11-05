@@ -62,7 +62,11 @@ function HolographicProjectDisplay({ project, color, icon, onSelect }) {
   });
 
   return (
-    <group onClick={onSelect} className="cursor-pointer">
+    <group
+      onClick={onSelect}
+      onPointerOver={() => { document.body.style.cursor = 'pointer'; }}
+      onPointerOut={() => { document.body.style.cursor = 'auto'; }}
+    >
       {/* Chrome Architectural Stems */}
       <mesh position={[-3.8, 1.4, 0]} castShadow>
         <cylinderGeometry args={[0.09, 0.14, 2.8, 12]} />

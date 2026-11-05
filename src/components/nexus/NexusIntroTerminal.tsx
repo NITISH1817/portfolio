@@ -132,7 +132,7 @@ export default function NexusIntroTerminal({
       {/* Top Header Bar */}
       <header className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-3 flex items-center justify-between border-b border-purple-500/20">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF8A3D] to-[#A855F7] p-[1px] shadow-[0_0_20px_rgba(255,138,61,0.3)]">
+          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-[#FF8A3D] to-[#A855F7] p-[1px] shadow-[0_0_20px_rgba(255,138,61,0.3)]">
             <div className="w-full h-full bg-[#080A12] rounded-[11px] flex items-center justify-center font-space font-black text-xs text-[#FF8A3D]">
               NX
             </div>
@@ -173,7 +173,7 @@ export default function NexusIntroTerminal({
 
           <button
             onClick={onOpenRecruiter}
-            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#FF8A3D] to-[#A855F7] hover:brightness-110 text-slate-950 font-space font-bold text-xs shadow-[0_0_20px_rgba(255,138,61,0.25)] flex items-center gap-1.5 active:scale-95 transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-linear-to-r from-[#FF8A3D] to-[#A855F7] hover:brightness-110 text-slate-950 font-space font-bold text-xs shadow-[0_0_20px_rgba(255,138,61,0.25)] flex items-center gap-1.5 active:scale-95 transition-all"
           >
             <Zap className="w-3.5 h-3.5 fill-current" />
             <span>RECRUITER DOSSIER</span>
@@ -196,7 +196,7 @@ export default function NexusIntroTerminal({
             {/* Candidate Identity Title */}
             <div>
               <h1 className="font-space text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none uppercase">
-                NITISH PRIYAN <span className="bg-gradient-to-r from-[#FF8A3D] via-[#A855F7] to-[#38BDF8] bg-clip-text text-transparent">R S</span>
+                NITISH PRIYAN <span className="bg-linear-to-r from-[#FF8A3D] via-[#A855F7] to-[#38BDF8] bg-clip-text text-transparent">R S</span>
               </h1>
               <p className="mt-2 text-sm sm:text-lg font-space font-medium text-slate-300">
                 Full Stack Developer <span className="text-[#FF8A3D]">•</span> AI/ML Engineer <span className="text-[#A855F7]">•</span> Distributed Systems Architect
@@ -230,7 +230,7 @@ export default function NexusIntroTerminal({
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={onStartMission}
-                className="group relative px-6 sm:px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF8A3D] via-[#FF70A6] to-[#A855F7] text-slate-950 font-space font-black text-sm tracking-wider uppercase shadow-[0_0_35px_rgba(255,138,61,0.35)] hover:shadow-[0_0_45px_rgba(168,85,247,0.5)] active:scale-95 transition-all flex items-center gap-2.5 overflow-hidden"
+                className="group relative px-6 sm:px-8 py-3.5 rounded-2xl bg-linear-to-r from-[#FF8A3D] via-[#FF70A6] to-[#A855F7] text-slate-950 font-space font-black text-sm tracking-wider uppercase shadow-[0_0_35px_rgba(255,138,61,0.35)] hover:shadow-[0_0_45px_rgba(168,85,247,0.5)] active:scale-95 transition-all flex items-center gap-2.5 overflow-hidden"
               >
                 <span className="relative z-10">INITIALIZE NEXUS MISSION</span>
                 <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1.5 transition-transform" />
@@ -277,7 +277,7 @@ export default function NexusIntroTerminal({
                     onClick={() => setSelectedDistrictIndex(idx)}
                     className={`py-2 rounded-xl text-center font-mono text-xs font-bold transition-all ${
                       selectedDistrictIndex === idx
-                        ? 'bg-gradient-to-b from-purple-500 to-cyan-500 text-slate-950 shadow-md'
+                        ? 'bg-linear-to-b from-purple-500 to-cyan-500 text-slate-950 shadow-md'
                         : 'bg-[#172036] hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-700/40'
                     }`}
                   >

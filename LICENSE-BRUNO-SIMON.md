@@ -39,3 +39,4 @@ SOFTWARE.
 ## Adaptation Details for Nitish Priyan's Portfolio
 - **Subsystem Integration**: The native Raycast Vehicle Controller (`DynamicRayCastVehicleController`), spherical camera controller (`View.js`), multi-modal input processing (`Inputs/`), and single-palette shader pipeline (`palette.png`) are adapted under the MIT License within `src/engine/folio/`.
 - **Personal Content Replacement**: All personal biographies, client works, projects, and contact details from the original repository have been replaced with Nitish Priyan's verified credentials, project repositories, and academic records.
+

@@ -50,7 +50,7 @@ export default function Loading({ onComplete }) {
           </div>
           <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
             <motion.div 
-              className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" 
+              className="h-full bg-linear-to-r from-orange-500 to-amber-400 rounded-full" 
               style={{ width: `${progress}%` }}
               transition={{ ease: "linear", duration: 0.1 }}
             />

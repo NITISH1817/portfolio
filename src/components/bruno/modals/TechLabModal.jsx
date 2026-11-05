@@ -212,7 +212,7 @@ export default function TechLabModal({ isOpen, onClose }) {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-space font-bold uppercase tracking-wider transition-all shrink-0 ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-purple-900 to-cyan-950 text-white border border-cyan-400/60 shadow-[0_0_15px_rgba(56,189,248,0.25)]'
+                  ? 'bg-linear-to-r from-purple-900 to-cyan-950 text-white border border-cyan-400/60 shadow-[0_0_15px_rgba(56,189,248,0.25)]'
                   : 'text-purple-300/70 hover:text-white hover:bg-purple-950/40 border border-transparent'
               }`}
             >
@@ -268,8 +268,8 @@ export default function TechLabModal({ isOpen, onClose }) {
                         style={{ height: `${val * 1.3}px` }}
                         className={`w-full rounded-t-lg transition-all duration-200 ${
                           isComp
-                            ? 'bg-gradient-to-t from-orange-500 to-pink-500 shadow-[0_0_15px_#FF6B00]'
-                            : 'bg-gradient-to-t from-cyan-600 to-blue-400 shadow-[0_0_10px_rgba(56,189,248,0.3)]'
+                            ? 'bg-linear-to-t from-orange-500 to-pink-500 shadow-[0_0_15px_#FF6B00]'
+                            : 'bg-linear-to-t from-cyan-600 to-blue-400 shadow-[0_0_10px_rgba(56,189,248,0.3)]'
                         }`}
                       />
                       <span className="text-[9px] font-mono text-purple-400/60">[{idx}]</span>
@@ -291,7 +291,7 @@ export default function TechLabModal({ isOpen, onClose }) {
                   </div>
                   <button
                     onClick={runBinarySearchStep}
-                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 text-white font-space font-bold text-xs shadow-md"
+                    className="px-4 py-2 rounded-xl bg-linear-to-r from-purple-600 to-blue-600 hover:opacity-90 text-white font-space font-bold text-xs shadow-md"
                   >
                     STEP SEARCH
                   </button>
@@ -416,7 +416,7 @@ export default function TechLabModal({ isOpen, onClose }) {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={stepGradientDescent}
-                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-space font-bold text-xs shadow-md"
+                      className="px-4 py-2 rounded-xl bg-linear-to-r from-pink-500 to-purple-600 text-white font-space font-bold text-xs shadow-md"
                     >
                       STEP OPTIMIZER
                     </button>

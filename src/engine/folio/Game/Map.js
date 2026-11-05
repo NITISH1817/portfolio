@@ -146,7 +146,7 @@ export class Map
         {
             if(action.active)
             {
-                if(!this.modal?.isOpen)
+                if(!this.modal.isOpen)
                     this.game.modals.open('map')
                 else
                     this.game.modals.close()
@@ -173,7 +173,7 @@ export class Map
 
     update()
     {
-        if(!this.modal?.isOpen)
+        if(!this.modal.isOpen)
             return
 
         const playerRoundedX = Math.round(this.game.player.position.x)

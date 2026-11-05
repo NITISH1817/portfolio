@@ -929,7 +929,7 @@ export class CircuitArea extends Area
                     const countryCode = score[1]
                     if(countryCode)
                     {                    
-                        const country = this.menu?.inputFlag?.countries?.get(countryCode)
+                        const country = this.menu.inputFlag.countries.get(countryCode)
 
                         if(country)
                         {
@@ -1178,7 +1178,7 @@ export class CircuitArea extends Area
                 for(const score of scores)
                 {
                     let flag = ''
-                    const country = this.menu?.inputFlag?.countries?.get(score[1])
+                    const country = this.menu.inputFlag.countries.get(score[1])
 
                     if(country)
                         flag = /* html */`<img width="27" height="18" src="${country.imageUrl}" loading="lazy">`
@@ -1336,7 +1336,7 @@ export class CircuitArea extends Area
         {
             this.menu.input.value = ''
             updateGroup()
-            this.menu?.inputFlag?.close()
+            this.menu.inputFlag.close()
         })
             
         this.game.server.events.on('connected', () =>

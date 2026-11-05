@@ -59,7 +59,7 @@ export default function BrunoLoadingScreen({
         {/* Progress Bar */}
         <div className="w-full bg-slate-900 border border-slate-800 rounded-full h-3 overflow-hidden p-0.5 mb-3 shadow-inner">
           <div
-            className="h-full bg-gradient-to-r from-[#FF9A45] via-[#FF70A6] to-[#A855F7] rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,154,69,0.5)]"
+            className="h-full bg-linear-to-r from-[#FF9A45] via-[#FF70A6] to-[#A855F7] rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,154,69,0.5)]"
             style={{ width: `${progress}%` }}
           />
         </div>

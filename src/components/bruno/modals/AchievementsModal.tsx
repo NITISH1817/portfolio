@@ -56,7 +56,7 @@ export default function AchievementsModal({ isOpen, onClose }: AchievementsModal
         {/* Progress Bar */}
         <div className="w-full bg-slate-800 h-1.5 shrink-0">
           <div
-            className="h-full bg-gradient-to-r from-amber-500 to-purple-500 transition-all duration-500"
+            className="h-full bg-linear-to-r from-amber-500 to-purple-500 transition-all duration-500"
             style={{ width: `${progressPercent}%` }}
           />
         </div>

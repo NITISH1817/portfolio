@@ -184,13 +184,11 @@ export class Menu
         {
             if(this.current)
                 _name = this.current.name
-            else if(this.default)
-                _name = this.default.name
             else
-                return
+                _name = this.default.name
         }
 
-        const item = this.items?.get(_name)
+        const item = this.items.get(_name)
 
         // Not found
         if(!item)

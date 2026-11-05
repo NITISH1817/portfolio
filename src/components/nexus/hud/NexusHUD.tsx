@@ -66,7 +66,7 @@ export default function NexusHUD({
           {/* Recruiter Fast-Track Button */}
           <button
             onClick={onOpenRecruiter}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-gradient-to-r from-[#FF8A3D] to-[#A855F7] text-slate-950 font-space font-black text-xs shadow-[0_0_20px_rgba(255,138,61,0.3)] active:scale-95 transition-all"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-linear-to-r from-[#FF8A3D] to-[#A855F7] text-slate-950 font-space font-black text-xs shadow-[0_0_20px_rgba(255,138,61,0.3)] active:scale-95 transition-all"
           >
             <Zap className="w-3.5 h-3.5 fill-current" />
             <span>RECRUITER DOSSIER</span>
@@ -181,7 +181,7 @@ export default function NexusHUD({
         <button
           onTouchStart={() => (vehicleInputs.boost = true)}
           onTouchEnd={() => (vehicleInputs.boost = false)}
-          className="w-12 h-24 rounded-2xl bg-gradient-to-t from-[#FF8A3D] to-[#A855F7] text-slate-950 font-space font-black text-xs flex flex-col items-center justify-center shadow-lg active:scale-95"
+          className="w-12 h-24 rounded-2xl bg-linear-to-t from-[#FF8A3D] to-[#A855F7] text-slate-950 font-space font-black text-xs flex flex-col items-center justify-center shadow-lg active:scale-95"
         >
           <Sparkles className="w-4 h-4 fill-current" />
           <span>BOOST</span>

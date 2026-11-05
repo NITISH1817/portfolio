@@ -220,7 +220,7 @@ export default function WorldMap({
         {/* Map Body: Split into Interactive SVG Map (Left/Center) and Navigation Panel (Right) */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden bg-[#171222]">
           {/* Main SVG Radar Map Viewport */}
-          <div className="relative flex-1 flex items-center justify-center p-3 sm:p-5 bg-gradient-to-b from-[#171222] to-[#0F0B18] overflow-hidden">
+          <div className="relative flex-1 flex items-center justify-center p-3 sm:p-5 bg-linear-to-b from-[#171222] to-[#0F0B18] overflow-hidden">
             {/* SVG Map Canvas */}
             <div className="relative w-full h-full max-w-[560px] aspect-square rounded-2xl overflow-hidden border border-purple-500/30 shadow-2xl bg-[#0B1522]">
               <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -504,7 +504,7 @@ export default function WorldMap({
                     </p>
                     <button
                       onClick={() => handleTeleport(selectedLandmark)}
-                      className="w-full mt-2 py-2 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-mono text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95"
+                      className="w-full mt-2 py-2 px-3 rounded-xl bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-mono text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95"
                     >
                       <Navigation className="w-3.5 h-3.5" />
                       FAST TRAVEL TO LOCATION

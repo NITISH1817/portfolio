@@ -126,7 +126,7 @@ export default function RecruiterModal({
           <a
             href="/resume/Nitish_Priyan_RS_Resume.pdf"
             download="Nitish_Priyan_RS_Resume.pdf"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-lg active:scale-95 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-linear-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-lg active:scale-95 transition-all"
           >
             <Download className="w-4 h-4" /> DOWNLOAD CV (.PDF)
           </a>

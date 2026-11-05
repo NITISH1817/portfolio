@@ -45,7 +45,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
   return (
     <div
       onClick={handleStart}
-      className="fixed inset-0 z-50 flex flex-col justify-between p-4 md:p-8 cursor-pointer select-none font-sans pointer-events-auto bg-gradient-to-b from-black/50 via-transparent to-black/60 backdrop-blur-[1px] animate-in fade-in duration-700"
+      className="fixed inset-0 z-50 flex flex-col justify-between p-4 md:p-8 cursor-pointer select-none font-sans pointer-events-auto bg-linear-to-b from-black/50 via-transparent to-black/60 backdrop-blur-[1px] animate-in fade-in duration-700"
     >
       {/* Top Header Bar */}
       <div className="flex items-center justify-between w-full pointer-events-auto">
@@ -94,7 +94,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
 
         {/* Hero "CLICK TO START" */}
         <h1
-          className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-purple-300 drop-shadow-[0_4px_30px_rgba(255,154,69,0.55)] tracking-wide"
+          className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 via-pink-400 to-purple-300 drop-shadow-[0_4px_30px_rgba(255,154,69,0.55)] tracking-wide"
           style={{ fontFamily: "'Caveat', 'Patrick Hand', cursive, sans-serif" }}
         >
           CLICK TO START

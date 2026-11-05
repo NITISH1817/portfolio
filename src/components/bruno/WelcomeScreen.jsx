@@ -12,7 +12,7 @@ export default function WelcomeScreen({ onStart, onOpenReader }) {
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in select-none">
       <div className="relative w-full max-w-lg bg-slate-900/90 border border-slate-700/80 rounded-3xl p-6 md:p-8 text-center shadow-2xl text-slate-100 flex flex-col items-center gap-6">
         {/* Glow badge */}
-        <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-3xl shadow-[0_0_35px_rgba(255,87,34,0.4)]">
+        <div className="w-16 h-16 rounded-3xl bg-linear-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-3xl shadow-[0_0_35px_rgba(255,87,34,0.4)]">
           🚗
         </div>
 
@@ -64,7 +64,7 @@ export default function WelcomeScreen({ onStart, onOpenReader }) {
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
           <button
             onClick={handleStart}
-            className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-sm shadow-xl active:scale-95 transition-all"
+            className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-sm shadow-xl active:scale-95 transition-all"
           >
             <Play className="w-4 h-4 fill-white" /> START EXPLORING
           </button>

@@ -50,7 +50,7 @@ export default function Hero({ onResumeOpen }) {
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
         <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">Scroll</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-gray-500 to-transparent" />
+        <div className="w-px h-12 bg-linear-to-b from-gray-500 to-transparent" />
       </div>
     </section>
   );

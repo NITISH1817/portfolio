@@ -109,7 +109,11 @@ function CyberProjectPedestal({
   });
 
   return (
-    <group onClick={onSelect} className="cursor-pointer">
+    <group
+      onClick={onSelect}
+      onPointerOver={() => { document.body.style.cursor = 'pointer'; }}
+      onPointerOut={() => { document.body.style.cursor = 'auto'; }}
+    >
       {/* Plinth Base */}
       <mesh position={[0, 0.3, 0]} castShadow receiveShadow>
         <boxGeometry args={[4.6, 0.6, 1.2]} />

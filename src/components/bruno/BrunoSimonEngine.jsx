@@ -248,7 +248,7 @@ export default function BrunoSimonEngine({
               if (onOpenRecruiter) onOpenRecruiter();
               else setIsRecruiterOpen(true);
             }}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold font-mono text-xs shadow-lg shadow-orange-500/20 active:scale-95 transition-all cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold font-mono text-xs shadow-lg shadow-orange-500/20 active:scale-95 transition-all cursor-pointer"
           >
             <UserCheck className="w-3.5 h-3.5" />
             <span>RECRUITER DOSSIER</span>

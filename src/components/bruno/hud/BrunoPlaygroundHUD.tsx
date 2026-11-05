@@ -106,7 +106,7 @@ export default function BrunoPlaygroundHUD({
           {/* Boost Energy Vertical Gauge */}
           <div className="h-10 w-2.5 bg-stone-900 border border-orange-500/40 rounded-full overflow-hidden flex flex-col justify-end p-0.5">
             <div
-              className="w-full bg-gradient-to-t from-orange-500 to-amber-300 rounded-full transition-all duration-100"
+              className="w-full bg-linear-to-t from-orange-500 to-amber-300 rounded-full transition-all duration-100"
               style={{ height: `${nitroEnergy}%` }}
             />
           </div>
@@ -151,7 +151,7 @@ export default function BrunoPlaygroundHUD({
           <button
             id="recruiter-dossier-btn"
             onClick={onOpenRecruiter}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#FF9A45] to-[#EA580C] text-slate-950 font-bold font-space text-xs shadow-lg transition-all active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-linear-to-r from-[#FF9A45] to-[#EA580C] text-slate-950 font-bold font-space text-xs shadow-lg transition-all active:scale-95 cursor-pointer"
           >
             <ShieldCheck className="w-4 h-4 text-slate-950" />
             <span className="hidden md:inline">RECRUITER DOSSIER</span>
@@ -176,7 +176,7 @@ export default function BrunoPlaygroundHUD({
         <div className="pointer-events-auto self-center animate-bounce mb-6">
           <button
             onClick={() => onOpenLandmark(nearLandmark.id)}
-            className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF9A45] via-[#EA580C] to-[#C2410C] text-white font-black font-space text-sm tracking-wider uppercase shadow-[0_0_30px_rgba(234,88,12,0.6)] active:scale-95 transition-all cursor-pointer border border-amber-300/40"
+            className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-linear-to-r from-[#FF9A45] via-[#EA580C] to-[#C2410C] text-white font-black font-space text-sm tracking-wider uppercase shadow-[0_0_30px_rgba(234,88,12,0.6)] active:scale-95 transition-all cursor-pointer border border-amber-300/40"
           >
             <Sparkles className="w-4 h-4 text-amber-200" />
             <span>EXPLORE {nearLandmark.name}</span>
@@ -234,7 +234,7 @@ export default function BrunoPlaygroundHUD({
               <button
                 onTouchStart={() => { vehicleInputs.nitro = true; }}
                 onTouchEnd={() => { vehicleInputs.nitro = false; }}
-                className="w-14 h-14 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 active:scale-95 flex items-center justify-center text-slate-950 font-black font-space text-xs shadow-lg"
+                className="w-14 h-14 rounded-2xl bg-linear-to-r from-orange-500 to-amber-500 active:scale-95 flex items-center justify-center text-slate-950 font-black font-space text-xs shadow-lg"
               >
                 NITRO
               </button>

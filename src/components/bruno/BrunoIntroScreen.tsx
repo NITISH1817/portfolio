@@ -92,7 +92,7 @@ export default function BrunoIntroScreen({
                 onClick={() => setQuality(q)}
                 className={`px-2.5 py-1 rounded-lg uppercase transition-all cursor-pointer ${
                   quality === q
-                    ? 'bg-gradient-to-r from-[#FF9A45] to-[#A855F7] text-slate-950 font-bold shadow-sm'
+                    ? 'bg-linear-to-r from-[#FF9A45] to-[#A855F7] text-slate-950 font-bold shadow-sm'
                     : 'hover:text-slate-200'
                 }`}
               >
@@ -115,13 +115,13 @@ export default function BrunoIntroScreen({
       {/* HERO CENTERPIECE */}
       <main className="relative z-10 my-auto py-8 flex flex-col items-center text-center max-w-4xl mx-auto">
         {/* Playable Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500/15 via-purple-500/15 to-blue-500/15 border border-orange-500/30 text-[11px] font-mono font-semibold tracking-wider text-orange-300 uppercase mb-5 backdrop-blur-sm shadow-inner">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-linear-to-r from-orange-500/15 via-purple-500/15 to-blue-500/15 border border-orange-500/30 text-[11px] font-mono font-semibold tracking-wider text-orange-300 uppercase mb-5 backdrop-blur-sm shadow-inner">
           <Sparkles className="w-3.5 h-3.5 text-[#FF9A45] animate-spin" style={{ animationDuration: '6s' }} />
           INTERACTIVE 3D VEHICLE EXPLORATION PORTFOLIO
         </div>
 
         {/* Main Title with Signature Orange-Purple-Cyan Gradient */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight font-space uppercase mb-3 bg-gradient-to-r from-[#FF9A45] via-[#FF70A6] to-[#61A5FF] bg-clip-text text-transparent drop-shadow-md">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight font-space uppercase mb-3 bg-linear-to-r from-[#FF9A45] via-[#FF70A6] to-[#61A5FF] bg-clip-text text-transparent drop-shadow-md">
           NITISH PRIYAN
         </h1>
 
@@ -168,7 +168,7 @@ export default function BrunoIntroScreen({
           <button
             id="start-exploring-btn"
             onClick={onStartExploring}
-            className="group relative flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#FF9A45] via-[#FF70A6] to-[#A855F7] text-slate-950 font-black text-sm tracking-wider uppercase font-space shadow-[0_0_35px_rgba(255,154,69,0.35)] hover:shadow-[0_0_50px_rgba(255,154,69,0.55)] active:scale-95 transition-all cursor-pointer"
+            className="group relative flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-2xl bg-linear-to-r from-[#FF9A45] via-[#FF70A6] to-[#A855F7] text-slate-950 font-black text-sm tracking-wider uppercase font-space shadow-[0_0_35px_rgba(255,154,69,0.35)] hover:shadow-[0_0_50px_rgba(255,154,69,0.55)] active:scale-95 transition-all cursor-pointer"
           >
             <span>START EXPLORING WORLD</span>
             <ChevronRight className="w-4 h-4 text-slate-950 group-hover:translate-x-1 transition-transform" />

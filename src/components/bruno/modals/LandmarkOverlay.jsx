@@ -261,7 +261,7 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
                     <div className="relative w-12 h-12 rounded-full border border-cyan-400/40 flex items-center justify-center overflow-hidden bg-[#0A0514]/90 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
                       {/* Rotating subtle sweep */}
                       <div
-                        className="absolute inset-0 bg-gradient-to-tr from-cyan-400/30 via-transparent to-transparent rounded-full animate-spin"
+                        className="absolute inset-0 bg-linear-to-tr from-cyan-400/30 via-transparent to-transparent rounded-full animate-spin"
                         style={{ animationDuration: '4s' }}
                       />
                       {/* Concentric rings */}
@@ -447,7 +447,7 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
                     <button
                       type="submit"
                       disabled={formStatus === 'sending' || formStatus === 'sent'}
-                      className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF6B00] via-[#A855F7] to-[#6366F1] hover:from-[#FF7A1A] hover:via-[#B568F8] hover:to-[#7376F8] text-white font-space font-bold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(255,107,0,0.35)] hover:shadow-[0_0_35px_rgba(255,107,0,0.5)] border border-white/20 transition-all active:scale-[0.98] disabled:opacity-80"
+                      className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#FF6B00] via-[#A855F7] to-[#6366F1] hover:from-[#FF7A1A] hover:via-[#B568F8] hover:to-[#7376F8] text-white font-space font-bold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(255,107,0,0.35)] hover:shadow-[0_0_35px_rgba(255,107,0,0.5)] border border-white/20 transition-all active:scale-[0.98] disabled:opacity-80"
                     >
                       {formStatus === 'sending' ? (
                         <span className="flex items-center gap-2">
@@ -525,7 +525,7 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
               </div>
 
               {/* Core Philosophy Callout */}
-              <div className="p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-[#1C1138] to-purple-950/50 border border-cyan-400/40 shadow-inner">
+              <div className="p-5 rounded-2xl bg-linear-to-r from-purple-950/50 via-[#1C1138] to-purple-950/50 border border-cyan-400/40 shadow-inner">
                 <p className="text-base md:text-lg text-cyan-200 font-medium italic leading-relaxed font-inter">
                   "{identityData.introduction}"
                 </p>
@@ -963,7 +963,7 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
                   </a>
                   <button
                     onClick={handleDownloadResume}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-xl active:scale-95 transition-all"
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-linear-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-xl active:scale-95 transition-all"
                   >
                     <Download className="w-4 h-4" /> DOWNLOAD CV (.PDF)
                   </button>

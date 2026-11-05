@@ -12,7 +12,7 @@ export default function Capabilities() {
         <div className="flex-1 flex flex-col gap-8">
           <h2 className="text-sm tracking-widest text-[#8B94A5] mb-4">02 / CAPABILITIES</h2>
           <div className="flex flex-col gap-4 relative">
-            <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-white/10" />
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
             
             {capabilities.map((cap) => (
               <button
@@ -22,7 +22,7 @@ export default function Capabilities() {
                 data-cursor="VIEW"
               >
                 {activeCap.id === cap.id && (
-                  <div className="absolute left-[-2px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-[#5C6CFF] shadow-[0_0_10px_#5C6CFF]" />
+                  <div className="absolute -left-0.5 top-1/2 -translate-y-1/2 w-1.25 h-1.25 rounded-full bg-[#5C6CFF] shadow-[0_0_10px_#5C6CFF]" />
                 )}
                 <span className="text-xl md:text-3xl font-light tracking-tight">
                   {cap.title?.includes('—') ? cap.title.split('—')[1]?.trim() : (cap.title?.includes('-') ? cap.title.split('-')[1]?.trim() : cap.title)}

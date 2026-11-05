@@ -57,7 +57,7 @@ export default function NexusTelemetryLoader({
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-purple-500/25">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF8A3D] to-[#A855F7] p-[1px]">
+            <div className="w-8 h-8 rounded-xl bg-linear-to-br from-[#FF8A3D] to-[#A855F7] p-[1px]">
               <div className="w-full h-full bg-[#080A12] rounded-[11px] flex items-center justify-center">
                 <Cpu className="w-4 h-4 text-[#FF8A3D] animate-pulse" />
               </div>
@@ -77,7 +77,7 @@ export default function NexusTelemetryLoader({
         <div className="space-y-2">
           <div className="w-full h-2.5 rounded-full bg-[#080A12] border border-cyan-500/30 overflow-hidden p-[1px]">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#FF8A3D] via-[#FF70A6] to-[#38BDF8] transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.6)]"
+              className="h-full rounded-full bg-linear-to-r from-[#FF8A3D] via-[#FF70A6] to-[#38BDF8] transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.6)]"
               style={{ width: `${progress}%` }}
             />
           </div>

@@ -402,7 +402,7 @@ export default function CommandPalette({
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`flex items-center justify-between p-3.5 rounded-xl cursor-pointer transition-all duration-150 ${
                     isSelected
-                      ? 'bg-gradient-to-r from-purple-900/60 to-cyan-950/40 border border-cyan-400/50 shadow-md translate-x-1'
+                      ? 'bg-linear-to-r from-purple-900/60 to-cyan-950/40 border border-cyan-400/50 shadow-md translate-x-1'
                       : 'hover:bg-purple-950/40 border border-transparent'
                   }`}
                 >

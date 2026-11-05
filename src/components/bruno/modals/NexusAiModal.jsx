@@ -244,7 +244,7 @@ export default function NexusAiModal({ isOpen, onClose }) {
               <div
                 className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-inter ${
                   m.role === 'user'
-                    ? 'bg-gradient-to-r from-purple-800 to-indigo-900 text-white border border-purple-400/30'
+                    ? 'bg-linear-to-r from-purple-800 to-indigo-900 text-white border border-purple-400/30'
                     : 'bg-[#170E2D] text-slate-100 border border-purple-500/30 shadow-md'
                 }`}
               >
@@ -296,7 +296,7 @@ export default function NexusAiModal({ isOpen, onClose }) {
           <button
             onClick={() => handleSend()}
             disabled={!input.trim() || isTyping}
-            className="h-12 px-5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 disabled:opacity-50 text-slate-950 font-space font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg transition-all"
+            className="h-12 px-5 rounded-xl bg-linear-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 disabled:opacity-50 text-slate-950 font-space font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg transition-all"
           >
             <Send className="w-4 h-4" />
             <span className="hidden sm:inline">TRANSMIT</span>

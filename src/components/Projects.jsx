@@ -24,9 +24,9 @@ function ProjectVisual({ id }) {
     return (
       <div className="w-full h-full bg-[var(--bg-surface)] flex items-center justify-center p-4 overflow-hidden relative">
         <div className="w-24 h-24 rounded-full border border-[var(--border-color)] relative overflow-hidden flex items-center justify-center">
-           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-red-500/20 to-transparent" />
-           <div className="w-full h-[1px] bg-red-500/50 absolute" />
-           <div className="w-[1px] h-full bg-red-500/50 absolute" />
+           <div className="absolute inset-0 bg-linear-to-tr from-transparent via-red-500/20 to-transparent" />
+           <div className="w-full h-px bg-red-500/50 absolute" />
+           <div className="w-px h-full bg-red-500/50 absolute" />
            <div className="w-2 h-2 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,1)]" />
         </div>
       </div>

@@ -53,7 +53,7 @@ export default function App() {
                 setIsClassicMode(false);
                 handleStartExploring();
               }}
-              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#FF9A45] to-[#A855F7] text-slate-950 font-space font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-linear-to-r from-[#FF9A45] to-[#A855F7] text-slate-950 font-space font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
             >
               LAUNCH 3D PLAYGROUND &rarr;
             </button>
