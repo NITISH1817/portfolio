@@ -1,10 +1,10 @@
 {
   "url": "https://portfolio-nitish1817.vercel.app",
-  "timestamp": "2026-11-05T07:17:29.605Z",
+  "timestamp": "2026-11-05T07:20:20.433Z",
   "tests": {
     "homepage_load": {
       "status": "PASS",
-      "loadTime": 2522,
+      "loadTime": 2639,
       "title": "Nitish Priyan R S | Software Engineer | Java | AI/ML"
     },
     "start_screen": {
@@ -54,9 +54,6 @@
     }
   },
   "consoleErrors": [
-    "Failed to load resource: the server responded with a status of 404 ()",
-    "Failed to load resource: the server responded with a status of 404 ()",
-    "Failed to load resource: the server responded with a status of 404 ()",
     "Failed to load resource: the server responded with a status of 404 ()",
     "Failed to load resource: the server responded with a status of 404 ()"
   ],
