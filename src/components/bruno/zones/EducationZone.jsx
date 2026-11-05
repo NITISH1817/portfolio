@@ -118,7 +118,7 @@ export default function EducationZone({ onSelectInfo, isNight }) {
           anchorX="center"
           anchorY="middle"
         >
-          B.E. CSE • BATCH 2028 • CGPA 7.8
+          B.E. CSE • BATCH 2028 • CGPA 7.79
         </Text>
       </group>
 

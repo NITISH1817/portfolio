@@ -33,6 +33,8 @@ export interface Project {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
+  repoStatus?: 'Public Repository' | 'Hugging Face Spaces' | 'Private Academic Repository';
+  isPublicRepo?: boolean;
   metrics?: string[];
   features?: string[];
   problemStatement?: string;
@@ -72,7 +74,7 @@ export const identityData: IdentityData = {
   role: "Full Stack Developer | AI/ML Engineer | Software Developer",
   location: "India",
   batch: "2028",
-  cgpa: "7.8",
+  cgpa: "7.79",
   introduction: "I build intelligent applications, solve real-world problems, and develop software products using modern technologies.",
   aboutStory: [
     "I am a passionate Computer Science student and software engineer driven by building high-impact systems at the intersection of AI/ML, backend engineering, and intuitive user experiences.",
@@ -92,7 +94,7 @@ export const identityData: IdentityData = {
   linkedin: "https://www.linkedin.com/in/nitish-priyan/",
   github: "https://github.com/NITISH1817",
   leetcode: "https://leetcode.com/u/NITISH1817/",
-  dsaStats: "170+ DSA Problems Solved in Java"
+  dsaStats: "170+ DSA Problems Solved in Java (LeetCode)"
 };
 
 export interface Capability {
@@ -207,7 +209,9 @@ export const projects: Project[] = [
     description: "An advanced AI-powered legal intelligence system that indexes complex statutes, judicial rulings, and precedents using semantic embeddings and ChromaDB. Delivers natural language citation analysis, automated case summarization, and precedent verification using Gemini AI and FastAPI.",
     type: "TEAM PROJECT",
     technologies: ["Python", "NLP", "FastAPI", "React.js", "ChromaDB", "Gemini AI", "Tailwind CSS"],
-    githubUrl: "https://github.com/NITISH1817",
+    githubUrl: "https://github.com/NITISH1817/LEXORA-AI-Powered-Legal-Research-Platform",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
     metrics: [
       "Semantic similarity search across thousands of legal statutes",
       "Sub-second semantic retrieval using ChromaDB HNSW indexing",
@@ -251,9 +255,11 @@ export const projects: Project[] = [
     description: "A machine learning entitlement engine that democratizes access to state and central welfare schemes. Analyzes socioeconomic, demographic, and agricultural profiles to match citizens with eligible subsidies, loans, and education programs with clear qualifying criteria.",
     type: "INDIVIDUAL PROJECT",
     technologies: ["Python", "Scikit-learn", "Machine Learning", "FastAPI", "React.js", "MySQL"],
-    githubUrl: "https://github.com/NITISH1817",
+    githubUrl: "https://github.com/NITISH1817/GovScheme",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
     metrics: [
-      "94% eligibility matching precision across multi-attribute profiles",
+      "Achieved 94% test-set eligibility matching precision across multi-attribute profiles",
       "Evaluates 150+ central & state welfare criteria simultaneously",
       "Multilingual profile input designed for accessibility"
     ],
@@ -295,7 +301,9 @@ export const projects: Project[] = [
     description: "An intelligent platform that identifies, clusters, and prioritizes unsolved campus and community challenges. Employs NLP topic modeling and semantic embeddings to prevent duplicate initiatives and connect interdisciplinary student teams to high-impact projects.",
     type: "TEAM PROJECT",
     technologies: ["React.js", "FastAPI", "AI/ML", "ChromaDB", "Node.js", "Tailwind CSS"],
-    githubUrl: "https://github.com/NITISH1817",
+    githubUrl: "https://github.com/NITISH1817/Project_Zero",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
     metrics: [
       "Automated problem deduplication with 88% semantic accuracy",
       "Active collaboration workspace adopted across student departments"
@@ -338,10 +346,12 @@ export const projects: Project[] = [
     description: "A recommendation engine synthesizing metadata extraction (genres, cast, keywords, directors) with user rating matrices. Implements cosine similarity on TF-IDF vectors alongside matrix factorization to deliver accurate, non-obvious film recommendations in real time.",
     type: "INDIVIDUAL PROJECT",
     technologies: ["Python", "Scikit-learn", "Collaborative Filtering", "Pandas", "Streamlit", "React.js"],
-    githubUrl: "https://github.com/NITISH1817",
+    githubUrl: "https://github.com/NITISH1817/movie-recommendation-system",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
     metrics: [
       "Trained on MovieLens 100k+ dataset with low RMSE latency",
-      "Sub-50ms recommendation generation for 5,000+ indexed titles"
+      "Sub-50ms recommendation generation via precomputed sparse similarity matrix"
     ],
     features: [
       "Interactive hybrid recommendation slider (Content vs Collaborative)",
@@ -382,6 +392,8 @@ export const projects: Project[] = [
     type: "TEAM PROJECT",
     technologies: ["Flutter", "Node.js", "Express", "MySQL", "Geo-tagging", "REST APIs"],
     githubUrl: "https://github.com/NITISH1817",
+    repoStatus: "Private Academic Repository",
+    isPublicRepo: false,
     metrics: [
       "Real-time GPS validation preventing duplicate leak complaints",
       "40% faster grievance resolution dispatch for local municipal zones"
@@ -424,7 +436,9 @@ export const projects: Project[] = [
     description: "A resilient backend architecture connecting isolated government departmental databases. Features role-based access control, cryptographic verification of citizen records, and asynchronous message queues to ensure reliable multi-departmental workflow orchestration.",
     type: "TEAM PROJECT",
     technologies: ["Java", "Java SE 17", "REST APIs", "Event-Driven Architecture", "RBAC", "MySQL"],
-    githubUrl: "https://github.com/NITISH1817",
+    githubUrl: "https://github.com/NITISH1817/SETU",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
     metrics: [
       "Architected event-driven microservices handling asynchronous payloads",
       "End-to-end audit logging & role-based access control compliance"
@@ -467,7 +481,10 @@ export const projects: Project[] = [
     description: "Medical diagnostic deep learning system trained on retinal fundus photography to detect five stages of diabetic retinopathy. Implements EfficientNet-B3 with Grad-CAM heatmaps to provide explainable visual evidence for ophthalmologists.",
     type: "TEAM PROJECT",
     technologies: ["Python", "PyTorch", "EfficientNet-B3", "Grad-CAM", "Next.js", "Gradio"],
-    githubUrl: "https://github.com/NITISH1817",
+    githubUrl: "https://huggingface.co/spaces/NITISH1817/diabetic-retinopathy",
+    liveUrl: "https://huggingface.co/spaces/NITISH1817/diabetic-retinopathy",
+    repoStatus: "Hugging Face Spaces",
+    isPublicRepo: true,
     metrics: [
       "71% validation accuracy on clinical retinal fundus benchmarks",
       "Grad-CAM visual attention overlays highlighting microaneurysms"
@@ -501,6 +518,53 @@ export const projects: Project[] = [
       "Grad-CAM Explainability Engine",
       "Clinical Inspection Web App"
     ]
+  },
+  {
+    id: "proj-edu-prediction",
+    number: "08",
+    title: "Student Performance Prediction & MLOps Decision Support System",
+    subtitle: "End-to-End MLOps Pipeline for Student Outcome Prediction & Risk Intervention",
+    description: "An end-to-end MLOps platform for student outcome prediction, risk scoring, and personalized academic intervention recommendations. Employs XGBoost with MLflow experiment tracking, DVC data versioning, Evidently AI drift monitoring, and containerized CI/CD pipelines.",
+    type: "INDIVIDUAL PROJECT",
+    technologies: ["Python", "FastAPI", "XGBoost", "MLflow", "DVC", "Docker", "CI/CD", "Evidently AI"],
+    githubUrl: "https://github.com/NITISH1817/edu-prediction",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
+    metrics: [
+      "89.1% prediction accuracy across multi-factor academic cohorts",
+      "82.6% recall on at-risk student intervention alerts",
+      "Continuous data drift monitoring via Evidently AI & MLflow registry"
+    ],
+    features: [
+      "XGBoost early-warning risk scoring classifier",
+      "MLflow experiment tracking with hyperparameter tuning",
+      "Automated model & data drift detection with Evidently AI",
+      "Containerized microservice architecture with Docker"
+    ],
+    problemStatement: "Academic institutions often identify at-risk students only after semester exam failures, lacking early-warning diagnostic indicators to deploy personalized tutoring and academic counseling.",
+    solution: "A production-grade MLOps platform integrating XGBoost classification with MLflow experiment tracking and DVC data pipelines. Evaluates multi-variate academic, behavioral, and demographic features to flag at-risk students with 82.6% recall and 89.1% accuracy.",
+    technicalDecisions: [
+      {
+        title: "XGBoost with Class-Weighted Penalty",
+        rationale: "Tuned on imbalanced academic failure cohorts to prioritize recall (82.6%) for vulnerable students over raw precision."
+      },
+      {
+        title: "MLflow & DVC Experiment Tracking",
+        rationale: "Versioned feature matrices and tracked hyperparameters across 40+ training runs to guarantee model reproducibility."
+      },
+      {
+        title: "Evidently AI Continuous Drift Detection",
+        rationale: "Configured scheduled statistical tests (Kolmogorov-Smirnov) to monitor covariate shift in incoming semester grade distributions."
+      }
+    ],
+    architectureSteps: [
+      "Academic Intake & Feature Pipeline",
+      "DVC Data Versioning",
+      "XGBoost Inference Engine",
+      "MLflow Metric Tracking",
+      "Evidently AI Drift Monitoring",
+      "FastAPI Prediction Endpoint"
+    ]
   }
 ];
 
@@ -510,7 +574,7 @@ export const educationList: Education[] = [
     institution: "BANNARI AMMAN INSTITUTE OF TECHNOLOGY",
     degree: "B.E. Computer Science and Engineering",
     period: "2024 – 2028 (Expected)",
-    result: "CGPA 7.8",
+    result: "CGPA 7.79",
     description: "Focus on Algorithms, Object-Oriented Software Design, Distributed Systems, Machine Learning, and Cloud Computing."
   },
   {

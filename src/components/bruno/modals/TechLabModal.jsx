@@ -117,7 +117,7 @@ export default function TechLabModal({ isOpen, onClose }) {
   // LAB 5: DATABASE SQL QUERY EXECUTION STATE
   // =========================================================================
   const sampleDatabase = [
-    { id: 1, name: 'Nitish Priyan R S', role: 'Full Stack / AI Engineer', cgpa: 7.8, batch: '2028' },
+    { id: 1, name: 'Nitish Priyan R S', role: 'Full Stack / AI Engineer', cgpa: 7.79, batch: '2028' },
     { id: 2, name: 'Lexora Platform', role: 'AI Legal Research', cgpa: 9.2, batch: '2024' },
     { id: 3, name: 'AI Govt Scheme', role: 'Citizen Eligibility', cgpa: 8.9, batch: '2024' },
     { id: 4, name: 'Project Zero', role: 'Security Diagnostics', cgpa: 8.5, batch: '2024' }

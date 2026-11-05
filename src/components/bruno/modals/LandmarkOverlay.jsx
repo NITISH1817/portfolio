@@ -800,16 +800,32 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
                     </div>
                   )}
 
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    <a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-space font-bold text-xs shadow-lg transition-all"
-                    >
-                      <GithubIcon className="w-4 h-4" /> REPOSITORY CODE & SPEC &rarr;
-                    </a>
-                    {selectedProject.liveUrl && (
+                  <div className="flex flex-wrap items-center gap-2 pt-2">
+                    {selectedProject.isPublicRepo === false ? (
+                      <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-200 font-mono text-xs">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                        <span>PRIVATE ACADEMIC REPO • CODE AVAILABLE ON REQUEST</span>
+                      </div>
+                    ) : selectedProject.repoStatus === 'Hugging Face Spaces' ? (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-space font-bold text-xs shadow-lg transition-all"
+                      >
+                        <span>🤗</span> HUGGING FACE SPACES MODEL & GRADIO DEMO &rarr;
+                      </a>
+                    ) : (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-space font-bold text-xs shadow-lg transition-all"
+                      >
+                        <GithubIcon className="w-4 h-4" /> VIEW GITHUB REPOSITORY &rarr;
+                      </a>
+                    )}
+                    {selectedProject.liveUrl && selectedProject.repoStatus !== 'Hugging Face Spaces' && (
                       <a
                         href={selectedProject.liveUrl}
                         target="_blank"

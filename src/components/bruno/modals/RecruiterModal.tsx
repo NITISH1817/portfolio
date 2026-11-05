@@ -79,7 +79,11 @@ export default function RecruiterModal({
     setTimeout(() => setCopiedPhone(false), 2500);
   };
 
-  const featuredProjects = projects.slice(0, 3);
+  const featuredProjects = [
+    projects.find((p) => p.id === 'proj-setu') || projects[0],
+    projects.find((p) => p.id === 'proj-lexora') || projects[1],
+    projects.find((p) => p.id === 'proj-edu-prediction') || projects[2]
+  ];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
@@ -179,7 +183,7 @@ export default function RecruiterModal({
           <div className="p-3.5 rounded-2xl bg-[#170E2D] border border-purple-500/30 space-y-1">
             <span className="text-[10px] font-mono text-cyan-300 font-bold uppercase">DEGREE & CGPA</span>
             <div className="font-space font-bold text-sm text-cyan-400">
-              B.E. CSE • 7.8 CGPA
+              B.E. CSE • {identityData.cgpa} CGPA
             </div>
           </div>
           <div className="p-3.5 rounded-2xl bg-[#170E2D] border border-purple-500/30 space-y-1">
@@ -247,8 +251,15 @@ export default function RecruiterModal({
                 className="group cursor-pointer p-4 rounded-2xl bg-[#140C28] hover:bg-[#1C1236] border border-purple-500/30 hover:border-cyan-400/60 transition-all flex flex-col justify-between space-y-3"
               >
                 <div>
-                  <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase">
-                    ARTIFACT {proj.number} • {proj.type}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">
+                      ARTIFACT {proj.number} • {proj.type}
+                    </span>
+                    {proj.repoStatus && (
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 font-mono">
+                        {proj.repoStatus}
+                      </span>
+                    )}
                   </div>
                   <h4 className="font-space font-bold text-sm text-white group-hover:text-cyan-300 transition-colors mt-1">
                     {proj.title}

@@ -1,0 +1,55 @@
+{
+  "url": "http://localhost:5173",
+  "timestamp": "2026-11-05T08:24:10.540Z",
+  "performance": {
+    "httpStatus": 304,
+    "networkIdleTimeMs": 6129,
+    "fcpMs": 380,
+    "domContentLoadedMs": 240,
+    "loadEventMs": 241
+  },
+  "tests": {
+    "http_status": {
+      "pass": false,
+      "loadTime": 6129
+    },
+    "recruiter_dossier": {
+      "pass": true,
+      "details": {
+        "hasVerifiedCGPA_7_79": true,
+        "hasIncorrectCGPA_7_8": false,
+        "hasBatch2028": true,
+        "hasCvDownloadButton": true,
+        "hasLeetCodeDSA": true,
+        "hasOracleCert": true,
+        "hasSETU": true,
+        "hasLEXORA": true,
+        "hasMLOps": true
+      }
+    },
+    "vehicle_physics": {
+      "pass": true
+    },
+    "project_links": {
+      "pass": true,
+      "details": {
+        "hasLexoraRepo": true,
+        "hasGenericOnly": false,
+        "hasProblemStatement": true,
+        "hasSolution": true,
+        "hasTechnicalDecisions": true
+      }
+    },
+    "mobile_viewport": {
+      "pass": true,
+      "details": {
+        "hasLeft": true,
+        "hasRight": true,
+        "hasUp": true,
+        "hasDown": true,
+        "hasRecruiter": true
+      }
+    }
+  },
+  "consoleErrors": []
+}

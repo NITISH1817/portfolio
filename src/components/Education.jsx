@@ -26,7 +26,7 @@ export default function Education() {
                 </p>
                 <div className="flex gap-4 mt-2">
                   <span className="text-sm font-bold text-[var(--accent)]">
-                    CGPA 7.8
+                    CGPA 7.79
                   </span>
                   <span className="text-sm font-medium text-[var(--text-secondary)]">
                     Expected 2028

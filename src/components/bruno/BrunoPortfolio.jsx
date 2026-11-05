@@ -20,23 +20,25 @@ import LandmarkResume from './landmarks/LandmarkResume';
 import LandmarkContact from './landmarks/LandmarkContact';
 import Decorations from './zones/Decorations';
 import BrunoHUD from './BrunoHUD';
-import WorldMap from './WorldMap';
-import LandmarkOverlay from './modals/LandmarkOverlay';
 import IntroScreen from './IntroScreen';
-import ClassicPortfolio from './ClassicPortfolio';
 import Crystals from './collectibles/Crystals';
 import TireTracks from './effects/TireTracks';
 import TireSmoke from './effects/TireSmoke';
 import MissionWaypoint from './effects/MissionWaypoint';
-import CommandPalette from './modals/CommandPalette';
-import NexusAiModal from './modals/NexusAiModal';
-import DevDashboardModal from './modals/DevDashboardModal';
-import TechLabModal from './modals/TechLabModal';
-import RecruiterModal from './modals/RecruiterModal';
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import { carAudio } from './CarAudio';
 import { useGameStore } from '../../store/gameStore';
 import { hasWebGL } from '../../utils';
+
+// Lazy-loaded modal & non-critical UI chunks for fast initial paint
+const WorldMap = React.lazy(() => import('./WorldMap'));
+const LandmarkOverlay = React.lazy(() => import('./modals/LandmarkOverlay'));
+const CommandPalette = React.lazy(() => import('./modals/CommandPalette'));
+const NexusAiModal = React.lazy(() => import('./modals/NexusAiModal'));
+const DevDashboardModal = React.lazy(() => import('./modals/DevDashboardModal'));
+const TechLabModal = React.lazy(() => import('./modals/TechLabModal'));
+const RecruiterModal = React.lazy(() => import('./modals/RecruiterModal'));
+const ClassicPortfolio = React.lazy(() => import('./ClassicPortfolio'));
 
 export default function BrunoPortfolio() {
   const [isIntro, setIsIntro] = useState(true);
@@ -167,51 +169,63 @@ export default function BrunoPortfolio() {
       )}
 
       {/* 2. Tactical Overhead Radar & World Map */}
-      <WorldMap
-        isOpen={isMapOpen}
-        onClose={() => setIsMapOpen(false)}
-        onTeleportTo={(coords) => {
-          window.dispatchEvent(new CustomEvent('car-teleport', { detail: coords }));
-          carAudio.playChime();
-        }}
-        discoveredLandmarks={storeDiscovered}
-      />
+      <Suspense fallback={null}>
+        <WorldMap
+          isOpen={isMapOpen}
+          onClose={() => setIsMapOpen(false)}
+          onTeleportTo={(coords) => {
+            window.dispatchEvent(new CustomEvent('car-teleport', { detail: coords }));
+            carAudio.playChime();
+          }}
+          discoveredLandmarks={storeDiscovered}
+        />
+      </Suspense>
 
       {/* 3. Command Palette (Ctrl + K) */}
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setCommandPaletteOpen(false)}
-        onOpenLandmark={handleOpenLandmark}
-        onToggleMap={() => setIsMapOpen((prev) => !prev)}
-        isClassicMode={isClassicMode}
-        setIsClassicMode={setIsClassicMode}
-      />
+      <Suspense fallback={null}>
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={() => setCommandPaletteOpen(false)}
+          onOpenLandmark={handleOpenLandmark}
+          onToggleMap={() => setIsMapOpen((prev) => !prev)}
+          isClassicMode={isClassicMode}
+          setIsClassicMode={setIsClassicMode}
+        />
+      </Suspense>
 
       {/* 4. NEXUS AI Portfolio Assistant */}
-      <NexusAiModal
-        isOpen={isAiAssistantOpen}
-        onClose={() => setAiAssistantOpen(false)}
-      />
+      <Suspense fallback={null}>
+        <NexusAiModal
+          isOpen={isAiAssistantOpen}
+          onClose={() => setAiAssistantOpen(false)}
+        />
+      </Suspense>
 
       {/* 5. Live Developer Analytics Dashboard */}
-      <DevDashboardModal
-        isOpen={isDevDashboardOpen}
-        onClose={() => setDevDashboardOpen(false)}
-      />
+      <Suspense fallback={null}>
+        <DevDashboardModal
+          isOpen={isDevDashboardOpen}
+          onClose={() => setDevDashboardOpen(false)}
+        />
+      </Suspense>
 
       {/* 6. Interactive Technology Laboratory */}
-      <TechLabModal
-        isOpen={isTechLabOpen}
-        onClose={() => setTechLabOpen(false)}
-      />
+      <Suspense fallback={null}>
+        <TechLabModal
+          isOpen={isTechLabOpen}
+          onClose={() => setTechLabOpen(false)}
+        />
+      </Suspense>
 
       {/* 6.5. Fast-Track Recruiter Executive Dossier */}
-      <RecruiterModal
-        isOpen={isRecruiterModalOpen}
-        onClose={() => setRecruiterModalOpen(false)}
-        onOpenProject={(proj) => handleOpenLandmark('projects', proj)}
-        onSwitchClassic={() => setIsClassicMode(true)}
-      />
+      <Suspense fallback={null}>
+        <RecruiterModal
+          isOpen={isRecruiterModalOpen}
+          onClose={() => setRecruiterModalOpen(false)}
+          onOpenProject={(proj) => handleOpenLandmark('projects', proj)}
+          onSwitchClassic={() => setIsClassicMode(true)}
+        />
+      </Suspense>
 
       {/* 7. Game HUD (Only visible during active gameplay, hidden during modal/map exploration) */}
       {!isIntro && !isAnyModalActive && (
@@ -230,14 +244,16 @@ export default function BrunoPortfolio() {
 
       {/* 8. Interactive Landmark Overlay Modal */}
       {activeLandmarkId && (
-        <LandmarkOverlay
-          landmarkId={activeLandmarkId}
-          initialProject={selectedProject}
-          onClose={() => {
-            setActiveLandmarkId(null);
-            setSelectedProject(null);
-          }}
-        />
+        <Suspense fallback={null}>
+          <LandmarkOverlay
+            landmarkId={activeLandmarkId}
+            initialProject={selectedProject}
+            onClose={() => {
+              setActiveLandmarkId(null);
+              setSelectedProject(null);
+            }}
+          />
+        </Suspense>
       )}
 
       {/* WebGL Fallback Banner if unsupported */}
@@ -250,7 +266,9 @@ export default function BrunoPortfolio() {
       {/* 9. 2D Reader Mode (Document Layout for Accessibility) */}
       {isClassicMode || !webglSupported ? (
         <div className="w-full h-full overflow-y-auto bg-slate-950 text-white pt-16">
-          <ClassicPortfolio />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-slate-400 font-mono">Loading Document View...</div>}>
+            <ClassicPortfolio />
+          </Suspense>
         </div>
       ) : (
         /* 10. Full 3D Stylized Game World */
@@ -351,14 +369,14 @@ export default function BrunoPortfolio() {
             <FollowCamera cameraMode={cameraMode} isIntro={isIntro} />
 
             {/* Cinematic Post-Processing: Selective Bloom & Subtle Vignette */}
-            <EffectComposer multisampling={4} disableNormalPass>
+            <EffectComposer multisampling={2} disableNormalPass>
               <Bloom
-                luminanceThreshold={0.85}
-                luminanceSmoothing={0.2}
-                intensity={0.75}
+                luminanceThreshold={0.88}
+                luminanceSmoothing={0.25}
+                intensity={0.7}
                 mipmapBlur
               />
-              <Vignette eskil={false} offset={0.28} darkness={0.42} />
+              <Vignette eskil={false} offset={0.28} darkness={0.4} />
             </EffectComposer>
           </Suspense>
         </Canvas>

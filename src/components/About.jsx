@@ -32,7 +32,7 @@ export default function About() {
                 <p>Bannari Amman Institute of Technology</p>
                 <p>B.E. Computer Science and Engineering</p>
                 <p className="text-[var(--text-secondary)]">Expected 2028</p>
-                <p className="mt-2 text-[var(--accent)] font-bold">CGPA 7.8</p>
+                <p className="mt-2 text-[var(--accent)] font-bold">CGPA 7.79</p>
               </div>
             </div>
 

@@ -63,7 +63,7 @@ export default function LandmarkExperience({ onEnter, onLeave, isDiscovered, isN
           anchorX="center"
           anchorY="middle"
         >
-          B.E. CSE • BATCH 2028 • CGPA 7.8
+          B.E. CSE • BATCH 2028 • CGPA 7.79
         </Text>
       </RigidBody>
 
