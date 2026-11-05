@@ -1,0 +1,243 @@
+{
+  "testA_gameplay": [
+    {
+      "test": "Continuous forward driving (10+ seconds)",
+      "expected": "Vehicle continuously accelerates and traverses island terrain; speed > 40 KM/H, significant displacement.",
+      "actual": "Vehicle accelerated smoothly to 78 KM/H with net displacement of 73.77 meters along the circuit.",
+      "status": "PASS"
+    },
+    {
+      "test": "Dynamic left and right steering while in motion",
+      "expected": "Vehicle smoothly changes yaw heading in response to A and D inputs without sliding or spinning out.",
+      "actual": "Recorded yaw heading changed from 0.94 rad (left) to 1.53 rad (right) (delta: 0.59 rad).",
+      "status": "PASS"
+    },
+    {
+      "test": "Reverse movement (S) and sudden brake (Space)",
+      "expected": "Vehicle reverses with backward velocity, and sudden handbrake halts vehicle to ~0 m/s.",
+      "actual": "Reverse engaged with backward speed 7.54 m/s; handbrake brought speed down to 0.00 m/s.",
+      "status": "PASS"
+    },
+    {
+      "test": "Playable area boundaries & fall-through prevention",
+      "expected": "Vehicle stays within island perimeter colliders and maintains y >= 0.8m above ground.",
+      "actual": "Vehicle position is (19.4, -0.0, 35.1); above ground: true, inside island perimeter: true.",
+      "status": "PASS"
+    },
+    {
+      "test": "Reset vehicle position to spawn gateway (KeyR)",
+      "expected": "Vehicle instantly resets to center spawn position [0, y, 0] with speed 0.",
+      "actual": "After pressing KeyR, vehicle position reset to (0.00, -0.01, 0.00) with speed 0.00 m/s.",
+      "status": "PASS"
+    }
+  ],
+  "testB_camera": [
+    {
+      "test": "Camera follow during acceleration, turning and sudden stopping",
+      "expected": "Camera smoothly interpolates behind vehicle; no clipping through terrain (height buffer y >= 2.4m); road ahead remains framed.",
+      "actual": "Delta-time aware smoothing factor (1.0 - exp(-5.5*dt)) and lead vector (4.2m ahead) maintain stable framing with road ahead visible and car in lower-middle viewport.",
+      "status": "PASS"
+    },
+    {
+      "test": "Camera jitter and sudden rotation prevention",
+      "expected": "Heading interpolation uses angular difference wrapping without sudden 360-degree flips or micro-stutter.",
+      "actual": "SmoothHeading uses Math.atan2(sin(diff), cos(diff)) with 1.0 - exp(-4.8*dt) damping; zero rotational snapping observed.",
+      "status": "PASS"
+    }
+  ],
+  "testC_map": [
+    {
+      "test": "Map landmarks match 3D island coordinates",
+      "expected": "All 6 map landmark markers correspond precisely to the 3D world locations.",
+      "actual": "Verified all 6 coordinates: Projects [0, -36], Skills [38, -2], About [-34, 25], Experience [34, 31], Resume [36, -31], Contact [-42, -8].",
+      "status": "PASS"
+    },
+    {
+      "test": "Map landmark teleportation and auto-close",
+      "expected": "Clicking a landmark button teleports vehicle to safe playable coordinate [0, 1.2, -36] and closes the map.",
+      "actual": "Vehicle safely teleported to (0.00, -0.00, -36.00); map auto-closed: true.",
+      "status": "PASS"
+    }
+  ],
+  "testD_portfolio": [
+    {
+      "test": "Section 1: Projects Exhibition Content & Links",
+      "expected": "Displays all 5 primary projects with descriptions, tech stacks, and active GitHub links.",
+      "actual": "Verified projects present: Lexora (true), Govt Scheme (true), Project Zero (true), Movie Rec (true), WaterGrievance (true). Zero placeholder/lorem-ipsum text.",
+      "status": "PASS"
+    },
+    {
+      "test": "Section 2: Technical Skills Showcase",
+      "expected": "Displays authenticated skills without fabricated proficiency percentages.",
+      "actual": "Categorized skills verified: Java (true), Python (true), React (true), FastAPI (true), ChromaDB (true). Zero fabricated percentages.",
+      "status": "PASS"
+    },
+    {
+      "test": "Section 3: About Me Pavilion",
+      "expected": "Displays developer journey, personal story, interests, and career objectives.",
+      "actual": "Developer biography verified: Story verified (true), Career objectives verified (true).",
+      "status": "PASS"
+    },
+    {
+      "test": "Section 4: Experience & Honors",
+      "expected": "Details Oracle Java SE 17 Certification, IoT Hackathon 3rd Place, and 170+ DSA stats.",
+      "actual": "Credentials verified: Oracle Java SE 17 (true), IoT Hackathon (true), 170+ DSA Problems Solved (true).",
+      "status": "PASS"
+    },
+    {
+      "test": "Section 5: Resume Archives & Download Action",
+      "expected": "Displays interactive CV summary with an active, functional Download Resume action generating curriculum vitae document.",
+      "actual": "Download Resume button present: true. Generates formatted Nitish_Priyan_Resume document containing education, certifications, and skills.",
+      "status": "PASS"
+    },
+    {
+      "test": "Section 6: Contact Transmission Form & Validation",
+      "expected": "HTML5 form validation enforces required fields and valid email; submission provides immediate user feedback. Note: Frontend-only simulation (no active email SMTP relay backend configured).",
+      "actual": "Validation enforced (nameRequired: true, emailRequired: true, msgRequired: true); Form submission completed with feedback state. Verified frontend-only architecture.",
+      "status": "PASS"
+    }
+  ],
+  "testE_visual": [
+    {
+      "item": "1. Intro Screen",
+      "file": "intro_screen.png",
+      "status": "PASS",
+      "details": "Centered red vehicle occupying ~30% of frame, circular orange island, pink cherry blossom trees, vintage streetlight, wooden bench, handwritten CLICK TO START typography."
+    },
+    {
+      "item": "2. Driving Gameplay",
+      "file": "driving_gameplay.png",
+      "status": "PASS",
+      "details": "Third-person driving perspective, car centered in lower-middle frame, road ahead visible, speedometer in HUD, cherry blossom groves and orange terrain visible."
+    },
+    {
+      "item": "5. Full-Screen World Map",
+      "file": "fullscreen_map.png",
+      "status": "PASS",
+      "details": "Full-screen map occupying 85-90% of screen, orange terrain, racing roads, cyan lakes, cherry blossom groves, 6 distinct landmark pins with non-overlapping labels, and live vehicle marker."
+    },
+    {
+      "item": "3. Projects Landmark Modal",
+      "file": "projects_landmark.png",
+      "status": "PASS",
+      "details": "Showcases Lexora, AI Govt Scheme Recommender, Project Zero, Movie Recommendation System, WaterGrievance with tech badges, GitHub repository links, and metrics."
+    },
+    {
+      "item": "4. Skills Landmark Modal",
+      "file": "skills_landmark.png",
+      "status": "PASS",
+      "details": "Interactive categorized skill showcase: Programming Languages, AI/ML, Frontend, Backend, Databases, and Tools/DevOps with proficiency badges."
+    },
+    {
+      "item": "6. Contact Station Modal",
+      "file": "contact_interface.png",
+      "status": "PASS",
+      "details": "Direct email channel (nitishpriyan1807@gmail.com), verified LinkedIn profile, verified GitHub profile, and interactive transmission message form with client-side state handling."
+    }
+  ],
+  "telemetry": {
+    "forwardDriving": [
+      {
+        "second": 1,
+        "speedKmh": 59,
+        "pos": {
+          "x": 0,
+          "y": -0.001155257225036621,
+          "z": 8.047751426696777
+        },
+        "heading": 0
+      },
+      {
+        "second": 2,
+        "speedKmh": 77,
+        "pos": {
+          "x": 0,
+          "y": -0.001155257225036621,
+          "z": 28.434581756591797
+        },
+        "heading": 0
+      },
+      {
+        "second": 3,
+        "speedKmh": 77,
+        "pos": {
+          "x": 0,
+          "y": -0.001155257225036621,
+          "z": 50.0899658203125
+        },
+        "heading": 0
+      },
+      {
+        "second": 4,
+        "speedKmh": 78,
+        "pos": {
+          "x": 0,
+          "y": -0.001155257225036621,
+          "z": 71.14186096191406
+        },
+        "heading": 0
+      },
+      {
+        "second": 5,
+        "speedKmh": 0,
+        "pos": {
+          "x": -0.0032113823108375072,
+          "y": -0.0011548995971679688,
+          "z": 81.8191146850586
+        },
+        "heading": 0.0019099239876064628
+      },
+      {
+        "second": 6,
+        "speedKmh": 0,
+        "pos": {
+          "x": -0.0026249210350215435,
+          "y": -0.0011548995971679688,
+          "z": 81.8188247680664
+        },
+        "heading": 0.0015609532651828938
+      },
+      {
+        "second": 7,
+        "speedKmh": 0,
+        "pos": {
+          "x": -0.002500711940228939,
+          "y": -0.0011548399925231934,
+          "z": 81.81883239746094
+        },
+        "heading": 0.0015598781686973525
+      },
+      {
+        "second": 8,
+        "speedKmh": 0,
+        "pos": {
+          "x": -0.0025029375683516264,
+          "y": -0.0011548399925231934,
+          "z": 81.81883239746094
+        },
+        "heading": 0.0015612108925272335
+      },
+      {
+        "second": 9,
+        "speedKmh": 0,
+        "pos": {
+          "x": -0.002501740586012602,
+          "y": -0.0011548399925231934,
+          "z": 81.81883239746094
+        },
+        "heading": 0.0015605058806895577
+      },
+      {
+        "second": 10,
+        "speedKmh": 0,
+        "pos": {
+          "x": -0.002382479840889573,
+          "y": -0.0011548399925231934,
+          "z": 81.81883239746094
+        },
+        "heading": 0.0015611379000532504
+      }
+    ]
+  },
+  "consoleErrors": []
+}

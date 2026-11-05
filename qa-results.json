@@ -1,0 +1,52 @@
+{
+  "vehicle": {
+    "passed": [
+      "Forward acceleration verified (Speedometer reached 58 KM/H)",
+      "Natural coasting deceleration verified (dropped from 58 to 0 KM/H)",
+      "Brake decel verified (speed dropped to 0 KM/H)",
+      "Reverse driving (S) and steering (A/D) inputs executed",
+      "RigidBody vehicle-ground collision active and upright constraint prevents flipping",
+      "Vehicle drives freely across island terrain without falling through ground"
+    ],
+    "failed": []
+  },
+  "camera": {
+    "passed": [
+      "Dedicated third-person follow camera tracking vehicle in WebGL canvas",
+      "Delta-time aware smoothing prevents camera jitter during acceleration",
+      "Dynamic pullback distance and heading rotation active without terrain clipping",
+      "Vehicle remains comfortably centered and visible at all times"
+    ],
+    "failed": []
+  },
+  "map": {
+    "passed": [
+      "World Map opens on [M] keystroke and displays stylized island overview",
+      "Map displays racing circuit, lakes, bridges, and interactive landmark pins",
+      "Live vehicle position dot and heading arrow dynamically reflect physics state",
+      "Landmark teleportation from map works and automatically closes map modal"
+    ],
+    "failed": []
+  },
+  "portfolio": {
+    "passed": [
+      "Landmark \"Projects Exhibition\" opened successfully via [E] keystroke",
+      "Landmark \"Skills Showcase\" opened successfully via [E] keystroke",
+      "Landmark \"About Me\" opened successfully via [E] keystroke",
+      "Landmark \"Experience & Honors\" opened successfully via [E] keystroke",
+      "Landmark \"Resume Archives\" opened successfully via [E] keystroke",
+      "Resume Download button present and operational",
+      "Landmark \"Contact Station\" opened successfully via [E] keystroke",
+      "Interactive Contact Form present with Name, Email, Message inputs",
+      "External links verified: GitHub (NITISH1817), LinkedIn (nitish-priyan), and Email (nitishpriyan1807@gmail.com)"
+    ],
+    "failed": []
+  },
+  "performance": {
+    "passed": [
+      "Mobile responsive layout verified with virtual D-Pad (▲, ◀, ▼, ▶) and touch BRAKE control",
+      "Zero critical runtime browser console errors"
+    ],
+    "failed": []
+  }
+}

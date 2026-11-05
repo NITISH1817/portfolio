@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #050609;
+    --bg-secondary: #0B0E14;
+    --bg-surface: #141823;
+    
+    --text-primary: #F4F7FB;
+    --text-secondary: #8B94A5;
+    
+    --border-color: rgba(139, 148, 165, 0.15);
+    
+    --accent: #5C6CFF;
+    --accent-secondary: #9A6BFF;
+    --accent-cyan: #35D7FF;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(91, 108, 255, 0.2);
+    color: var(--text-primary);
+  }
+}
+
+@layer utilities {
+  .text-hero {
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+  }
+  
+  .text-statement {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .text-heading {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  
+  .text-body {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
+  }
+  
+  .text-metadata {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+}
+
+/* Spatial Grid Layouts */
+.spatial-section {
+  padding: 8rem 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .spatial-section {
+    padding: 12rem 3rem;
+  }
+}
+
+/* Interactive Rows */
+.spatial-row {
+  border-bottom: 1px solid var(--border-color);
+  transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.spatial-row:hover {
+  background-color: rgba(18, 23, 34, 0.5);
+  padding-left: 1rem;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Cursor Light Override */
+.cursor-light-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5; /* Above WebGL, below content */
+  mix-blend-mode: screen;
+}
