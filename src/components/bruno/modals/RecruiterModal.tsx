@@ -111,8 +111,10 @@ export default function RecruiterModal({
           </div>
 
           <button
+            id="close-recruiter-modal"
+            aria-label="Close"
             onClick={onClose}
-            className="p-2.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-700 transition-all"
+            className="p-2.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-700 transition-all cursor-pointer"
             title="Close Dossier (ESC)"
           >
             <X className="w-5 h-5" />

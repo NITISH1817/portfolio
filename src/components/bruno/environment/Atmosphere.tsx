@@ -78,19 +78,19 @@ export default function Atmosphere() {
   // Sophisticated PBR atmospheric lighting with weather overrides
   const config = useMemo(() => {
     let base = {
-      bg: '#0A0612',
-      fogNear: 48,
-      fogFar: 155,
-      ambientColor: '#C084FC',
-      ambientInt: 0.55,
+      bg: '#141724',
+      fogNear: 45,
+      fogFar: 160,
+      ambientColor: '#E2E8F0',
+      ambientInt: 0.95,
       sunPos: [35, 55, 30] as [number, number, number],
-      sunColor: '#FFE4E6',
-      sunInt: 1.6,
-      fillColor: '#38BDF8',
-      fillInt: 0.9,
-      rimColor: '#9333EA',
-      rimInt: 1.1,
-      particleColor: '#38BDF8'
+      sunColor: '#FFE8D6',
+      sunInt: 2.4,
+      fillColor: '#60A5FA',
+      fillInt: 0.8,
+      rimColor: '#C084FC',
+      rimInt: 0.9,
+      particleColor: '#FF9A45'
     };
 
     if (timeOfDay === 'day') {
@@ -173,7 +173,7 @@ export default function Atmosphere() {
         intensity={config.sunInt}
         color={config.sunColor}
         castShadow
-        shadow-mapSize={[2048, 2048]}
+        shadow-mapSize={[1024, 1024]}
         shadow-camera-near={10}
         shadow-camera-far={140}
         shadow-camera-left={-75}
