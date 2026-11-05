@@ -90,3 +90,4 @@ All 6 core portfolio sections from Portfolio 5.1 are 100% preserved and connecte
 - [x] Mobile touch controls with D-pad, Nitro, and Jump buttons.
 - [x] Procedural Web Audio synthesizer with engine pitch modulation and mute toggle.
 - [x] 100% accurate verified professional claims (CGPA 7.79, Batch 2028, Oracle Certified Java SE 17 Developer).
+

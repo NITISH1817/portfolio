@@ -80,3 +80,4 @@ Pressing `Enter` or clicking opens the corresponding section in `LandmarkOverlay
 - **Achievement Arena**: Oracle Certified Java SE 17 Developer, SIH 2025, 170+ LeetCode DSA.
 - **Education Center**: Bannari Amman Institute of Technology details and academic highlights.
 - **Contact Station**: Direct email transmission form, LinkedIn, GitHub, and resume PDF download.
+
