@@ -340,11 +340,12 @@ export interface GameStoreState {
   missionToast: string | null;
   isAchievementsModalOpen: boolean;
 
-  // Portfolio 4.0 Interactive Modals & Engines
+  // Portfolio 4.0 & 5.0 Interactive Modals & Engines
   isCommandPaletteOpen: boolean;
   isAiAssistantOpen: boolean;
   isDevDashboardOpen: boolean;
   isTechLabOpen: boolean;
+  isRecruiterModalOpen: boolean;
   performanceTier: 'high' | 'medium' | 'low';
   reducedMotion: boolean;
 
@@ -363,6 +364,7 @@ export interface GameStoreState {
   setAiAssistantOpen: (open: boolean) => void;
   setDevDashboardOpen: (open: boolean) => void;
   setTechLabOpen: (open: boolean) => void;
+  setRecruiterModalOpen: (open: boolean) => void;
   setPerformanceTier: (tier: 'high' | 'medium' | 'low') => void;
   setReducedMotion: (rm: boolean) => void;
   setAudioEnabled: (enabled: boolean) => void;
@@ -390,11 +392,12 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
   missionToast: null,
   isAchievementsModalOpen: false,
 
-  // Portfolio 4.0 Interactive Modals & Engines
+  // Portfolio 4.0 & 5.0 Interactive Modals & Engines
   isCommandPaletteOpen: false,
   isAiAssistantOpen: false,
   isDevDashboardOpen: false,
   isTechLabOpen: false,
+  isRecruiterModalOpen: false,
   performanceTier: 'high',
   reducedMotion: false,
 
@@ -677,6 +680,7 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
   setAiAssistantOpen: (open: boolean) => set({ isAiAssistantOpen: open }),
   setDevDashboardOpen: (open: boolean) => set({ isDevDashboardOpen: open }),
   setTechLabOpen: (open: boolean) => set({ isTechLabOpen: open }),
+  setRecruiterModalOpen: (open: boolean) => set({ isRecruiterModalOpen: open }),
   setPerformanceTier: (tier: 'high' | 'medium' | 'low') => set({ performanceTier: tier }),
   setReducedMotion: (rm: boolean) => set({ reducedMotion: rm }),
 

@@ -8,6 +8,7 @@ import FollowCamera from './FollowCamera';
 import Atmosphere from './environment/Atmosphere';
 import StylizedIsland from './environment/StylizedIsland';
 import CherryBlossoms from './environment/CherryBlossoms';
+import AtmosphericEmbers from './environment/AtmosphericEmbers';
 import Mountains from './environment/Mountains';
 import Clouds from './environment/Clouds';
 import SpawnZone from './zones/SpawnZone';
@@ -31,6 +32,7 @@ import CommandPalette from './modals/CommandPalette';
 import NexusAiModal from './modals/NexusAiModal';
 import DevDashboardModal from './modals/DevDashboardModal';
 import TechLabModal from './modals/TechLabModal';
+import RecruiterModal from './modals/RecruiterModal';
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import { carAudio } from './CarAudio';
 import { useGameStore } from '../../store/gameStore';
@@ -64,6 +66,8 @@ export default function BrunoPortfolio() {
   const setDevDashboardOpen = useGameStore((s) => s.setDevDashboardOpen);
   const isTechLabOpen = useGameStore((s) => s.isTechLabOpen);
   const setTechLabOpen = useGameStore((s) => s.setTechLabOpen);
+  const isRecruiterModalOpen = useGameStore((s) => s.isRecruiterModalOpen);
+  const setRecruiterModalOpen = useGameStore((s) => s.setRecruiterModalOpen);
 
   // Initialize frame-rate independent vehicle inputs
   useVehicleController();
@@ -111,19 +115,22 @@ export default function BrunoPortfolio() {
     const handleOpenAi = () => setAiAssistantOpen(true);
     const handleOpenDash = () => setDevDashboardOpen(true);
     const handleOpenTech = () => setTechLabOpen(true);
+    const handleOpenRecruiter = () => setRecruiterModalOpen(true);
 
     window.addEventListener('open-command-palette', handleOpenCmd);
     window.addEventListener('open-ai-assistant', handleOpenAi);
     window.addEventListener('open-dev-dashboard', handleOpenDash);
     window.addEventListener('open-tech-lab', handleOpenTech);
+    window.addEventListener('open-recruiter-modal', handleOpenRecruiter);
 
     return () => {
       window.removeEventListener('open-command-palette', handleOpenCmd);
       window.removeEventListener('open-ai-assistant', handleOpenAi);
       window.removeEventListener('open-dev-dashboard', handleOpenDash);
       window.removeEventListener('open-tech-lab', handleOpenTech);
+      window.removeEventListener('open-recruiter-modal', handleOpenRecruiter);
     };
-  }, [setCommandPaletteOpen, setAiAssistantOpen, setDevDashboardOpen, setTechLabOpen]);
+  }, [setCommandPaletteOpen, setAiAssistantOpen, setDevDashboardOpen, setTechLabOpen, setRecruiterModalOpen]);
 
   // Listen for 'M' to toggle world map
   useEffect(() => {
@@ -144,7 +151,8 @@ export default function BrunoPortfolio() {
     isCommandPaletteOpen ||
     isAiAssistantOpen ||
     isDevDashboardOpen ||
-    isTechLabOpen
+    isTechLabOpen ||
+    isRecruiterModalOpen
   );
 
   return (
@@ -195,6 +203,14 @@ export default function BrunoPortfolio() {
       <TechLabModal
         isOpen={isTechLabOpen}
         onClose={() => setTechLabOpen(false)}
+      />
+
+      {/* 6.5. Fast-Track Recruiter Executive Dossier */}
+      <RecruiterModal
+        isOpen={isRecruiterModalOpen}
+        onClose={() => setRecruiterModalOpen(false)}
+        onOpenProject={(proj) => handleOpenLandmark('projects', proj)}
+        onSwitchClassic={() => setIsClassicMode(true)}
       />
 
       {/* 7. Game HUD (Only visible during active gameplay, hidden during modal/map exploration) */}
@@ -278,6 +294,9 @@ export default function BrunoPortfolio() {
 
               {/* Cherry Blossom Trees & Falling Sakura Petals */}
               <CherryBlossoms />
+
+              {/* Floating Atmospheric Cyber Embers & Fireflies */}
+              <AtmosphericEmbers />
 
               {/* Distant Mountains & Stylized Drifting Clouds */}
               <Mountains />

@@ -35,6 +35,10 @@ export interface Project {
   liveUrl?: string;
   metrics?: string[];
   features?: string[];
+  problemStatement?: string;
+  solution?: string;
+  technicalDecisions?: { title: string; rationale: string }[];
+  architectureSteps?: string[];
 }
 
 export interface Certification {
@@ -213,6 +217,30 @@ export const projects: Project[] = [
       "Semantic search across statutory laws and precedent cases",
       "Automated legal citation extraction & cross-referencing",
       "Interactive query playground with source grounding"
+    ],
+    problemStatement: "Legal advocates and researchers spend hundreds of manual hours cross-referencing dense statutes and precedent case rulings across fragmented portals, where conventional keyword searches fail to detect semantic conceptual relevance.",
+    solution: "An end-to-end legal intelligence platform that indexes statutory clauses and judicial rulings into ChromaDB with dense vector embeddings. Powered by FastAPI and Gemini AI RAG, it yields sub-second semantic search, automated precedent citation mapping, and verifiable grounded case briefs.",
+    technicalDecisions: [
+      {
+        title: "ChromaDB HNSW Indexing",
+        rationale: "Selected over PostgreSQL pgvector to maintain a low-overhead, embedded vector store with sub-100ms vector cosine distance lookups."
+      },
+      {
+        title: "Hierarchical Clause Chunking",
+        rationale: "Implemented hierarchical legal clause parsing with parent-document metadata tagging to prevent hallucinated, out-of-context legal citations."
+      },
+      {
+        title: "FastAPI Async Worker Pools",
+        rationale: "Configured asynchronous non-blocking worker pools to stream RAG-synthesized case briefs directly to the React frontend."
+      }
+    ],
+    architectureSteps: [
+      "Legal Corpus Ingestion",
+      "Semantic Embedding Model",
+      "ChromaDB HNSW Vector Store",
+      "FastAPI Query Engine",
+      "Gemini AI RAG Synthesis",
+      "Interactive Citation UI"
     ]
   },
   {
@@ -233,6 +261,30 @@ export const projects: Project[] = [
       "Dynamic questionnaire with conditional attribute evaluation",
       "Instant eligibility scoring with required document checklists",
       "Direct portal application links with tracking guidelines"
+    ],
+    problemStatement: "Rural and low-income citizens frequently forfeit critical government subsidies, scholarships, and agricultural grants due to fragmented eligibility criteria spread across dozens of departmental gazettes.",
+    solution: "A multi-attribute machine learning engine that ingests socioeconomic, demographic, and agricultural citizen profiles and evaluates qualification logic against 150+ state and central welfare schemes with 94% precision.",
+    technicalDecisions: [
+      {
+        title: "Scikit-learn Multi-Output Classifier",
+        rationale: "Tuned on demographic indicator matrices with high cross-validation stability against noisy citizen survey data."
+      },
+      {
+        title: "Dynamic Conditional Branching",
+        rationale: "Designed an adaptive questionnaire that prunes irrelevant input paths, cutting completion time from 15 minutes to under 3 minutes."
+      },
+      {
+        title: "Relational Criteria Schema",
+        rationale: "Stored verified departmental criteria and document requirements with strict foreign-key integrity in MySQL to ensure auditability."
+      }
+    ],
+    architectureSteps: [
+      "Citizen Demographic Intake",
+      "Attribute Normalization & Imputation",
+      "Scikit-Learn Inference Engine",
+      "Rule-Based Eligibility Filtering",
+      "MySQL Scheme Catalog",
+      "Ranked Recommendation Output"
     ]
   },
   {
@@ -252,6 +304,30 @@ export const projects: Project[] = [
       "Natural language problem intake & automated tag clustering",
       "Skill-matching algorithm for project collaborator discovery",
       "Milestone tracking and mentor review workflow"
+    ],
+    problemStatement: "Student engineering teams and campus labs often duplicate project efforts and struggle to discover interdisciplinary collaborators with complementary skill sets across departments.",
+    solution: "An intelligent innovation platform utilizing NLP topic modeling and ChromaDB embeddings to cluster unsolved campus problems, eliminate duplicate project submissions, and recommend collaborators based on skill affinities.",
+    technicalDecisions: [
+      {
+        title: "Embedding-Based Deduplication",
+        rationale: "Computed semantic cosine similarity thresholds (0.88) to automatically flag duplicate problem statements upon submission."
+      },
+      {
+        title: "Vector Affinity Matching",
+        rationale: "Clustered student capability profiles against open project technology requirements to suggest optimal team formation."
+      },
+      {
+        title: "Event-Driven Milestone Webhooks",
+        rationale: "Leveraged Node.js and FastAPI webhooks to notify mentors and collaborators upon milestone delivery."
+      }
+    ],
+    architectureSteps: [
+      "Problem Statement Intake",
+      "NLP Embedding & Deduplication",
+      "ChromaDB Clustering Engine",
+      "Collaborator Affinity Matcher",
+      "Project Milestone Tracker",
+      "Collaborative Workspace"
     ]
   },
   {
@@ -271,6 +347,30 @@ export const projects: Project[] = [
       "Interactive hybrid recommendation slider (Content vs Collaborative)",
       "Dynamic movie posters and metadata preview modal",
       "Cold-start handling for new user taste profiles"
+    ],
+    problemStatement: "Traditional recommendation engines suffer from the cold-start dilemma for new users and over-specialize in narrow genre clusters, failing to balance popularity with serendipitous content discovery.",
+    solution: "A hybrid recommendation engine synthesizing metadata extraction (genres, cast, keywords, directors) with user rating matrices, combining cosine similarity on TF-IDF vectors with collaborative filtering to deliver sub-50ms recommendations.",
+    technicalDecisions: [
+      {
+        title: "Dynamic Blending Coefficient",
+        rationale: "Formulated a dynamic blending coefficient allowing users to toggle between content-based similarity and collaborative matrix factorization."
+      },
+      {
+        title: "Precomputed Sparse Matrices",
+        rationale: "Precomputed high-dimensional sparse genre/keyword matrices on 5,000+ film titles to ensure sub-50ms query latency."
+      },
+      {
+        title: "Bayesian Average Cold-Start",
+        rationale: "Implemented weighted Bayesian-average popularity fallbacks for new users before initial rating feedback is recorded."
+      }
+    ],
+    architectureSteps: [
+      "MovieLens Dataset Ingestion",
+      "TF-IDF Metadata Vectorizer",
+      "Collaborative Matrix Factorization",
+      "Hybrid Blending Pipeline",
+      "Cosine Similarity Matrix",
+      "Streamlit & React Interface"
     ]
   },
   {
@@ -290,6 +390,30 @@ export const projects: Project[] = [
       "One-tap photo reporting with automatic GPS geotag coordinates",
       "Live grievance resolution timeline & status notifications",
       "Municipal zoning heatmaps for recurring pipeline failures"
+    ],
+    problemStatement: "Citizens facing urban water supply disruptions and pipe leaks encounter cumbersome municipal reporting channels with no geo-tag validation, causing lost tickets and slow maintenance response times.",
+    solution: "A civic-tech mobile application developed in Flutter with a Node.js/Express backend that allows citizens to capture photos, automatically geo-tag GPS coordinates, submit tickets, and track resolution timelines with automated municipal SLA escalation.",
+    technicalDecisions: [
+      {
+        title: "Native Flutter GPS Geotagging",
+        rationale: "Integrated native location services to bind strict latitude/longitude metadata to grievance photos, preventing duplicate fraud."
+      },
+      {
+        title: "Municipal Spatial Queries",
+        rationale: "Partitioned grievance reports by municipal district wards using MySQL spatial coordinates for instant engineer routing."
+      },
+      {
+        title: "Automated SLA Escalation Workers",
+        rationale: "Implemented background cron workers to escalate unresolved water leakage complaints after 48 hours to supervisory authorities."
+      }
+    ],
+    architectureSteps: [
+      "Citizen Photo & GPS Capture",
+      "Flutter Mobile Client",
+      "Node.js / Express API Gateway",
+      "MySQL Spatial Data Store",
+      "Municipal Engineer Dashboard",
+      "Automated SLA Escalation"
     ]
   },
   {
@@ -304,6 +428,35 @@ export const projects: Project[] = [
     metrics: [
       "Architected event-driven microservices handling asynchronous payloads",
       "End-to-end audit logging & role-based access control compliance"
+    ],
+    features: [
+      "Inter-departmental cryptographic citizen record verification",
+      "Event-driven asynchronous messaging queue for service requests",
+      "Granular role-based access control (RBAC) audit logs"
+    ],
+    problemStatement: "Fragmented government databases operate in silos, requiring citizens to repeatedly present redundant physical paperwork across departments with high bureaucratic delay and risk of identity forgery.",
+    solution: "A resilient event-driven enterprise architecture written in Java SE 17 connecting disparate departmental databases through standardized REST APIs, role-based access control, cryptographic verification, and asynchronous message queues.",
+    technicalDecisions: [
+      {
+        title: "Java SE 17 Modern Architecture",
+        rationale: "Chose modern Java for strict type safety, predictable garbage collection, and robust concurrency primitives in public infrastructure."
+      },
+      {
+        title: "Cryptographic Record Hashing",
+        rationale: "Implemented SHA-256 hash chains on citizen identity verification payloads to ensure immutable inter-departmental audit logs."
+      },
+      {
+        title: "Strict RBAC & Token Auth",
+        rationale: "Architected fine-grained permission scopes guaranteeing that departments can only access authorized document slices."
+      }
+    ],
+    architectureSteps: [
+      "Citizen Auth & Single Sign-On",
+      "Java Enterprise Gateway",
+      "Cryptographic Record Verification",
+      "RBAC Permission Enforcement",
+      "Event-Driven Asynchronous Queue",
+      "Inter-Departmental Database Sync"
     ]
   },
   {
@@ -318,6 +471,35 @@ export const projects: Project[] = [
     metrics: [
       "71% validation accuracy on clinical retinal fundus benchmarks",
       "Grad-CAM visual attention overlays highlighting microaneurysms"
+    ],
+    features: [
+      "5-stage classification (No DR, Mild, Moderate, Severe, Proliferative)",
+      "Grad-CAM heatmap attention visualizations for clinicians",
+      "Automated retinal vessel and microaneurysm contrast enhancement"
+    ],
+    problemStatement: "Diabetic retinopathy is a leading cause of preventable blindness worldwide, yet early screening is bottlenecked by the acute shortage of certified ophthalmologists to inspect retinal fundus photography.",
+    solution: "A deep learning diagnostic pipeline built with PyTorch and EfficientNet-B3 that classifies fundus photography into five clinical severity stages, integrated with Grad-CAM visual heatmaps for clinical explainability.",
+    technicalDecisions: [
+      {
+        title: "EfficientNet-B3 Feature Backbone",
+        rationale: "Selected over ResNet-50 for superior parameter efficiency and high image feature extraction at 300x300 retinal resolutions."
+      },
+      {
+        title: "Grad-CAM Diagnostic Explainability",
+        rationale: "Generated class activation maps to visually highlight microaneurysms and hemorrhages, giving clinicians verifiable diagnostic rationales."
+      },
+      {
+        title: "Clinical CLAHE Preprocessing",
+        rationale: "Implemented CLAHE contrast normalization and elastic transforms to counteract clinical illumination variances across diverse eye clinics."
+      }
+    ],
+    architectureSteps: [
+      "Retinal Fundus Image Ingestion",
+      "CLAHE Contrast Normalization",
+      "EfficientNet-B3 Feature Extractor",
+      "5-Stage Severity Classification",
+      "Grad-CAM Explainability Engine",
+      "Clinical Inspection Web App"
     ]
   }
 ];

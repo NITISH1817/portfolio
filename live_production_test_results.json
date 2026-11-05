@@ -1,10 +1,10 @@
 {
   "url": "https://portfolio-nitish1817.vercel.app",
-  "timestamp": "2026-11-05T07:20:20.433Z",
+  "timestamp": "2026-11-05T07:36:34.589Z",
   "tests": {
     "homepage_load": {
       "status": "PASS",
-      "loadTime": 2639,
+      "loadTime": 7646,
       "title": "Nitish Priyan R S | Software Engineer | Java | AI/ML"
     },
     "start_screen": {

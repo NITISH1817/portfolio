@@ -318,13 +318,17 @@ export default function VehiclePhysics({
     const isAccelerating = inputs.forward || (inputs.backward && targetSpeed <= 0);
     carAudio.updateEngine(speedMagnitude / normalMaxSpeed, isAccelerating);
 
-    // Wheel visual rotation
+    // Wheel visual rotation with dynamic steering camber tilt
     const wheelRotDelta = (targetSpeed * dt) / 0.34;
     if (flWheelRef.current && frWheelRef.current) {
       flWheelRef.current.rotation.x += wheelRotDelta;
       frWheelRef.current.rotation.x += wheelRotDelta;
       flWheelRef.current.rotation.y = currentSteer.current;
       frWheelRef.current.rotation.y = currentSteer.current;
+      // Authentic steering camber angle (wheels lean into turns)
+      const camber = currentSteer.current * 0.085;
+      flWheelRef.current.rotation.z = camber;
+      frWheelRef.current.rotation.z = camber;
     }
     if (rlWheelRef.current && rrWheelRef.current) {
       rlWheelRef.current.rotation.x += wheelRotDelta;

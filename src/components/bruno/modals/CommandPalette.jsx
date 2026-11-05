@@ -21,7 +21,8 @@ import {
   BookOpen,
   ArrowRight,
   Sparkles,
-  Command
+  Command,
+  Briefcase
 } from 'lucide-react';
 import { useGameStore } from '../../../store/gameStore';
 import { carAudio } from '../CarAudio';
@@ -44,6 +45,7 @@ export default function CommandPalette({
   const setAiAssistantOpen = useGameStore((s) => s.setAiAssistantOpen);
   const setDevDashboardOpen = useGameStore((s) => s.setDevDashboardOpen);
   const setTechLabOpen = useGameStore((s) => s.setTechLabOpen);
+  const setRecruiterModalOpen = useGameStore((s) => s.setRecruiterModalOpen);
   const audioEnabled = useGameStore((s) => s.audioEnabled);
   const setAudioEnabled = useGameStore((s) => s.setAudioEnabled);
 
@@ -76,6 +78,17 @@ export default function CommandPalette({
   }, [isOpen]);
 
   const commandList = [
+    {
+      id: 'cmd-recruiter',
+      category: 'FAST-TRACK',
+      title: 'Open Recruiter Fast-Track Brief',
+      description: 'Quick-review executive summary, resume download, contact, and competencies',
+      icon: <Briefcase className="w-4 h-4 text-amber-400" />,
+      action: () => {
+        onClose();
+        setRecruiterModalOpen(true);
+      }
+    },
     {
       id: 'cmd-about',
       category: 'NAVIGATION',

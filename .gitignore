@@ -37,6 +37,8 @@ test-screenshots/
 *-results.json
 portfolio4_test_results.json
 live_audit_report.json
+portfolio_5.0_test_results.json
+live_production_test_results.json
 
 .vercel
 .env*
