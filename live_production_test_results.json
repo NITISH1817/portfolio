@@ -1,0 +1,64 @@
+{
+  "url": "https://portfolio-nitish1817.vercel.app",
+  "timestamp": "2026-11-05T07:17:29.605Z",
+  "tests": {
+    "homepage_load": {
+      "status": "PASS",
+      "loadTime": 2522,
+      "title": "Nitish Priyan R S | Software Engineer | Java | AI/ML"
+    },
+    "start_screen": {
+      "status": "PASS"
+    },
+    "driving_init": {
+      "status": "PASS"
+    },
+    "vehicle_physics": {
+      "status": "PASS",
+      "telemetry": {
+        "hasKmH": true,
+        "hasMs": true,
+        "hasAcc": true,
+        "hasHeading": true,
+        "hasGear": true
+      }
+    },
+    "command_center": {
+      "status": "PASS"
+    },
+    "nexus_ai": {
+      "status": "PASS"
+    },
+    "dev_dashboard": {
+      "status": "PASS"
+    },
+    "tech_lab": {
+      "status": "PASS"
+    },
+    "projects_landmark": {
+      "status": "PASS"
+    },
+    "contact_landmark": {
+      "status": "PASS"
+    },
+    "tactical_map": {
+      "status": "PASS"
+    },
+    "resume_pdf": {
+      "status": "PASS",
+      "url": "https://portfolio-nitish1817.vercel.app/resume/Nitish_Priyan_RS_Resume.pdf"
+    },
+    "mobile_controls": {
+      "status": "PASS",
+      "hasControls": true
+    }
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 ()",
+    "Failed to load resource: the server responded with a status of 404 ()",
+    "Failed to load resource: the server responded with a status of 404 ()",
+    "Failed to load resource: the server responded with a status of 404 ()",
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ],
+  "networkErrors": []
+}

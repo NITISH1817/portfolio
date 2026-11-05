@@ -1,23 +1,11 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
     {
       "source": "/((?!assets/|resume/|favicon\\.svg|icons\\.svg|.*\\..*).*)",
       "destination": "/index.html"
-    },
-    {
-      "source": "/api(/.*)?",
-      "destination": {
-        "type": "service",
-        "service": "backend"
-      }
-    },
-    {
-      "source": "/(.*)",
-      "destination": {
-        "type": "service",
-        "service": "frontend"
-      }
     }
   ],
   "headers": [
@@ -39,15 +27,5 @@
         }
       ]
     }
-  ],
-  "services": {
-    "frontend": {
-      "root": ".",
-      "framework": "vite"
-    },
-    "backend": {
-      "root": "backend",
-      "entrypoint": "main:app"
-    }
-  }
+  ]
 }
