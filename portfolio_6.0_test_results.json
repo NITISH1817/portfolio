@@ -1,0 +1,44 @@
+{
+  "url": "http://localhost:5173",
+  "timestamp": "2026-11-05T08:43:45.978Z",
+  "performance": {
+    "httpStatus": 200,
+    "loadDoneMs": 1256,
+    "fcpMs": null,
+    "domContentLoadedMs": 1249,
+    "loadEventMs": 1251
+  },
+  "tests": {
+    "http_load": {
+      "pass": true,
+      "loadTime": 1256
+    },
+    "intro_terminal": {
+      "pass": true
+    },
+    "recruiter_instant": {
+      "pass": true
+    },
+    "canvas_active": {
+      "pass": true
+    },
+    "vehicle_physics": {
+      "pass": true
+    },
+    "project_links": {
+      "pass": true
+    },
+    "mobile_viewport": {
+      "pass": true,
+      "details": {
+        "hasLeft": true,
+        "hasRight": true,
+        "hasUp": true,
+        "hasDown": true,
+        "hasBoost": true,
+        "hasRecruiter": true
+      }
+    }
+  },
+  "consoleErrors": []
+}
