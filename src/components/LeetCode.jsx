@@ -14,7 +14,7 @@ export default function LeetCode() {
           </p>
           <div className="flex gap-8 mb-8 border-l-2 border-accent-primary pl-6 py-2">
             <div>
-              <div className="text-4xl font-bold text-white mb-1">170+</div>
+              <div className="text-4xl font-bold text-white mb-1">250+</div>
               <div className="text-sm font-mono text-gray-500 uppercase tracking-widest">Problems Solved</div>
             </div>
             <div>
@@ -22,7 +22,7 @@ export default function LeetCode() {
               <div className="text-sm font-mono text-gray-500 uppercase tracking-widest">Primary Language</div>
             </div>
           </div>
-          <a href="https://leetcode.com/" target="_blank" rel="noreferrer" className="text-sm font-mono text-accent-primary hover:text-white transition-colors">
+          <a href="https://leetcode.com/u/NITISH1817/" target="_blank" rel="noreferrer" className="text-sm font-mono text-accent-primary hover:text-white transition-colors">
             VIEW LEETCODE PROFILE &rarr;
           </a>
         </div>

@@ -118,7 +118,7 @@ export default function EducationZone({ onSelectInfo, isNight }) {
           anchorX="center"
           anchorY="middle"
         >
-          B.E. CSE • BATCH 2028 • CGPA 7.79
+          B.E. CSE • BATCH 2028 • CGPA 7.8
         </Text>
       </group>
 
@@ -169,7 +169,7 @@ export default function EducationZone({ onSelectInfo, isNight }) {
         ))}
       </group>
 
-      {/* Achievement Blocks: 170+ DSA & SIH 2025 */}
+      {/* Achievement Blocks: 250+ DSA & SIH 2025 */}
       <group position={[14, 0, 0]}>
         <mesh position={[0, 1.8, 0]} castShadow receiveShadow>
           <boxGeometry args={[3.5, 3.6, 3.5]} />
@@ -183,7 +183,7 @@ export default function EducationZone({ onSelectInfo, isNight }) {
           anchorY="middle"
           fontWeight="bold"
         >
-          170+
+          250+
         </Text>
         <Text
           position={[0, 1.2, 1.8]}

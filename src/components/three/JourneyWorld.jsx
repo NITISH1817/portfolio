@@ -11,7 +11,7 @@ export default function JourneyWorld({ position = [25, 0, -180] }) {
   const milestones = [
     { label: 'SCHOOLING', sub: '93.1% HSC', pos: [0, 0, 0] },
     { label: 'B.E. CSE', sub: 'BIT — 2024→2028', pos: [0, 1.5, -4] },
-    { label: 'JAVA / DSA', sub: '170+ Problems', pos: [2, 0, -8] },
+    { label: 'JAVA / DSA', sub: '250+ Problems', pos: [2, 0, -8] },
     { label: 'PROJECTS', sub: 'SETU / DR / MLOps', pos: [-2, 1, -12] },
     { label: 'SIH 2025', sub: 'Selected Participant', pos: [0, 0, -16] },
     { label: 'CERTIFICATIONS', sub: 'Oracle • AWS • Cisco', pos: [2, 1.5, -20] },

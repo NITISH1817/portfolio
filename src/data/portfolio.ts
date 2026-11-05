@@ -15,6 +15,7 @@ export interface IdentityData {
   github: string;
   leetcode: string;
   dsaStats: string;
+  resumeUrl: string;
 }
 
 export interface SkillCategory {
@@ -29,7 +30,8 @@ export interface Project {
   title: string;
   subtitle: string;
   description: string;
-  type: 'TEAM PROJECT' | 'INDIVIDUAL PROJECT';
+  type: 'FLAGSHIP PROJECT' | 'TEAM PROJECT' | 'INDIVIDUAL PROJECT';
+  status?: string;
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
@@ -65,36 +67,37 @@ export interface Achievement {
   title: string;
   subtitle: string;
   description: string;
-  category: 'Hackathon' | 'Certification' | 'Coding' | 'Academic';
+  category: 'Patent' | 'Hackathon' | 'Certification' | 'Coding' | 'Academic';
 }
 
 export const identityData: IdentityData = {
   name: "NITISH PRIYAN R S",
   shortName: "NITISH PRIYAN",
-  role: "Full Stack Developer | AI/ML Engineer | Software Developer",
-  location: "India",
-  batch: "2028",
-  cgpa: "7.79",
-  introduction: "I build intelligent applications, solve real-world problems, and develop software products using modern technologies.",
+  role: "Computer Science & Engineering Student | Software Engineer | Java Developer | AI/ML Engineer",
+  location: "Tamil Nadu, India",
+  batch: "Batch of 2028",
+  cgpa: "7.8",
+  introduction: "Computer Science undergraduate (Batch of 2028) and aspiring Software Engineer with strong proficiency in Java, backed by an Oracle Certified Associate Java SE 17 Developer credential and AWS Cloud Practitioner certification. Hands-on experience across Full-Stack Development, Machine Learning and MLOps. Built and deployed 10+ projects spanning a patent-filed AI e-governance platform, an AI campus digital twin, and MLOps decision-support systems using Java, Python, TypeScript, REST APIs, React, and Git. Solved 250+ DSA problems in Java on LeetCode.",
   aboutStory: [
-    "I am a passionate Computer Science student and software engineer driven by building high-impact systems at the intersection of AI/ML, backend engineering, and intuitive user experiences.",
-    "My journey spans developing scalable microservices in Java and Python, training computer vision and deep learning models for medical diagnostics, and orchestrating intelligent vector-search applications using LLMs and ChromaDB.",
-    "Whether architecting event-driven government interoperability platforms or building real-time citizen grievance mobile apps, I focus on clean architecture, robust data pipelines, and measurable real-world outcomes."
+    "I am a Computer Science undergraduate (Batch of 2028) at Bannari Amman Institute of Technology with a 7.8 CGPA and an aspiring Software Engineer with strong proficiency in Java.",
+    "Certified as an Oracle Certified Associate: Java SE 17 Developer and AWS Cloud Practitioner, with over 250+ Data Structures & Algorithms problems solved in Java on LeetCode.",
+    "Proven track record of building and deploying 10+ production-grade projects: from filing a patent for GovScheme (an AI-powered welfare discovery platform with sub-50ms matching) to engineering NEXORA (an AI campus digital twin with 129/129 tests passing and 253 kB bundle) and production MLOps pipelines."
   ],
   interests: [
-    "Artificial Intelligence & LLM Workflows",
-    "Scalable Backend & Distributed Systems",
-    "Data Structures & Algorithmic Problem Solving",
-    "Cloud Architecture & MLOps Pipelines",
-    "Clean Code & Domain-Driven Design"
+    "Enterprise Java & Software Engineering",
+    "Artificial Intelligence & MLOps Lifecycle",
+    "Data Structures & Algorithmic Optimization (250+ Java DSA)",
+    "Distributed Web Services & REST API Design",
+    "Interactive 3D Graphics & Three.js Systems"
   ],
-  careerObjectives: "To leverage my skills in full-stack software development, Java systems, and AI engineering to build resilient, human-centered products that solve complex computational and operational challenges at scale.",
+  careerObjectives: "To leverage strong Java engineering, full-stack development, and machine learning competencies to build scalable, resilient, and human-centered software products that solve mission-critical real-world challenges.",
   email: "nitishpriyan1807@gmail.com",
   phone: "+91 9442497220",
   linkedin: "https://www.linkedin.com/in/nitish-priyan/",
   github: "https://github.com/NITISH1817",
   leetcode: "https://leetcode.com/u/NITISH1817/",
-  dsaStats: "170+ DSA Problems Solved in Java (LeetCode)"
+  dsaStats: "250+ DSA Problems Solved in Java (LeetCode)",
+  resumeUrl: "/resume/Nitish_Priyan_Resume_Blue.pdf"
 };
 
 export interface Capability {
@@ -107,28 +110,28 @@ export interface Capability {
 export const capabilities: Capability[] = [
   {
     id: "cap-01",
-    title: "01 — FULL STACK & SOFTWARE DEVELOPMENT",
-    technologies: ["Java", "Python", "C", "C++", "React.js", "Flutter", "Node.js"]
+    title: "01 — SOFTWARE & BACKEND ENGINEERING",
+    technologies: ["Java", "Python", "TypeScript", "C", "C++", "SQL", "FastAPI", "Node.js", "REST APIs", "JWT Authentication"]
   },
   {
     id: "cap-02",
-    title: "02 — AI & MACHINE LEARNING",
-    technologies: ["Scikit-learn", "TensorFlow", "PyTorch", "NLP", "Computer Vision", "Gemini AI"]
+    title: "02 — AI, MACHINE LEARNING & MLOPS",
+    technologies: ["Scikit-learn", "XGBoost", "MLflow", "Gemini AI", "DVC", "Evidently AI", "NLP", "Computer Vision"]
   },
   {
     id: "cap-03",
-    title: "03 — BACKEND & API ENGINEERING",
-    technologies: ["FastAPI", "Flask", "Node.js", "REST APIs", "Event-Driven Systems"]
+    title: "03 — WEB & 3D INTERACTIVE SYSTEMS",
+    technologies: ["React", "Three.js", "WebSockets", "Tesseract.js", "Tailwind CSS", "HTML5 & CSS3"]
   },
   {
     id: "cap-04",
-    title: "04 — DATABASES & VECTOR STORAGE",
-    technologies: ["MySQL", "SQLite", "ChromaDB (Vector DB)"]
+    title: "04 — DATABASES & ORM",
+    technologies: ["MySQL", "PostgreSQL", "MongoDB", "SQLAlchemy", "SQLite"]
   },
   {
     id: "cap-05",
-    title: "05 — DEVOPS & TOOLS",
-    technologies: ["Git", "GitHub", "Docker", "CI/CD", "Linux"]
+    title: "05 — DEVOPS, TESTING & TOOLS",
+    technologies: ["Docker", "Git", "GitHub", "CI/CD", "Automated Testing (129/129 Passing)"]
   }
 ];
 
@@ -139,43 +142,35 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "Java", level: "Proficient" },
       { name: "Python", level: "Proficient" },
+      { name: "TypeScript", level: "Proficient" },
       { name: "C", level: "Advanced" },
       { name: "C++", level: "Advanced" },
-      { name: "JavaScript", level: "Proficient" }
+      { name: "SQL", level: "Proficient" }
     ]
   },
   {
     id: "aiml",
-    category: "AI & Machine Learning",
+    category: "AI, ML & MLOps",
     skills: [
       { name: "Scikit-learn", level: "Proficient" },
-      { name: "TensorFlow", level: "Advanced" },
-      { name: "PyTorch", level: "Advanced" },
-      { name: "NLP", level: "Advanced" },
-      { name: "Computer Vision", level: "Advanced" },
-      { name: "Gemini AI", level: "Proficient" }
-    ]
-  },
-  {
-    id: "frontend",
-    category: "Frontend Development",
-    skills: [
-      { name: "React.js", level: "Proficient" },
-      { name: "Flutter", level: "Experienced" },
-      { name: "HTML5 & CSS3", level: "Proficient" },
-      { name: "Tailwind CSS", level: "Proficient" },
-      { name: "Three.js / WebGL", level: "Advanced" }
+      { name: "XGBoost", level: "Proficient" },
+      { name: "MLflow", level: "Proficient" },
+      { name: "Gemini AI", level: "Proficient" },
+      { name: "DVC", level: "Advanced" },
+      { name: "Evidently AI", level: "Advanced" }
     ]
   },
   {
     id: "backend",
-    category: "Backend & APIs",
+    category: "Web & Backend Development",
     skills: [
       { name: "FastAPI", level: "Proficient" },
-      { name: "Flask", level: "Advanced" },
-      { name: "Node.js", level: "Advanced" },
-      { name: "REST APIs", level: "Proficient" },
-      { name: "Event-Driven Systems", level: "Advanced" }
+      { name: "Node.js", level: "Proficient" },
+      { name: "React", level: "Proficient" },
+      { name: "Three.js", level: "Advanced" },
+      { name: "REST API Design", level: "Proficient" },
+      { name: "JWT Authentication", level: "Proficient" },
+      { name: "WebSockets", level: "Advanced" }
     ]
   },
   {
@@ -183,33 +178,197 @@ export const skillCategories: SkillCategory[] = [
     category: "Databases & Storage",
     skills: [
       { name: "MySQL", level: "Proficient" },
-      { name: "SQLite", level: "Proficient" },
-      { name: "ChromaDB (Vector DB)", level: "Advanced" }
+      { name: "PostgreSQL", level: "Proficient" },
+      { name: "MongoDB", level: "Proficient" },
+      { name: "SQLAlchemy", level: "Proficient" },
+      { name: "SQLite", level: "Proficient" }
     ]
   },
   {
-    id: "tools",
-    category: "Tools & DevOps",
+    id: "devops",
+    category: "DevOps & Core Concepts",
     skills: [
-      { name: "Git", level: "Proficient" },
-      { name: "GitHub", level: "Proficient" },
       { name: "Docker", level: "Advanced" },
-      { name: "CI/CD", level: "Experienced" },
-      { name: "Linux / Shell", level: "Advanced" }
+      { name: "Git & GitHub", level: "Proficient" },
+      { name: "CI/CD", level: "Advanced" },
+      { name: "DSA (250+ Solved)", level: "Proficient" },
+      { name: "OOP & Systems Design", level: "Proficient" }
     ]
   }
 ];
 
+export const softSkillsList: string[] = [
+  "Teamwork",
+  "Problem Solving",
+  "Critical Thinking",
+  "Communication"
+];
+
+export const languagesList: string[] = [
+  "English — Professional Proficiency",
+  "Tamil — Native"
+];
+
 export const projects: Project[] = [
   {
-    id: "proj-lexora",
+    id: "proj-govscheme",
     number: "01",
+    title: "GOVSCHEME — AI Welfare Discovery & Lifecycle Administration Platform",
+    subtitle: "Patent-Filed Hybrid Eligibility & E-Governance Intelligence Platform",
+    status: "Patent Filed",
+    description: "An AI-powered citizen entitlement platform that democratizes access to 75+ state and central welfare schemes across 10 official Indian languages. Features a patent-filed hybrid eligibility decision engine (MCDA), semantic search, client-side OCR for document analysis, multilingual voice interface, and WebSocket-driven real-time application tracking with explainable matching.",
+    type: "FLAGSHIP PROJECT",
+    technologies: ["React", "TypeScript", "Node.js", "MongoDB", "Google Gemini AI", "WebSockets", "Tesseract.js"],
+    githubUrl: "https://github.com/NITISH1817/GovScheme",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
+    metrics: [
+      "Sub-50ms explainable eligibility matching across 75+ welfare schemes",
+      "Patent filed for hybrid eligibility decision engine (MCDA)",
+      "Supports 10 official Indian languages with voice interface & client-side OCR"
+    ],
+    features: [
+      "75+ Central & State welfare schemes catalog",
+      "Multilingual accessibility across 10 official Indian languages",
+      "Hybrid eligibility decision engine with Multi-Criteria Decision Analysis (MCDA)",
+      "Client-side OCR with Tesseract.js for instant document verification",
+      "Real-time WebSocket application lifecycle status tracker",
+      "Multilingual voice input interface powered by Google Gemini AI"
+    ],
+    problemStatement: "Citizens in rural and semi-urban communities often forfeit crucial governmental entitlements and financial aid due to complex bureaucratic criteria, language barriers, and manual document submission bottlenecks.",
+    solution: "A patent-filed e-governance platform featuring an explainable MCDA hybrid eligibility engine, sub-50ms matching across 75+ schemes, client-side OCR document scanning, and 10 Indian language voice interactions.",
+    technicalDecisions: [
+      {
+        title: "Patent-Filed Hybrid Eligibility Engine (MCDA)",
+        rationale: "Engineered multi-criteria decision analysis to compute mathematically explainable matching scores with sub-50ms query latency."
+      },
+      {
+        title: "Client-Side Tesseract.js OCR",
+        rationale: "Executed OCR directly in the browser to maintain strict user privacy and eliminate heavy server-side image processing costs."
+      },
+      {
+        title: "WebSocket Application State Machine",
+        rationale: "Utilized bidirectional WebSockets to stream real-time lifecycle status updates as citizen applications traverse verification stages."
+      }
+    ],
+    architectureSteps: [
+      "Multilingual Voice/Text Citizen Intake (10 Languages)",
+      "Client-Side OCR Document Parsing (Tesseract.js)",
+      "MCDA Hybrid Eligibility Decision Engine",
+      "MongoDB Distributed Scheme Catalog",
+      "Google Gemini AI Natural Language Explanations",
+      "Real-Time WebSocket Application Tracking"
+    ]
+  },
+  {
+    id: "proj-nexora",
+    number: "02",
+    title: "NEXORA — AI-Powered Campus Digital Twin",
+    subtitle: "Interactive 3D Digital Twin with Predictive ML & Sustainability Analytics",
+    status: "Production Deployed",
+    description: "An AI-powered campus digital twin integrating 3D spatial visualization with five predictive machine learning models. Delivers real-time resource forecasting (energy, water, occupancy), anomaly detection, what-if simulations, optimization workflows, and comprehensive sustainability analytics. Built with 129 passing automated tests and optimized frontend bundle size.",
+    type: "FLAGSHIP PROJECT",
+    technologies: ["Python", "FastAPI", "React.js", "Three.js", "Scikit-learn", "SQLAlchemy", "PostgreSQL", "SQLite", "Docker", "JWT", "Git"],
+    githubUrl: "https://github.com/NITISH1817/portfolio",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
+    metrics: [
+      "129/129 passing automated tests across all API endpoints & ML modules",
+      "Initial frontend JS bundle reduced from 1.73 MB to 253.33 kB (85% optimization)",
+      "Five production predictive ML models running live anomaly detection"
+    ],
+    features: [
+      "Interactive 3D campus visualization with Three.js WebGPU/WebGL",
+      "Five predictive ML models forecasting power, water, and space occupancy",
+      "Real-time sensor anomaly detection with threshold alerts",
+      "Interactive 'What-If' simulation sandbox for campus administration",
+      "Sustainability analytics dashboard tracking carbon footprints",
+      "Dockerized microservice architecture secured with JWT authentication"
+    ],
+    problemStatement: "Modern university campuses operate disconnected facility management systems, resulting in unmonitored energy spikes, delayed anomaly resolution, and inability to simulate operational interventions.",
+    solution: "A unified AI campus digital twin combining interactive Three.js 3D spatial models with 5 Scikit-learn predictive algorithms, automated sensor anomaly detection, and interactive simulation controls.",
+    technicalDecisions: [
+      {
+        title: "Frontend Code-Splitting & Tree-Shaking",
+        rationale: "Optimized rollups and chunking to slash initial bundle weight from 1.73 MB to 253.33 kB, ensuring sub-500ms initial loads."
+      },
+      {
+        title: "Test-Driven Development (TDD)",
+        rationale: "Authored 129 comprehensive automated unit, integration, and regression tests ensuring 100% test pass rate across all services."
+      },
+      {
+        title: "Dual Database Strategy (PostgreSQL & SQLite)",
+        rationale: "Used SQLAlchemy abstraction supporting robust PostgreSQL in production and high-speed SQLite for isolated automated CI test runs."
+      }
+    ],
+    architectureSteps: [
+      "IoT Sensor & Facility Telemetry Ingestion",
+      "FastAPI Async Data Pipeline",
+      "5 Predictive Machine Learning Models (Scikit-learn)",
+      "PostgreSQL / SQLAlchemy Storage Layer",
+      "Three.js 3D Campus Spatial Rendering",
+      "Sustainability Analytics & Simulation Sandbox"
+    ]
+  },
+  {
+    id: "proj-mlops",
+    number: "03",
+    title: "Student Performance Prediction & MLOps Decision Support System",
+    subtitle: "End-to-End MLOps Pipeline for Student Outcome Prediction & Risk Intervention",
+    status: "Production Deployed",
+    description: "A production-grade end-to-end MLOps platform engineered to predict student academic outcomes, compute multi-factor risk scores, and deliver personalized intervention recommendations. Features XGBoost models tracked with MLflow, DVC data versioning, Evidently AI drift monitoring, and containerized Docker CI/CD pipelines.",
+    type: "FLAGSHIP PROJECT",
+    technologies: ["Python", "FastAPI", "XGBoost", "MLflow", "DVC", "Docker", "CI/CD", "Evidently AI"],
+    githubUrl: "https://github.com/NITISH1817/Student-Performance-MLOps",
+    repoStatus: "Public Repository",
+    isPublicRepo: true,
+    metrics: [
+      "89.1% prediction accuracy across multi-cohort academic benchmark datasets",
+      "82.6% recall on at-risk student intervention alerts",
+      "Continuous data & model drift monitoring powered by MLflow and Evidently AI"
+    ],
+    features: [
+      "XGBoost early-warning academic risk scoring classifier",
+      "MLflow experiment tracking with automated hyperparameter logging",
+      "Data version control (DVC) for reproducible feature engineering",
+      "Continuous data and concept drift detection with Evidently AI",
+      "Containerized microservice architecture with automated CI/CD deployment"
+    ],
+    problemStatement: "Educational institutions lack predictive diagnostic tools to detect struggling students early in the semester, leading to avoidable course dropouts and failures.",
+    solution: "An end-to-end MLOps platform featuring an XGBoost classification pipeline tracked with MLflow, DVC, and Evidently AI, detecting at-risk students with 82.6% recall and 89.1% accuracy.",
+    technicalDecisions: [
+      {
+        title: "XGBoost with Class-Weighted Penalty",
+        rationale: "Tuned on imbalanced academic failure cohorts to prioritize recall (82.6%) for vulnerable students over raw precision."
+      },
+      {
+        title: "MLflow & DVC Experiment Tracking",
+        rationale: "Versioned feature matrices and tracked hyperparameters across 40+ training runs to guarantee model reproducibility."
+      },
+      {
+        title: "Evidently AI Continuous Drift Detection",
+        rationale: "Configured scheduled statistical tests (Kolmogorov-Smirnov) to monitor covariate shift in incoming semester grade distributions."
+      }
+    ],
+    architectureSteps: [
+      "Academic Feature Extraction & Normalization",
+      "DVC Data Versioning Pipeline",
+      "XGBoost Inference Engine",
+      "MLflow Metric & Artifact Tracking",
+      "Evidently AI Drift Monitoring",
+      "FastAPI Prediction Endpoint & CI/CD"
+    ]
+  },
+  {
+    id: "proj-lexora",
+    number: "04",
     title: "LEXORA — AI-Powered Legal Research Platform",
     subtitle: "Vector Search & Retrieval Augmented Generation for Legal Precedents",
+    status: "Active",
     description: "An advanced AI-powered legal intelligence system that indexes complex statutes, judicial rulings, and precedents using semantic embeddings and ChromaDB. Delivers natural language citation analysis, automated case summarization, and precedent verification using Gemini AI and FastAPI.",
     type: "TEAM PROJECT",
     technologies: ["Python", "NLP", "FastAPI", "React.js", "ChromaDB", "Gemini AI", "Tailwind CSS"],
-    githubUrl: "https://github.com/NITISH1817/LEXORA-AI-Powered-Legal-Research-Platform",
+    githubUrl: "https://github.com/NITISH1817/LEXORA-AI",
     repoStatus: "Public Repository",
     isPublicRepo: true,
     metrics: [
@@ -248,191 +407,11 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: "proj-gov-scheme",
-    number: "02",
-    title: "AI-Powered Government Scheme Eligibility Recommender",
-    subtitle: "Intelligent Citizen Entitlement & Welfare Matching Engine",
-    description: "A machine learning entitlement engine that democratizes access to state and central welfare schemes. Analyzes socioeconomic, demographic, and agricultural profiles to match citizens with eligible subsidies, loans, and education programs with clear qualifying criteria.",
-    type: "INDIVIDUAL PROJECT",
-    technologies: ["Python", "Scikit-learn", "Machine Learning", "FastAPI", "React.js", "MySQL"],
-    githubUrl: "https://github.com/NITISH1817/GovScheme",
-    repoStatus: "Public Repository",
-    isPublicRepo: true,
-    metrics: [
-      "Achieved 94% test-set eligibility matching precision across multi-attribute profiles",
-      "Evaluates 150+ central & state welfare criteria simultaneously",
-      "Multilingual profile input designed for accessibility"
-    ],
-    features: [
-      "Dynamic questionnaire with conditional attribute evaluation",
-      "Instant eligibility scoring with required document checklists",
-      "Direct portal application links with tracking guidelines"
-    ],
-    problemStatement: "Rural and low-income citizens frequently forfeit critical government subsidies, scholarships, and agricultural grants due to fragmented eligibility criteria spread across dozens of departmental gazettes.",
-    solution: "A multi-attribute machine learning engine that ingests socioeconomic, demographic, and agricultural citizen profiles and evaluates qualification logic against 150+ state and central welfare schemes with 94% precision.",
-    technicalDecisions: [
-      {
-        title: "Scikit-learn Multi-Output Classifier",
-        rationale: "Tuned on demographic indicator matrices with high cross-validation stability against noisy citizen survey data."
-      },
-      {
-        title: "Dynamic Conditional Branching",
-        rationale: "Designed an adaptive questionnaire that prunes irrelevant input paths, cutting completion time from 15 minutes to under 3 minutes."
-      },
-      {
-        title: "Relational Criteria Schema",
-        rationale: "Stored verified departmental criteria and document requirements with strict foreign-key integrity in MySQL to ensure auditability."
-      }
-    ],
-    architectureSteps: [
-      "Citizen Demographic Intake",
-      "Attribute Normalization & Imputation",
-      "Scikit-Learn Inference Engine",
-      "Rule-Based Eligibility Filtering",
-      "MySQL Scheme Catalog",
-      "Ranked Recommendation Output"
-    ]
-  },
-  {
-    id: "proj-zero",
-    number: "03",
-    title: "Project Zero — Campus Innovation Engine",
-    subtitle: "AI Problem Clustering & Collaborative Solution Incubator",
-    description: "An intelligent platform that identifies, clusters, and prioritizes unsolved campus and community challenges. Employs NLP topic modeling and semantic embeddings to prevent duplicate initiatives and connect interdisciplinary student teams to high-impact projects.",
-    type: "TEAM PROJECT",
-    technologies: ["React.js", "FastAPI", "AI/ML", "ChromaDB", "Node.js", "Tailwind CSS"],
-    githubUrl: "https://github.com/NITISH1817/Project_Zero",
-    repoStatus: "Public Repository",
-    isPublicRepo: true,
-    metrics: [
-      "Automated problem deduplication with 88% semantic accuracy",
-      "Active collaboration workspace adopted across student departments"
-    ],
-    features: [
-      "Natural language problem intake & automated tag clustering",
-      "Skill-matching algorithm for project collaborator discovery",
-      "Milestone tracking and mentor review workflow"
-    ],
-    problemStatement: "Student engineering teams and campus labs often duplicate project efforts and struggle to discover interdisciplinary collaborators with complementary skill sets across departments.",
-    solution: "An intelligent innovation platform utilizing NLP topic modeling and ChromaDB embeddings to cluster unsolved campus problems, eliminate duplicate project submissions, and recommend collaborators based on skill affinities.",
-    technicalDecisions: [
-      {
-        title: "Embedding-Based Deduplication",
-        rationale: "Computed semantic cosine similarity thresholds (0.88) to automatically flag duplicate problem statements upon submission."
-      },
-      {
-        title: "Vector Affinity Matching",
-        rationale: "Clustered student capability profiles against open project technology requirements to suggest optimal team formation."
-      },
-      {
-        title: "Event-Driven Milestone Webhooks",
-        rationale: "Leveraged Node.js and FastAPI webhooks to notify mentors and collaborators upon milestone delivery."
-      }
-    ],
-    architectureSteps: [
-      "Problem Statement Intake",
-      "NLP Embedding & Deduplication",
-      "ChromaDB Clustering Engine",
-      "Collaborator Affinity Matcher",
-      "Project Milestone Tracker",
-      "Collaborative Workspace"
-    ]
-  },
-  {
-    id: "proj-movie",
-    number: "04",
-    title: "Movie Recommendation System",
-    subtitle: "Hybrid Content-Based & Collaborative Recommendation Engine",
-    description: "A recommendation engine synthesizing metadata extraction (genres, cast, keywords, directors) with user rating matrices. Implements cosine similarity on TF-IDF vectors alongside matrix factorization to deliver accurate, non-obvious film recommendations in real time.",
-    type: "INDIVIDUAL PROJECT",
-    technologies: ["Python", "Scikit-learn", "Collaborative Filtering", "Pandas", "Streamlit", "React.js"],
-    githubUrl: "https://github.com/NITISH1817/movie-recommendation-system",
-    repoStatus: "Public Repository",
-    isPublicRepo: true,
-    metrics: [
-      "Trained on MovieLens 100k+ dataset with low RMSE latency",
-      "Sub-50ms recommendation generation via precomputed sparse similarity matrix"
-    ],
-    features: [
-      "Interactive hybrid recommendation slider (Content vs Collaborative)",
-      "Dynamic movie posters and metadata preview modal",
-      "Cold-start handling for new user taste profiles"
-    ],
-    problemStatement: "Traditional recommendation engines suffer from the cold-start dilemma for new users and over-specialize in narrow genre clusters, failing to balance popularity with serendipitous content discovery.",
-    solution: "A hybrid recommendation engine synthesizing metadata extraction (genres, cast, keywords, directors) with user rating matrices, combining cosine similarity on TF-IDF vectors with collaborative filtering to deliver sub-50ms recommendations.",
-    technicalDecisions: [
-      {
-        title: "Dynamic Blending Coefficient",
-        rationale: "Formulated a dynamic blending coefficient allowing users to toggle between content-based similarity and collaborative matrix factorization."
-      },
-      {
-        title: "Precomputed Sparse Matrices",
-        rationale: "Precomputed high-dimensional sparse genre/keyword matrices on 5,000+ film titles to ensure sub-50ms query latency."
-      },
-      {
-        title: "Bayesian Average Cold-Start",
-        rationale: "Implemented weighted Bayesian-average popularity fallbacks for new users before initial rating feedback is recorded."
-      }
-    ],
-    architectureSteps: [
-      "MovieLens Dataset Ingestion",
-      "TF-IDF Metadata Vectorizer",
-      "Collaborative Matrix Factorization",
-      "Hybrid Blending Pipeline",
-      "Cosine Similarity Matrix",
-      "Streamlit & React Interface"
-    ]
-  },
-  {
-    id: "proj-water",
-    number: "05",
-    title: "WaterGrievance Application",
-    subtitle: "Geo-Tagged Citizen Water Supply & Infrastructure Grievance Portal",
-    description: "A civic-tech mobile application enabling citizens to report water supply shortages, pipe leakages, and water contamination with GPS geo-tagging and image evidence. Includes an administrative dashboard for municipal engineers with automated SLA escalation.",
-    type: "TEAM PROJECT",
-    technologies: ["Flutter", "Node.js", "Express", "MySQL", "Geo-tagging", "REST APIs"],
-    githubUrl: "https://github.com/NITISH1817",
-    repoStatus: "Private Academic Repository",
-    isPublicRepo: false,
-    metrics: [
-      "Real-time GPS validation preventing duplicate leak complaints",
-      "40% faster grievance resolution dispatch for local municipal zones"
-    ],
-    features: [
-      "One-tap photo reporting with automatic GPS geotag coordinates",
-      "Live grievance resolution timeline & status notifications",
-      "Municipal zoning heatmaps for recurring pipeline failures"
-    ],
-    problemStatement: "Citizens facing urban water supply disruptions and pipe leaks encounter cumbersome municipal reporting channels with no geo-tag validation, causing lost tickets and slow maintenance response times.",
-    solution: "A civic-tech mobile application developed in Flutter with a Node.js/Express backend that allows citizens to capture photos, automatically geo-tag GPS coordinates, submit tickets, and track resolution timelines with automated municipal SLA escalation.",
-    technicalDecisions: [
-      {
-        title: "Native Flutter GPS Geotagging",
-        rationale: "Integrated native location services to bind strict latitude/longitude metadata to grievance photos, preventing duplicate fraud."
-      },
-      {
-        title: "Municipal Spatial Queries",
-        rationale: "Partitioned grievance reports by municipal district wards using MySQL spatial coordinates for instant engineer routing."
-      },
-      {
-        title: "Automated SLA Escalation Workers",
-        rationale: "Implemented background cron workers to escalate unresolved water leakage complaints after 48 hours to supervisory authorities."
-      }
-    ],
-    architectureSteps: [
-      "Citizen Photo & GPS Capture",
-      "Flutter Mobile Client",
-      "Node.js / Express API Gateway",
-      "MySQL Spatial Data Store",
-      "Municipal Engineer Dashboard",
-      "Automated SLA Escalation"
-    ]
-  },
-  {
     id: "proj-setu",
-    number: "06",
+    number: "05",
     title: "SETU — Government Service Interoperability Platform",
     subtitle: "Event-Driven Orchestration Platform for Fragmented Citizen Portals",
+    status: "Active",
     description: "A resilient backend architecture connecting isolated government departmental databases. Features role-based access control, cryptographic verification of citizen records, and asynchronous message queues to ensure reliable multi-departmental workflow orchestration.",
     type: "TEAM PROJECT",
     technologies: ["Java", "Java SE 17", "REST APIs", "Event-Driven Architecture", "RBAC", "MySQL"],
@@ -475,9 +454,10 @@ export const projects: Project[] = [
   },
   {
     id: "proj-retinopathy",
-    number: "07",
+    number: "06",
     title: "Diabetic Retinopathy Classification System",
     subtitle: "Deep Learning Medical Image Diagnostics with Grad-CAM Explainability",
+    status: "Active",
     description: "Medical diagnostic deep learning system trained on retinal fundus photography to detect five stages of diabetic retinopathy. Implements EfficientNet-B3 with Grad-CAM heatmaps to provide explainable visual evidence for ophthalmologists.",
     type: "TEAM PROJECT",
     technologies: ["Python", "PyTorch", "EfficientNet-B3", "Grad-CAM", "Next.js", "Gradio"],
@@ -520,50 +500,95 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: "proj-edu-prediction",
-    number: "08",
-    title: "Student Performance Prediction & MLOps Decision Support System",
-    subtitle: "End-to-End MLOps Pipeline for Student Outcome Prediction & Risk Intervention",
-    description: "An end-to-end MLOps platform for student outcome prediction, risk scoring, and personalized academic intervention recommendations. Employs XGBoost with MLflow experiment tracking, DVC data versioning, Evidently AI drift monitoring, and containerized CI/CD pipelines.",
+    id: "proj-movie",
+    number: "07",
+    title: "Movie Recommendation System",
+    subtitle: "Hybrid Content-Based & Collaborative Recommendation Engine",
+    status: "Active",
+    description: "A recommendation engine synthesizing metadata extraction (genres, cast, keywords, directors) with user rating matrices. Implements cosine similarity on TF-IDF vectors alongside matrix factorization to deliver accurate, non-obvious film recommendations in real time.",
     type: "INDIVIDUAL PROJECT",
-    technologies: ["Python", "FastAPI", "XGBoost", "MLflow", "DVC", "Docker", "CI/CD", "Evidently AI"],
-    githubUrl: "https://github.com/NITISH1817/edu-prediction",
+    technologies: ["Python", "Scikit-learn", "Collaborative Filtering", "Pandas", "Streamlit", "React.js"],
+    githubUrl: "https://github.com/NITISH1817/movie-recommendation-system",
     repoStatus: "Public Repository",
     isPublicRepo: true,
     metrics: [
-      "89.1% prediction accuracy across multi-factor academic cohorts",
-      "82.6% recall on at-risk student intervention alerts",
-      "Continuous data drift monitoring via Evidently AI & MLflow registry"
+      "Trained on MovieLens 100k+ dataset with low RMSE latency",
+      "Sub-50ms recommendation generation via precomputed sparse similarity matrix"
     ],
     features: [
-      "XGBoost early-warning risk scoring classifier",
-      "MLflow experiment tracking with hyperparameter tuning",
-      "Automated model & data drift detection with Evidently AI",
-      "Containerized microservice architecture with Docker"
+      "Interactive hybrid recommendation slider (Content vs Collaborative)",
+      "Dynamic movie posters and metadata preview modal",
+      "Cold-start handling for new user taste profiles"
     ],
-    problemStatement: "Academic institutions often identify at-risk students only after semester exam failures, lacking early-warning diagnostic indicators to deploy personalized tutoring and academic counseling.",
-    solution: "A production-grade MLOps platform integrating XGBoost classification with MLflow experiment tracking and DVC data pipelines. Evaluates multi-variate academic, behavioral, and demographic features to flag at-risk students with 82.6% recall and 89.1% accuracy.",
+    problemStatement: "Traditional recommendation engines suffer from the cold-start dilemma for new users and over-specialize in narrow genre clusters, failing to balance popularity with serendipitous content discovery.",
+    solution: "A hybrid recommendation engine synthesizing metadata extraction (genres, cast, keywords, directors) with user rating matrices, combining cosine similarity on TF-IDF vectors with collaborative filtering to deliver sub-50ms recommendations.",
     technicalDecisions: [
       {
-        title: "XGBoost with Class-Weighted Penalty",
-        rationale: "Tuned on imbalanced academic failure cohorts to prioritize recall (82.6%) for vulnerable students over raw precision."
+        title: "Dynamic Blending Coefficient",
+        rationale: "Formulated a dynamic blending coefficient allowing users to toggle between content-based similarity and collaborative matrix factorization."
       },
       {
-        title: "MLflow & DVC Experiment Tracking",
-        rationale: "Versioned feature matrices and tracked hyperparameters across 40+ training runs to guarantee model reproducibility."
+        title: "Precomputed Sparse Matrices",
+        rationale: "Precomputed high-dimensional sparse genre/keyword matrices on 5,000+ film titles to ensure sub-50ms query latency."
       },
       {
-        title: "Evidently AI Continuous Drift Detection",
-        rationale: "Configured scheduled statistical tests (Kolmogorov-Smirnov) to monitor covariate shift in incoming semester grade distributions."
+        title: "Bayesian Average Cold-Start",
+        rationale: "Implemented weighted Bayesian-average popularity fallbacks for new users before initial rating feedback is recorded."
       }
     ],
     architectureSteps: [
-      "Academic Intake & Feature Pipeline",
-      "DVC Data Versioning",
-      "XGBoost Inference Engine",
-      "MLflow Metric Tracking",
-      "Evidently AI Drift Monitoring",
-      "FastAPI Prediction Endpoint"
+      "MovieLens Dataset Ingestion",
+      "TF-IDF Metadata Vectorizer",
+      "Collaborative Matrix Factorization",
+      "Hybrid Blending Pipeline",
+      "Cosine Similarity Matrix",
+      "Streamlit & React Interface"
+    ]
+  },
+  {
+    id: "proj-water",
+    number: "08",
+    title: "WaterGrievance Application",
+    subtitle: "Geo-Tagged Citizen Water Supply & Infrastructure Grievance Portal",
+    status: "Active",
+    description: "A civic-tech mobile application enabling citizens to report water supply shortages, pipe leakages, and water contamination with GPS geo-tagging and image evidence. Includes an administrative dashboard for municipal engineers with automated SLA escalation.",
+    type: "TEAM PROJECT",
+    technologies: ["Flutter", "Node.js", "Express", "MySQL", "Geo-tagging", "REST APIs"],
+    githubUrl: "https://github.com/NITISH1817",
+    repoStatus: "Private Academic Repository",
+    isPublicRepo: false,
+    metrics: [
+      "Real-time GPS validation preventing duplicate leak complaints",
+      "40% faster grievance resolution dispatch for local municipal zones"
+    ],
+    features: [
+      "One-tap photo reporting with automatic GPS geotag coordinates",
+      "Live grievance resolution timeline & status notifications",
+      "Municipal zoning heatmaps for recurring pipeline failures"
+    ],
+    problemStatement: "Citizens facing urban water supply disruptions and pipe leaks encounter cumbersome municipal reporting channels with no geo-tag validation, causing lost tickets and slow maintenance response times.",
+    solution: "A civic-tech mobile application developed in Flutter with a Node.js/Express backend that allows citizens to capture photos, automatically geo-tag GPS coordinates, submit tickets, and track resolution timelines with automated municipal SLA escalation.",
+    technicalDecisions: [
+      {
+        title: "Native Flutter GPS Geotagging",
+        rationale: "Integrated native location services to bind strict latitude/longitude metadata to grievance photos, preventing duplicate fraud."
+      },
+      {
+        title: "Municipal Spatial Queries",
+        rationale: "Partitioned grievance reports by municipal district wards using MySQL spatial coordinates for instant engineer routing."
+      },
+      {
+        title: "Automated SLA Escalation Workers",
+        rationale: "Implemented background cron workers to escalate unresolved water leakage complaints after 48 hours to supervisory authorities."
+      }
+    ],
+    architectureSteps: [
+      "Citizen Photo & GPS Capture",
+      "Flutter Mobile Client",
+      "Node.js / Express API Gateway",
+      "MySQL Spatial Data Store",
+      "Municipal Engineer Dashboard",
+      "Automated SLA Escalation"
     ]
   }
 ];
@@ -573,9 +598,9 @@ export const educationList: Education[] = [
     id: "edu-01",
     institution: "BANNARI AMMAN INSTITUTE OF TECHNOLOGY",
     degree: "B.E. Computer Science and Engineering",
-    period: "2024 – 2028 (Expected)",
-    result: "CGPA 7.79",
-    description: "Focus on Algorithms, Object-Oriented Software Design, Distributed Systems, Machine Learning, and Cloud Computing."
+    period: "2024 – 2028 (Expected May 2028)",
+    result: "CGPA 7.8",
+    description: "Core focus on Data Structures & Algorithms, Java SE 17 Object-Oriented Engineering, Database Systems, Computer Networks, and Machine Learning."
   },
   {
     id: "edu-02",
@@ -583,7 +608,7 @@ export const educationList: Education[] = [
     degree: "Higher Secondary Certificate (HSC)",
     period: "2023 – 2024",
     result: "93.1%",
-    description: "Excellence in Mathematics, Computer Science, and Physics."
+    description: "Academic excellence in Mathematics, Physics, Chemistry, and Computer Science."
   }
 ];
 
@@ -610,24 +635,24 @@ export const certificationsList: Certification[] = [
 
 export const achievementsList: Achievement[] = [
   {
-    id: "ach-iot",
-    title: "IoT Hackathon — Third Place",
-    subtitle: "Hardware & Embedded Cloud Innovation",
-    description: "Awarded 3rd place for engineering an IoT-enabled smart monitoring prototype integrating embedded microcontrollers, edge sensors, and real-time cloud analytics for industrial automation.",
-    category: "Hackathon"
+    id: "ach-patent",
+    title: "Patent Filed: GovScheme Platform",
+    subtitle: "AI Welfare Discovery & Lifecycle Administration",
+    description: "Patent filed for an innovative hybrid eligibility decision engine (MCDA), client-side OCR, multilingual voice interface, and sub-50ms welfare matching engine.",
+    category: "Patent"
+  },
+  {
+    id: "ach-dsa",
+    title: "250+ DSA Problems Solved in Java",
+    subtitle: "LeetCode & Algorithmic Problem Solving",
+    description: "Solved 250+ Data Structures & Algorithms problems in Java on LeetCode covering Trees, Dynamic Programming, Graphs, Backtracking, and Binary Search.",
+    category: "Coding"
   },
   {
     id: "ach-sih",
     title: "Smart India Hackathon (SIH 2025)",
     subtitle: "Selected Participant",
-    description: "Selected to compete nationwide solving national-scale problem statements for public digital infrastructure.",
+    description: "Selected to compete nationwide solving national-scale digital infrastructure challenges for public governance.",
     category: "Hackathon"
-  },
-  {
-    id: "ach-dsa",
-    title: "170+ DSA Problems Solved in Java",
-    subtitle: "LeetCode & Competitive Platforms",
-    description: "Consistent problem solver in core data structures (Trees, Dynamic Programming, Graphs, Backtracking, Two Pointers) on LeetCode.",
-    category: "Coding"
   }
 ];

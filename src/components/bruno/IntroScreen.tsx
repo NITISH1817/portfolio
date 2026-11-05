@@ -61,7 +61,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
               NITISH PRIYAN R S
             </div>
             <div className="text-[11px] text-purple-300 font-medium">
-              3D Automotive Developer Experience 3.0
+              Software Engineer | Java Developer | AI/ML Engineer
             </div>
           </div>
         </div>

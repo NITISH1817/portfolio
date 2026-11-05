@@ -53,34 +53,46 @@ function queryPortfolioRAG(query) {
 
   // 1. Who is Nitish Priyan / Bio
   if (q.includes('who is') || q.includes('about') || q.includes('introduce') || q.includes('background') || q.includes('profile')) {
-    return `Nitish Priyan R S is a Full Stack Developer and AI/ML Engineer based in India (Batch of 2028, CGPA: ${identityData.cgpa}). He builds intelligent applications, scalable Java/Python backends, and full-stack software products. His engineering journey focuses on the intersection of AI/ML, distributed backend systems, and clean architecture.`;
+    return `**Nitish Priyan R S** is a Computer Science & Engineering Student, Software Engineer, Java Developer, and AI/ML Engineer based in Tamil Nadu, India (Bannari Amman Institute of Technology, Batch of 2028, CGPA: 7.8).\n\nHe is an **Oracle Certified Associate: Java SE 17 Developer** and **AWS Cloud Practitioner**, having solved **250+ DSA problems in Java** on LeetCode. He has built and deployed 10+ projects including the patent-filed **GovScheme** e-governance platform, the **NEXORA** campus digital twin (129/129 tests passing), and end-to-end MLOps decision support systems.`;
   }
 
   // 2. Programming Languages / Tech Skills
   if (q.includes('language') || q.includes('skills') || q.includes('tech stack') || q.includes('technologies') || q.includes('framework')) {
     const list = PORTFOLIO_KNOWLEDGE.skills.map((s) => `• **${s.category}:** ${s.skills}`).join('\n\n');
-    return `Here is Nitish Priyan's verified technical capability matrix:\n\n${list}\n\nHe has also solved **170+ Data Structures & Algorithms problems in Java** on LeetCode.`;
+    return `Here is Nitish Priyan's verified technical capability matrix from his official resume:\n\n${list}\n\n• **Core Concepts:** DSA, OOP, MLOps, REST API Integration, Problem Solving.\n• **Problem Solving:** **250+ Data Structures & Algorithms problems in Java** on LeetCode.`;
   }
 
-  // 3. LEXORA Project
-  if (q.includes('lexora') || q.includes('legal')) {
-    const lex = projects.find((p) => p.id === 'proj-lexora');
-    return `**LEXORA — AI-Powered Legal Research Platform:**\n\n• **Architecture:** Vector Search & Retrieval Augmented Generation (RAG) for legal statutes and judicial precedents.\n• **Tech Stack:** Python, FastAPI, React.js, ChromaDB (Vector DB), Gemini AI, and Tailwind CSS.\n• **Core Features:** Sub-second semantic retrieval across legal precedents, automated case brief summarization, and legal citation cross-referencing.\n• **GitHub Repository:** ${lex?.githubUrl || identityData.github}`;
+  // 3. Flagship Projects: GovScheme, NEXORA, MLOps
+  if (q.includes('govscheme') || q.includes('welfare') || q.includes('patent')) {
+    return `**GOVSCHEME (Patent Filed) — AI Welfare Discovery & Lifecycle Administration Platform:**\n\n• **Status:** Patent Filed.\n• **Tech Stack:** React, TypeScript, Node.js, MongoDB, Google Gemini AI, WebSockets, Tesseract.js.\n• **Core Features:** 75+ welfare schemes, 10 official Indian languages, hybrid eligibility decision engine (MCDA), client-side OCR, voice interface, WebSocket real-time application tracking.\n• **Verified Metric:** Sub-50ms explainable eligibility matching across 75+ schemes.\n• **GitHub Repository:** https://github.com/NITISH1817/GovScheme`;
   }
 
-  // 4. Machine Learning & AI Projects
-  if (q.includes('machine learning') || q.includes('ai project') || q.includes('models') || q.includes('ml')) {
-    const aiProjects = projects.filter((p) => p.technologies.some((t) => ['NLP', 'AI', 'FastAPI', 'Gemini AI', 'Machine Learning'].includes(t)));
-    const desc = aiProjects
-      .map((p) => `• **${p.title}:** ${p.description}\n  *Tech Stack:* ${p.technologies.join(', ')}`)
-      .join('\n\n');
-    return `Nitish Priyan has developed several verified AI/ML applications:\n\n${desc}`;
+  if (q.includes('nexora') || q.includes('digital twin') || q.includes('campus')) {
+    return `**NEXORA — AI-Powered Campus Digital Twin:**\n\n• **Tech Stack:** Python, FastAPI, React.js, Three.js, Scikit-learn, SQLAlchemy, PostgreSQL, SQLite, Docker, JWT, Git.\n• **Features:** Five predictive ML models, resource forecasting, sensor anomaly detection, interactive 'what-if' simulations, sustainability analytics, 3D spatial digital twin.\n• **Verified Metrics:** **129/129 passing automated tests**; initial frontend JS bundle optimized from 1.73 MB to **253.33 kB**.\n• **GitHub Repository:** https://github.com/NITISH1817/portfolio`;
+  }
+
+  if (q.includes('student performance') || q.includes('mlops') || q.includes('risk score') || q.includes('xgboost')) {
+    return `**Student Performance Prediction & MLOps Decision Support System:**\n\n• **Tech Stack:** Python, FastAPI, XGBoost, MLflow, DVC, Docker, CI/CD, Evidently AI.\n• **Features:** Early-warning academic risk scoring, intervention recommendations, hyperparameter experiment tracking, automated data versioning, continuous drift detection.\n• **Verified Metrics:** **89.1% prediction accuracy** and **82.6% at-risk student recall**.\n• **GitHub Repository:** https://github.com/NITISH1817/Student-Performance-MLOps`;
+  }
+
+  // 4. Java & Backend Engineering
+  if (q.includes('java') || q.includes('oracle') || q.includes('dsa') || q.includes('leetcode')) {
+    return `**Java & Algorithmic Problem Solving Mastery:**\n\n• **Credential:** Oracle Certified Associate: Java SE 17 Developer\n• **LeetCode Stats:** **250+ Data Structures & Algorithms problems solved in Java** (Trees, Dynamic Programming, Graphs, Backtracking, Binary Search, Two Pointers)\n• **Enterprise Project:** SETU Interoperability Platform — Java SE 17 event-driven architecture connecting fragmented databases with cryptographic record verification.`;
   }
 
   // 5. Certifications & Honors
-  if (q.includes('certif') || q.includes('honor') || q.includes('achievement') || q.includes('award') || q.includes('oracle')) {
-    const certs = PORTFOLIO_KNOWLEDGE.certifications.map((c) => `• ${c}`).join('\n');
-    return `**Verified Professional Credentials & Honors:**\n\n${certs}\n\n• **Competitive Podiums:** Top 5 Finalist at Smart India Hackathon (SIH 2024), 2nd Place at National-Level Hack-Ai-Thon, and 170+ LeetCode Java DSA problems solved.`;
+  if (q.includes('certif') || q.includes('honor') || q.includes('achievement') || q.includes('award')) {
+    return `**Verified Professional Credentials & Honors:**\n\n• **Oracle Certified Associate: Java SE 17 Developer** (Oracle Corporation)\n• **AWS Cloud Practitioner Essentials** (Amazon Web Services)\n• **Introduction to Cybersecurity** (Cisco Networking Academy)\n• **250+ DSA Problems Solved in Java** on LeetCode\n• **Selected Participant:** Smart India Hackathon (SIH 2025)\n• **Patent Filed:** GovScheme Hybrid Eligibility Decision Engine & Platform`;
+  }
+
+  // 6. Education
+  if (q.includes('education') || q.includes('college') || q.includes('school') || q.includes('bannari') || q.includes('cgpa')) {
+    return `**Official Academic Credentials:**\n\n1. **Bannari Amman Institute of Technology:**\n   • Degree: B.E. Computer Science and Engineering\n   • Period: 2024 – 2028 (Expected May 2028)\n   • CGPA: **7.8 / 10.0**\n\n2. **Saratha Matriculation Higher Secondary School:**\n   • Degree: Higher Secondary Certificate (HSC), 2023–2024\n   • Score: **93.1%**`;
+  }
+
+  // 7. Resume Download
+  if (q.includes('resume') || q.includes('cv')) {
+    return `You can download Nitish Priyan's authoritative resume directly:\n\n📄 **[Download Nitish_Priyan_Resume_Blue.pdf](/resume/Nitish_Priyan_Resume_Blue.pdf)**`;
   }
 
   // 6. Contact / Email / LinkedIn / GitHub

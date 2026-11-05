@@ -38,7 +38,7 @@ export default function AlgorithmWorld({ position = [0, 0, -260] }) {
         ALGORITHM LAB
       </Text>
       <Text fontSize={0.28} color="#6B7280" anchorX="center" anchorY="middle" position={[0, 3, 0]}>
-        170+ Problems · Java
+        250+ Problems · Java
       </Text>
       {DSA_STRUCTURES.map(s => <DSANode key={s.label} {...s} />)}
     </group>

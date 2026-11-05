@@ -86,8 +86,8 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/resume/Nitish_Priyan_RS_Resume.pdf';
-    link.download = 'Nitish_Priyan_RS_Resume.pdf';
+    link.href = '/resume/Nitish_Priyan_Resume_Blue.pdf';
+    link.download = 'Nitish_Priyan_Resume_Blue.pdf';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
@@ -962,7 +962,7 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <a
-                    href="/resume/Nitish_Priyan_RS_Resume.pdf"
+                    href="/resume/Nitish_Priyan_Resume_Blue.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-500/40 text-purple-200 hover:text-white font-space font-bold text-xs shadow-lg transition-all"
@@ -1022,7 +1022,7 @@ export default function LandmarkOverlay({ landmarkId, initialProject = null, onC
                     </div>
                   ))}
                   <div className="text-slate-300">
-                    • 170+ Data Structures & Algorithms Problems Solved in Java (LeetCode)
+                    • 250+ Data Structures & Algorithms Problems Solved in Java (LeetCode)
                   </div>
                 </div>
               </div>

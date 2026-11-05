@@ -31,7 +31,7 @@ export default function Resume() {
               </MagneticButton>
 
               <MagneticButton 
-                href="/resume/Nitish_Priyan_RS_Resume.pdf" 
+                href="/resume/Nitish_Priyan_Resume_Blue.pdf" 
                 className="group flex items-center gap-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] pb-2 border-b border-[var(--border-color)] hover:border-[var(--text-primary)] transition-colors w-fit"
                 cursorData="download"
               >

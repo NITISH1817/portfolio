@@ -124,15 +124,15 @@ export default function RecruiterModal({
         {/* 1. Quick Action Strip (1-Click Recruiter Deliverables) */}
         <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 p-3.5 rounded-2xl bg-[#17102A] border border-purple-500/30">
           <a
-            href="/resume/Nitish_Priyan_RS_Resume.pdf"
-            download="Nitish_Priyan_RS_Resume.pdf"
+            href="/resume/Nitish_Priyan_Resume_Blue.pdf"
+            download="Nitish_Priyan_Resume_Blue.pdf"
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-linear-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-space font-bold text-xs shadow-lg active:scale-95 transition-all"
           >
             <Download className="w-4 h-4" /> DOWNLOAD CV (.PDF)
           </a>
 
           <a
-            href="/resume/Nitish_Priyan_RS_Resume.pdf"
+            href="/resume/Nitish_Priyan_Resume_Blue.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-purple-950/80 hover:bg-purple-900 text-purple-200 hover:text-white font-space font-bold text-xs border border-purple-500/40 transition-all"
@@ -191,13 +191,13 @@ export default function RecruiterModal({
           <div className="p-3.5 rounded-2xl bg-[#170E2D] border border-purple-500/30 space-y-1">
             <span className="text-[10px] font-mono text-emerald-300 font-bold uppercase">PROBLEM SOLVING</span>
             <div className="font-space font-bold text-sm text-emerald-400">
-              170+ LeetCode DSA
+              250+ LeetCode DSA
             </div>
           </div>
           <div className="p-3.5 rounded-2xl bg-[#170E2D] border border-purple-500/30 space-y-1">
             <span className="text-[10px] font-mono text-amber-300 font-bold uppercase">CORE ARCHITECTURE</span>
             <div className="font-space font-bold text-xs text-amber-300">
-              Java SE 17, FastAPI, RAG
+              Java SE 17, Python, MLOps
             </div>
           </div>
         </div>

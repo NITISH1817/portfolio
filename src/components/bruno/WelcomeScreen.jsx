@@ -24,7 +24,7 @@ export default function WelcomeScreen({ onStart, onOpenReader }) {
             NITISH PRIYAN R S
           </h1>
           <p className="text-xs md:text-sm text-slate-400 font-medium mt-1">
-            Full Stack Developer • AI/ML Engineer • Software Developer
+            Computer Science Student • Software Engineer • Java Developer • AI/ML Engineer
           </p>
         </div>
 

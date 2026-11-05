@@ -32,19 +32,19 @@ export default function About() {
                 <p>Bannari Amman Institute of Technology</p>
                 <p>B.E. Computer Science and Engineering</p>
                 <p className="text-[var(--text-secondary)]">Expected 2028</p>
-                <p className="mt-2 text-[var(--accent)] font-bold">CGPA 7.79</p>
+                <p className="mt-2 text-[var(--accent)] font-bold">CGPA {identityData.cgpa}</p>
               </div>
             </div>
 
             <div className="flex flex-col gap-3">
               <p className="text-metadata text-[var(--text-secondary)]">LOCATION</p>
-              <p className="text-[var(--text-primary)] text-sm font-medium uppercase tracking-tight">Tamil Nadu, India</p>
+              <p className="text-[var(--text-primary)] text-sm font-medium uppercase tracking-tight">{identityData.location}</p>
             </div>
 
             <div className="flex flex-col gap-4 sm:col-span-2">
               <p className="text-metadata text-[var(--text-secondary)]">FOCUS AREAS</p>
               <div className="flex flex-wrap gap-2">
-                {identityData.primaryFocus.map((focus, index) => (
+                {(identityData.primaryFocus || identityData.interests || []).map((focus, index) => (
                   <span 
                     key={index} 
                     className="px-4 py-2 border border-[var(--border-color)] text-[var(--text-primary)] text-xs font-medium uppercase tracking-tight hover:border-[var(--accent)] transition-colors"

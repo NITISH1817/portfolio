@@ -61,25 +61,41 @@ export default function Achievements() {
           
           <div className="flex flex-col md:flex-row items-baseline gap-4 md:gap-12">
             <div className="text-[clamp(6rem,15vw,12rem)] font-bold tracking-tighter leading-none text-[var(--text-primary)]">
-              <AnimatedCounter value="170+" />
+              <AnimatedCounter value="250+" />
             </div>
             <div className="flex flex-col gap-2 max-w-sm">
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--text-primary)] uppercase">
                 DSA PROBLEMS
               </h3>
               <p className="text-body text-[var(--text-secondary)] uppercase">
-                Solved in Java
+                Solved in Java on LeetCode
               </p>
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[var(--border-color)]" />
+          <div className="w-full h-px bg-[var(--border-color)]" />
 
           <div className="flex flex-col md:flex-row items-baseline gap-4 md:gap-12">
-            <div className="text-[clamp(4rem,10vw,8rem)] font-bold tracking-tighter leading-none text-[var(--text-primary)] uppercase">
+            <div className="text-[clamp(3.5rem,8vw,6rem)] font-bold tracking-tighter leading-none text-[var(--text-primary)] uppercase">
+              PATENT FILED
+            </div>
+            <div className="flex flex-col gap-2 max-w-md pt-4 md:pt-0">
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 border border-emerald-400 px-3 py-1 rounded-full w-fit">
+                Intellectual Property
+              </span>
+              <p className="text-body text-[var(--text-secondary)]">
+                GovScheme Hybrid Eligibility Decision Engine & Multilingual E-Governance Platform
+              </p>
+            </div>
+          </div>
+
+          <div className="w-full h-px bg-[var(--border-color)]" />
+
+          <div className="flex flex-col md:flex-row items-baseline gap-4 md:gap-12">
+            <div className="text-[clamp(3.5rem,8vw,6rem)] font-bold tracking-tighter leading-none text-[var(--text-primary)] uppercase">
               SMART INDIA<br />HACKATHON<br />2025
             </div>
-            <div className="flex flex-col gap-2 max-w-sm pt-8 md:pt-0">
+            <div className="flex flex-col gap-2 max-w-sm pt-4 md:pt-0">
               <span className="text-xs font-bold uppercase tracking-widest text-[var(--accent)] border border-[var(--accent)] px-3 py-1 rounded-full w-fit">
                 Selected Participant
               </span>

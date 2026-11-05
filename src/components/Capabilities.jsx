@@ -12,7 +12,7 @@ const capabilities = [
     title: 'JAVA DEVELOPMENT',
     description: 'Enterprise backend systems and performance-critical algorithms.',
     tech: ['Java SE 17', 'REST APIs', 'OOP', 'Backend Architecture'],
-    evidence: 'SETU, 170+ DSA'
+    evidence: 'SETU, 250+ DSA'
   },
   {
     title: 'AI / MACHINE LEARNING',

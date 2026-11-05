@@ -58,7 +58,7 @@ export default function BrunoIntroScreen({
               NITISH PRIYAN R S
             </div>
             <div className="text-[10px] text-purple-300 font-medium">
-              B.E. CSE • CGPA 7.79 • Batch 2028
+              B.E. CSE • CGPA 7.8 • Batch 2028
             </div>
           </div>
         </div>
@@ -126,8 +126,8 @@ export default function BrunoIntroScreen({
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-xl font-medium text-slate-300 tracking-wide mb-6">
-          Full Stack Developer <span className="text-purple-400 font-bold">•</span> AI / ML Engineer
+        <p className="text-base sm:text-lg font-medium text-slate-300 tracking-wide mb-6">
+          Computer Science Student <span className="text-purple-400 font-bold">•</span> Software Engineer <span className="text-purple-400 font-bold">•</span> Java Developer <span className="text-purple-400 font-bold">•</span> AI/ML Engineer
         </p>
 
         {/* Core Pillars Feature Grid */}
@@ -257,7 +257,7 @@ export default function BrunoIntroScreen({
             </div>
             <div className="p-2 rounded-lg bg-[#141824]/60 border border-slate-800/60 text-center">
               <div className="text-emerald-400 font-bold">5. EDUCATION</div>
-              <div className="text-slate-400">BIT 2028 (7.79)</div>
+              <div className="text-slate-400">BIT 2028 (7.8)</div>
             </div>
             <div className="p-2 rounded-lg bg-[#141824]/60 border border-slate-800/60 text-center">
               <div className="text-pink-400 font-bold">6. CONTACT</div>

@@ -15,7 +15,7 @@ export default function Resume() {
           <button className="text-sm tracking-widest hover:text-[#5C6CFF] transition-colors" data-cursor="OPEN">
             VIEW RESUME
           </button>
-          <a href="/resume/Nitish_Priyan_RS_Resume.pdf" download className="text-sm tracking-widest hover:text-[#35D7FF] transition-colors" data-cursor="DOWNLOAD">
+          <a href="/resume/Nitish_Priyan_Resume_Blue.pdf" download className="text-sm tracking-widest hover:text-[#35D7FF] transition-colors" data-cursor="DOWNLOAD">
             DOWNLOAD PDF
           </a>
         </div>

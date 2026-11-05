@@ -26,10 +26,10 @@ export default function Education() {
                 </p>
                 <div className="flex gap-4 mt-2">
                   <span className="text-sm font-bold text-[var(--accent)]">
-                    CGPA 7.79
+                    CGPA 7.8
                   </span>
                   <span className="text-sm font-medium text-[var(--text-secondary)]">
-                    Expected 2028
+                    Expected May 2028
                   </span>
                 </div>
               </div>
@@ -40,10 +40,10 @@ export default function Education() {
               <div className="flex flex-col gap-2">
                 <p className="font-mono text-sm text-[var(--text-secondary)]">2023 — 2024</p>
                 <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)] uppercase">
-                  Higher Secondary Certificate
+                  Higher Secondary Certificate (HSC)
                 </h3>
                 <p className="text-body text-[var(--text-primary)] font-medium">
-                  Bharathi Vidhya Bhavan
+                  Saratha Matriculation Higher Secondary School
                 </p>
                 <div className="flex gap-4 mt-2">
                   <span className="text-sm font-bold text-[var(--text-primary)]">

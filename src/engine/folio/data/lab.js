@@ -66,7 +66,7 @@ export default [
         imageMini: 'doom-portal-mini.ktx'
     },
     {
-        title: '170+ LeetCode DSA Java Solvers',
+        title: '250+ LeetCode DSA Java Solvers',
         url: 'https://leetcode.com/u/NITISH1817/',
         image: 'organic-sphere.ktx',
         imageMini: 'organic-sphere-mini.ktx'

@@ -91,7 +91,7 @@ export default function District5AchievementCenter({ onEnter, onLeave, onInterac
           anchorX="center"
           anchorY="middle"
         >
-          B.E. CSE • BATCH 2028 • CGPA 7.79
+          B.E. CSE • BATCH 2028 • CGPA 7.8
         </Text>
 
         {/* 3 Golden Trophy Podiums in Front */}

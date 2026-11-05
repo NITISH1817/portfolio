@@ -90,7 +90,7 @@ export default function BrunoZones({
           anchorX="center"
           anchorY="middle"
         >
-          B.E. Computer Science & Engineering • CGPA 7.79 (Batch 2024-2028)
+          B.E. Computer Science & Engineering • CGPA 7.8 (Batch 2024-2028)
           Specializing in Scalable Full-Stack Cloud Apps & Production AI/ML Pipelines.
         </Text>
         <Text
@@ -357,7 +357,7 @@ export default function BrunoZones({
             anchorX="center"
             anchorY="middle"
           >
-            Smart India Hackathon 2025 Nominee • 170+ LeetCode DSA Solutions
+            Smart India Hackathon 2025 Nominee • 250+ LeetCode DSA Solutions
           </Text>
         </group>
       </group>
@@ -430,7 +430,7 @@ export default function BrunoZones({
             anchorX="center"
             anchorY="middle"
           >
-            Academic Cumulative GPA: 7.79 / 10.0
+            Academic Cumulative GPA: 7.8 / 10.0
           </Text>
           <Text
             position={[0, 1.55, 0.15]}

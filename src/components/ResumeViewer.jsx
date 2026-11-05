@@ -35,7 +35,7 @@ export default function ResumeViewer({ onClose }) {
         
         <div className="flex items-center gap-6">
           <a 
-            href="/resume/Nitish_Priyan_RS_Resume.pdf" 
+            href="/resume/Nitish_Priyan_Resume_Blue.pdf" 
             download
             className="hidden md:block text-sm font-bold uppercase tracking-widest text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors border-b border-transparent hover:border-[var(--accent)] pb-1"
           >
@@ -54,7 +54,7 @@ export default function ResumeViewer({ onClose }) {
       <div className="w-full flex-grow flex justify-center p-4 md:p-12 overflow-auto relative">
         {/* We use an iframe to natively support browser's built-in PDF features (zoom, print, etc) */}
         <iframe 
-          src="/resume/Nitish_Priyan_RS_Resume.pdf#toolbar=0&navpanes=0" 
+          src="/resume/Nitish_Priyan_Resume_Blue.pdf#toolbar=0&navpanes=0" 
           title="Resume PDF"
           className="w-full h-full max-w-5xl bg-white shadow-2xl border border-[var(--border-color)]"
         />

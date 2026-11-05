@@ -78,7 +78,7 @@ export default function WorldMap({
       color: '#F59E0B',
       icon: '🏆',
       labelOffset: { x: 5, y: 7, align: 'left' },
-      description: 'Oracle Java SE 17 Certified, IoT Hackathon 3rd Place, 170+ DSA Problems.'
+      description: 'Oracle Java SE 17 Certified, AWS Cloud, SIH 2025 Finalist, 250+ LeetCode DSA.'
     },
     {
       id: 'about',

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { profile } from '../../data/profile';
-import { skills } from '../../data/skills';
-import { projects } from '../../data/projects';
+import { skillCategories, projects } from '../../data/portfolio';
 
 const COMMANDS = {
   help: () => ({
@@ -24,12 +23,12 @@ ${profile.headline.slice(1).join(' | ')}`
   }),
   about: () => ({ output: profile.about.join('\n') }),
   skills: () => ({
-    output: Object.entries(skills).map(([cat, list]) => `[${cat}]\n  ${list.join(', ')}`).join('\n')
+    output: skillCategories.map(c => `[${c.category}]\n  ${c.skills.map(s => s.name).join(', ')}`).join('\n')
   }),
   projects: () => ({
-    output: projects.map(p => `• ${p.title}\n  ${p.type} — ${p.technologies.slice(0,3).join(', ')}`).join('\n')
+    output: projects.map(p => `• ${p.title}\n  ${p.type} — ${p.technologies.slice(0,4).join(', ')}`).join('\n')
   }),
-  stack: () => ({ output: Object.values(skills).flat().join(' · ') }),
+  stack: () => ({ output: skillCategories.flatMap(c => c.skills.map(s => s.name)).join(' · ') }),
   github: () => { window.open(profile.contact.github, '_blank'); return { output: `Opening ${profile.contact.github}` }; },
   resume: () => ({ output: `Resume: ${profile.resume}\nUse the "View Resume" button in the Hero section.` }),
   contact: () => ({

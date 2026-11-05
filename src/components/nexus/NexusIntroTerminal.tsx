@@ -76,7 +76,7 @@ export default function NexusIntroTerminal({
       number: '05',
       name: 'ACHIEVEMENT CENTER',
       tag: 'HONORS VAULT & CERTIFICATIONS',
-      desc: 'Oracle Java SE 17 Developer, AWS Cloud, SIH 2025, and 170+ LeetCode DSA.',
+      desc: 'Oracle Java SE 17 Developer, AWS Cloud, SIH 2025, and 250+ LeetCode DSA.',
       accent: '#FBBF24',
       icon: '🏆'
     },
@@ -212,12 +212,12 @@ export default function NexusIntroTerminal({
 
               <div className="p-3 rounded-2xl bg-[#10182A]/80 border border-purple-500/25 space-y-0.5">
                 <span className="text-[10px] font-mono text-cyan-300 font-bold uppercase">DEGREE & CGPA</span>
-                <div className="font-space font-bold text-xs text-cyan-300">B.E. CSE • 7.79</div>
+                <div className="font-space font-bold text-xs text-cyan-300">B.E. CSE • 7.8</div>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#10182A]/80 border border-purple-500/25 space-y-0.5">
                 <span className="text-[10px] font-mono text-emerald-300 font-bold uppercase">ALGORITHMS</span>
-                <div className="font-space font-bold text-xs text-emerald-400">170+ LeetCode DSA</div>
+                <div className="font-space font-bold text-xs text-emerald-400">250+ LeetCode DSA</div>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#10182A]/80 border border-purple-500/25 space-y-0.5">

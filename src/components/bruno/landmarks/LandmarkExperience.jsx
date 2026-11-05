@@ -63,7 +63,7 @@ export default function LandmarkExperience({ onEnter, onLeave, isDiscovered, isN
           anchorX="center"
           anchorY="middle"
         >
-          B.E. CSE • BATCH 2028 • CGPA 7.79
+          B.E. CSE • BATCH 2028 • CGPA 7.8
         </Text>
       </RigidBody>
 
@@ -101,14 +101,14 @@ export default function LandmarkExperience({ onEnter, onLeave, isDiscovered, isN
         ))}
       </group>
 
-      {/* 170+ DSA Cube & IoT Hackathon Block */}
+      {/* 250+ DSA Cube & SIH 2025 Block */}
       <group position={[12, 0, 0]}>
         <mesh position={[0, 1.6, 0]} castShadow receiveShadow>
           <boxGeometry args={[3.2, 3.2, 3.2]} />
           <meshStandardMaterial color="#10B981" roughness={0.3} />
         </mesh>
         <Text position={[0, 2.2, 1.65]} fontSize={0.8} color="#FFFFFF" anchorX="center" fontWeight="bold">
-          170+
+          250+
         </Text>
         <Text
           position={[0, 1.1, 1.65]}

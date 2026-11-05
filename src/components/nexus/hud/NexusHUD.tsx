@@ -59,7 +59,7 @@ export default function NexusHUD({
         <div className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#090D1A]/90 border border-purple-500/30 backdrop-blur-md shadow-lg">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
           <div className="font-space font-extrabold text-xs text-white">NITISH PRIYAN R S</div>
-          <span className="text-[10px] text-purple-300 font-mono hidden sm:inline">// B.E. CSE • 7.79 CGPA</span>
+          <span className="text-[10px] text-purple-300 font-mono hidden sm:inline">// B.E. CSE • 7.8 CGPA</span>
         </div>
 
         <div className="flex items-center gap-2">
