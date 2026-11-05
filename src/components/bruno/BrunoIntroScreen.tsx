@@ -136,14 +136,14 @@ export default function BrunoIntroScreen({
             <span className="text-base">🏎️</span>
             <div>
               <div className="text-white font-bold">Rapier Physics</div>
-              <div className="text-[10px] text-slate-400">Drift, Jump & Nitro</div>
+              <div className="text-[10px] text-slate-400">Steering, Jump & Nitro</div>
             </div>
           </div>
           <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#171B26]/70 border border-slate-800/80 text-left">
-            <span className="text-base">🏝️</span>
+            <span className="text-base">🌄</span>
             <div>
-              <div className="text-white font-bold">Stylized World</div>
-              <div className="text-[10px] text-slate-400">Canal, Bridge & Ramps</div>
+              <div className="text-white font-bold">Sunset Playground</div>
+              <div className="text-[10px] text-slate-400">Continuous Warm World</div>
             </div>
           </div>
           <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#171B26]/70 border border-slate-800/80 text-left">
@@ -154,10 +154,10 @@ export default function BrunoIntroScreen({
             </div>
           </div>
           <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#171B26]/70 border border-slate-800/80 text-left">
-            <span className="text-base">💎</span>
+            <span className="text-base">🎳</span>
             <div>
-              <div className="text-white font-bold">Collectibles</div>
-              <div className="text-[10px] text-slate-400">Crystals & Dominoes</div>
+              <div className="text-white font-bold">Physics Dominoes</div>
+              <div className="text-[10px] text-slate-400">Stunt Ramps & Bowling</div>
             </div>
           </div>
         </div>

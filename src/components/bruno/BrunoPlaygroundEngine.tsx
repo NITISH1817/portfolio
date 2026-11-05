@@ -1,13 +1,11 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 import Atmosphere from './environment/Atmosphere';
 import BrunoPlaygroundWorld from './environment/BrunoPlaygroundWorld';
 import BrunoZones from './zones/BrunoZones';
-import Crystals from './collectibles/Crystals';
 import BrunoVehicle from './vehicle/BrunoVehicle';
 import FollowCamera, { CameraMode } from './FollowCamera';
 import BrunoPlaygroundHUD from './hud/BrunoPlaygroundHUD';
@@ -73,34 +71,34 @@ export default function BrunoPlaygroundEngine({
   }, [nearLandmark, activeLandmarkId]);
 
   const cycleCameraMode = () => {
-    const modes: CameraMode[] = ['thirdperson', 'showcase', 'isometric', 'topdown', 'cockpit', 'free'];
+    const modes: CameraMode[] = ['thirdperson', 'isometric', 'topdown', 'showcase', 'free'];
     const nextIdx = (modes.indexOf(cameraMode) + 1) % modes.length;
     setCameraMode(modes[nextIdx]);
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-[#0D111A]">
+    <div className="relative w-full h-full overflow-hidden bg-[#FFA86B]">
       {/* 3D WebGL Canvas */}
       <Canvas
         shadows
         dpr={[1, 1.5]}
-        camera={{ position: [3.8, 2.6, 4.6], fov: 45 }}
+        camera={{ position: [0, 14.5, 26.5], fov: 46 }}
         gl={{
           antialias: true,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.15
+          toneMappingExposure: 1.12
         }}
       >
-        {/* Dynamic Atmosphere: Day / Sunset / Night, Embers, Lighting & Shadows */}
+        {/* Dynamic Atmosphere: Sunny Warm Day, Soft Shadows, Peach Horizon */}
         <Atmosphere />
 
         {/* Rapier Physics Simulation World */}
         <Physics gravity={[0, -9.81, 0]}>
-          {/* Stylized Island Playground Terrain & Architecture */}
+          {/* Continuous Warm Orange Playground Terrain, Ramps, Dominoes & Rocks */}
           <BrunoPlaygroundWorld />
 
-          {/* 6 Explorable Portfolio Discovery Zones */}
+          {/* 6 Explorable Portfolio Discovery Destinations */}
           <BrunoZones
             onEnterZone={handleEnterZone}
             onLeaveZone={handleLeaveZone}
@@ -108,18 +106,15 @@ export default function BrunoPlaygroundEngine({
             discoveredLandmarks={discoveredLandmarks}
           />
 
-          {/* 7 Collectible Energy Crystals */}
-          <Crystals />
+          {/* Stylized Red-Orange Off-Roader Vehicle */}
+          <BrunoVehicle initialPosition={[0, 0.8, 12]} />
 
-          {/* Upgraded Stylized Rapier Physics Off-Roader Vehicle */}
-          <BrunoVehicle initialPosition={[0, 1.2, 24]} />
-
-          {/* Spring-Damped Follow Camera with Drag Orbit & Zoom */}
+          {/* Elevated Isometric Third-Person Follow Camera */}
           <FollowCamera cameraMode={cameraMode} isIntro={false} />
         </Physics>
       </Canvas>
 
-      {/* Floating Game HUD */}
+      {/* Floating Modern Toy Game HUD */}
       <BrunoPlaygroundHUD
         onOpenRecruiter={() => setIsRecruiterOpen(true)}
         onSwitchClassic={onSwitchClassic}
