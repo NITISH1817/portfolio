@@ -411,19 +411,19 @@ export default function BrunoSimonEngine({
       <button className="js-menu-trigger menu-trigger hidden" />
       <button className="js-map-trigger map-trigger hidden" />
 
-      {/* 3. RETRO-FUTURISTIC HUD OVERLAY */}
+      {/* 3. MINIMALIST PLAYGROUND HUD OVERLAY */}
       {/* Top Header Bar */}
-      <div className="fixed top-4 left-4 right-4 z-40 flex items-center justify-between pointer-events-none">
-        {/* Left: Driver Telemetry, 2D Reader & Tactical Jump */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+      <div className="fixed top-3 left-3 right-3 z-40 flex items-center justify-between pointer-events-none">
+        {/* Left: 2D Reader & District Navigation Pill */}
+        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/75 border border-white/10 backdrop-blur-md shadow-xl pointer-events-auto">
           <button
             onClick={() => {
               if (onSwitchClassic) onSwitchClassic();
             }}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-amber-500/40 text-slate-300 hover:text-white text-xs font-mono backdrop-blur-md transition-all shadow-lg active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-amber-500/15 border border-white/5 hover:border-amber-500/30 text-slate-300 hover:text-white text-xs font-mono transition-all active:scale-95 cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5 text-amber-400" />
-            <span>2D READER</span>
+            <span>2D</span>
           </button>
 
           <button
@@ -431,15 +431,17 @@ export default function BrunoSimonEngine({
               pauseGame();
               setIsWorldMapOpen(true);
             }}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-mono backdrop-blur-md transition-all shadow-lg active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/15 border border-white/5 hover:border-cyan-500/30 text-cyan-300 hover:text-white text-xs font-mono transition-all active:scale-95 cursor-pointer"
             title="Tactical World Radar (Press M)"
           >
             <Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
-            <span className="hidden sm:inline">RADAR MAP</span>
+            <span className="hidden sm:inline">RADAR</span>
           </button>
 
-          {/* Quick 6 District Jump Buttons */}
-          <div className="hidden xl:flex items-center gap-1 p-1 rounded-xl bg-[#0F1424]/90 border border-white/10 backdrop-blur-md">
+          <div className="w-px h-5 bg-white/10 hidden md:block" />
+
+          {/* District Quick Jumps */}
+          <div className="hidden lg:flex items-center gap-1">
             {[
               { id: 'landing', label: 'City' },
               { id: 'lab', label: 'AI Lab' },
@@ -464,8 +466,8 @@ export default function BrunoSimonEngine({
                     setTimeout(() => handleOpenLandmark('contact'), 500);
                   }
                 }}
-                className="px-2.5 py-1 rounded-lg text-xs font-mono text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-all cursor-pointer"
-                title={`Fast travel and inspect ${btn.label}`}
+                className="px-2.5 py-1 rounded-lg text-xs font-mono text-slate-400 hover:text-amber-300 hover:bg-white/5 transition-all cursor-pointer"
+                title={`Fast travel to ${btn.label}`}
               >
                 {btn.label}
               </button>
@@ -473,13 +475,55 @@ export default function BrunoSimonEngine({
           </div>
         </div>
 
-        {/* Right: Dynamic World Engine, AI Assistant & Recruiter Fast-Track */}
-        <div className="flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
-          {/* Day / Night Cycle */}
+        {/* Right: Consolidated Tools & Environment Controls Pill */}
+        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/75 border border-white/10 backdrop-blur-md shadow-xl pointer-events-auto">
+          {/* Recruiter Fast-Track Dossier */}
+          <button
+            onClick={() => {
+              pauseGame();
+              if (onOpenRecruiter) onOpenRecruiter();
+              else setIsRecruiterOpen(true);
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold font-mono text-xs shadow-md shadow-orange-500/20 active:scale-95 transition-all cursor-pointer"
+            title="Recruiter Fast-Track Dossier (Press R or D)"
+          >
+            <UserCheck className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">DOSSIER</span>
+          </button>
+
+          {/* Nexus AI Assistant */}
+          <button
+            onClick={() => {
+              pauseGame();
+              setIsNexusAiOpen(true);
+            }}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-950/60 border border-purple-500/30 hover:border-purple-400 text-purple-200 text-xs font-mono transition-all active:scale-95 cursor-pointer"
+            title="Nexus AI Assistant (Press A)"
+          >
+            <Bot className="w-3.5 h-3.5 text-purple-400" />
+            <span className="hidden md:inline">AI</span>
+          </button>
+
+          {/* Interactive Tech Lab */}
+          <button
+            onClick={() => {
+              pauseGame();
+              setIsTechLabOpen(true);
+            }}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-blue-950/60 border border-blue-500/30 hover:border-blue-400 text-blue-200 text-xs font-mono transition-all active:scale-95 cursor-pointer"
+            title="AI & DSA Tech Lab (Press T)"
+          >
+            <FlaskConical className="w-3.5 h-3.5 text-blue-400" />
+            <span className="hidden md:inline">LAB</span>
+          </button>
+
+          <div className="w-px h-5 bg-white/10" />
+
+          {/* Day / Night Toggle */}
           <button
             onClick={handleCycleDay}
-            className="p-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-amber-500/40 text-slate-300 hover:text-amber-400 transition-all backdrop-blur-md shadow-lg active:scale-95 cursor-pointer"
-            title={`Day/Night Cycle: ${dayCycleName.toUpperCase()} (Press N)`}
+            className="p-1.5 rounded-xl text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
+            title={`Cycle Lighting: ${dayCycleName.toUpperCase()} (Press N)`}
           >
             {dayCycleName === 'night' ? (
               <Moon className="w-4 h-4 text-purple-400" />
@@ -488,19 +532,19 @@ export default function BrunoSimonEngine({
             )}
           </button>
 
-          {/* Weather Cycle */}
+          {/* Weather Toggle */}
           <button
             onClick={handleCycleWeather}
-            className="p-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-cyan-500/40 text-slate-300 hover:text-cyan-400 transition-all backdrop-blur-md shadow-lg active:scale-95 cursor-pointer"
-            title={`Weather Cycle: ${weatherName.toUpperCase()} (Shift+W)`}
+            className="p-1.5 rounded-xl text-slate-400 hover:text-cyan-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
+            title={`Weather: ${weatherName.toUpperCase()} (Shift+W)`}
           >
             <CloudRain className="w-4 h-4 text-cyan-400" />
           </button>
 
-          {/* Vehicle Paint Customization */}
+          {/* Vehicle Paint */}
           <button
             onClick={handleCyclePaint}
-            className="p-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-orange-500/40 text-slate-300 hover:text-orange-400 transition-all backdrop-blur-md shadow-lg active:scale-95 cursor-pointer"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-orange-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
             title={`Vehicle Paint: ${paintName.toUpperCase()} (Press P)`}
           >
             <Palette className="w-4 h-4 text-orange-400" />
@@ -509,12 +553,12 @@ export default function BrunoSimonEngine({
           {/* Camera View Mode */}
           <button
             onClick={handleToggleCamera}
-            className={`p-2 rounded-xl bg-[#0F1424]/90 border transition-all backdrop-blur-md shadow-lg active:scale-95 cursor-pointer ${
+            className={`p-1.5 rounded-xl transition-all active:scale-95 cursor-pointer ${
               isFreeCam
-                ? 'border-emerald-500/60 text-emerald-400'
-                : 'border-white/10 text-slate-300 hover:text-white'
+                ? 'text-emerald-400 bg-emerald-500/10'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
             }`}
-            title={`Camera: ${isFreeCam ? 'FREE ORBIT' : 'ISOMETRIC FOLLOW'} (Press C/V)`}
+            title={`Camera: ${isFreeCam ? 'FREE ORBIT' : 'THIRD-PERSON ELEVATED'} (Press C/V)`}
           >
             <Camera className="w-4 h-4" />
           </button>
@@ -522,7 +566,7 @@ export default function BrunoSimonEngine({
           {/* Sound Mute Toggle */}
           <button
             onClick={handleToggleMute}
-            className="p-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white transition-all backdrop-blur-md shadow-lg active:scale-95 cursor-pointer"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
             title={isSoundMuted ? 'Unmute Sound' : 'Mute Sound'}
           >
             {isSoundMuted ? (
@@ -532,56 +576,16 @@ export default function BrunoSimonEngine({
             )}
           </button>
 
-          {/* Nexus AI Local RAG Assistant */}
-          <button
-            onClick={() => {
-              pauseGame();
-              setIsNexusAiOpen(true);
-            }}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-purple-950/80 border border-purple-500/40 hover:border-purple-400 text-purple-200 hover:text-white text-xs font-mono backdrop-blur-md transition-all shadow-lg active:scale-95 cursor-pointer"
-            title="Nexus AI Assistant (Press A)"
-          >
-            <Bot className="w-3.5 h-3.5 text-purple-400" />
-            <span className="hidden md:inline">NEXUS AI</span>
-          </button>
-
-          {/* Interactive Tech Lab */}
-          <button
-            onClick={() => {
-              pauseGame();
-              setIsTechLabOpen(true);
-            }}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-950/80 border border-blue-500/40 hover:border-blue-400 text-blue-200 hover:text-white text-xs font-mono backdrop-blur-md transition-all shadow-lg active:scale-95 cursor-pointer"
-            title="AI & DSA Tech Lab (Press T)"
-          >
-            <FlaskConical className="w-3.5 h-3.5 text-blue-400" />
-            <span className="hidden md:inline">TECH LAB</span>
-          </button>
-
-          {/* Achievements Gallery */}
+          {/* Achievements Trophy */}
           <button
             onClick={() => {
               pauseGame();
               setIsAchievementsOpen(true);
             }}
-            className="p-2 rounded-xl bg-[#0F1424]/90 border border-white/10 hover:border-amber-500/40 text-slate-300 hover:text-amber-400 transition-all backdrop-blur-md shadow-lg active:scale-95 cursor-pointer"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
             title="Achievements & Honors"
           >
             <Trophy className="w-4 h-4 text-amber-400" />
-          </button>
-
-          {/* Recruiter Fast-Track Golden Button */}
-          <button
-            onClick={() => {
-              pauseGame();
-              if (onOpenRecruiter) onOpenRecruiter();
-              else setIsRecruiterOpen(true);
-            }}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold font-mono text-xs shadow-lg shadow-orange-500/20 active:scale-95 transition-all cursor-pointer"
-            title="Recruiter Fast-Track Dossier (Press R or D)"
-          >
-            <UserCheck className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">DOSSIER</span>
           </button>
         </div>
       </div>

@@ -9,7 +9,8 @@ export class Grass
     {
         this.game = Game.getInstance()
 
-        this.subdivisions = 280
+        // Clean, balanced density for broad open paths and central plaza (Screenshot 2)
+        this.subdivisions = 140
         const halfExtent = this.game.view.optimalArea.radius
         this.size = halfExtent * 2
         this.count = this.subdivisions * this.subdivisions
@@ -37,8 +38,8 @@ export class Grass
             this.surfaceOverflow = Math.max(0, this.surface - this.surfaceIdeal) / this.surfaceIdeal
             
             this.sizeUniform.value = this.size
-            this.bladeWidth.value = 0.1 * (1 + this.surfaceOverflow * 0.4)
-            this.bladeHeight.value = 0.6 * (1 + this.surfaceOverflow * 0.4)
+            this.bladeWidth.value = 0.075 * (1 + this.surfaceOverflow * 0.3)
+            this.bladeHeight.value = 0.32 * (1 + this.surfaceOverflow * 0.3)
 
             this.geometry.dispose()
             this.setGeometry()
@@ -99,9 +100,9 @@ export class Grass
         const wind = varying(vec2())
         const bladePosition = varying(vec2())
 
-        this.bladeWidth = uniform(0.1 * (1 + this.surfaceOverflow * 0.5))
-        this.bladeHeight = uniform(0.6 * (1 + this.surfaceOverflow * 0.5))
-        this.bladeHeightRandomness = uniform(0.6)
+        this.bladeWidth = uniform(0.075 * (1 + this.surfaceOverflow * 0.3))
+        this.bladeHeight = uniform(0.32 * (1 + this.surfaceOverflow * 0.3))
+        this.bladeHeightRandomness = uniform(0.5)
         this.sizeUniform = uniform(this.size)
 
         const bladeShape = uniformArray([

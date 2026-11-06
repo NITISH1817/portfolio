@@ -332,13 +332,14 @@ export class View
     setSpherical()
     {
         this.spherical = {}
-        this.spherical.phi = Math.PI * (this.game.quality.level === 0 ? 0.31 : 0.27)
+        // Lower, closer elevated third-person perspective matching Screenshot 2 composition
+        this.spherical.phi = Math.PI * 0.385
         this.spherical.theta = Math.PI * 0.25
 
         this.spherical.radius = {}
-        this.spherical.radius.edges = { min: 15, max: 30 }
+        this.spherical.radius.edges = { min: 11, max: 20 }
         this.spherical.radius.current = lerp(this.spherical.radius.edges.min, this.spherical.radius.edges.max, 1 - this.zoom.smoothedRatio)
-        this.spherical.radius.nonIdealRatioOffset = 9
+        this.spherical.radius.nonIdealRatioOffset = 6
 
         this.spherical.offset = new THREE.Vector3()
         this.spherical.offset.setFromSphericalCoords(this.spherical.radius.current, this.spherical.phi, this.spherical.theta)
@@ -391,7 +392,8 @@ export class View
 
     setCameras()
     {
-        this.camera = new THREE.PerspectiveCamera(25, this.game.viewport.ratio, 0.1, 200)
+        // Cinematic perspective FOV 36 with deep view distance
+        this.camera = new THREE.PerspectiveCamera(36, this.game.viewport.ratio, 0.1, 260)
         this.camera.position.setFromSphericalCoords(this.spherical.radius.current, this.spherical.phi, this.spherical.theta)
 
         this.defaultCamera = this.camera.clone()
@@ -714,9 +716,11 @@ export class View
         this.delta = this.position.clone().sub(this.defaultCamera.position)
         this.defaultCamera.position.copy(this.position)
 
-        // Default camera look at and roll
+        // Default camera look at and roll (elevated focus target reveals world ahead)
         this.defaultCamera.rotation.set(0, 0, 0)
-        this.defaultCamera.lookAt(this.focusPoint.smoothedPosition)
+        const lookTarget = this.focusPoint.smoothedPosition.clone()
+        lookTarget.y += 0.75
+        this.defaultCamera.lookAt(lookTarget)
 
         this.roll.velocity = - this.roll.value * this.roll.pullStrength * this.game.ticker.deltaScaled
         this.roll.speed += this.roll.velocity
