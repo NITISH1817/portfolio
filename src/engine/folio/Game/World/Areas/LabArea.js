@@ -10,6 +10,224 @@ import { Inputs } from '../../Inputs/Inputs.js'
 import { MeshDefaultMaterial } from '../../Materials/MeshDefaultMaterial.js'
 import { Area } from './Area.js'
 
+function createLabGraphicTexture(title = 'AI & DSA SIMULATOR', isMini = false)
+{
+    const width = isMini ? 512 : 1024
+    const height = isMini ? 288 : 576
+    const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+    const ctx = canvas.getContext('2d')
+    if(!ctx) return new THREE.Texture()
+
+    // 1. Dark futuristic background
+    const bgGrad = ctx.createLinearGradient(0, 0, width, height)
+    bgGrad.addColorStop(0, '#060B14')
+    bgGrad.addColorStop(0.5, '#0B1428')
+    bgGrad.addColorStop(1, '#040711')
+    ctx.fillStyle = bgGrad
+    ctx.fillRect(0, 0, width, height)
+
+    // 2. Blueprint cyber grid
+    ctx.strokeStyle = 'rgba(6, 182, 212, 0.08)'
+    ctx.lineWidth = 1
+    const step = isMini ? 32 : 48
+    for(let x = 0; x < width; x += step)
+    {
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, height)
+        ctx.stroke()
+    }
+    for(let y = 0; y < height; y += step)
+    {
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(width, y)
+        ctx.stroke()
+    }
+
+    // 3. Top system status bar
+    const barH = isMini ? 36 : 56
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)'
+    ctx.fillRect(0, 0, width, barH)
+    ctx.strokeStyle = 'rgba(6, 182, 212, 0.3)'
+    ctx.beginPath()
+    ctx.moveTo(0, barH)
+    ctx.lineTo(width, barH)
+    ctx.stroke()
+
+    // Pulse dot + label
+    ctx.fillStyle = '#10B981'
+    ctx.beginPath()
+    ctx.arc(isMini ? 18 : 28, isMini ? 18 : 28, isMini ? 4 : 6, 0, Math.PI * 2)
+    ctx.fill()
+
+    ctx.font = isMini ? 'bold 11px monospace' : 'bold 15px monospace'
+    ctx.fillStyle = '#38BDF8'
+    ctx.fillText('NITISH PRIYAN // AI & DSA LAB', isMini ? 30 : 44, isMini ? 22 : 34)
+
+    ctx.fillStyle = '#F59E0B'
+    ctx.textAlign = 'right'
+    ctx.fillText('ONLINE', width - (isMini ? 16 : 24), isMini ? 22 : 34)
+    ctx.textAlign = 'left'
+
+    // 4. Center visual based on project title
+    const tLower = (title || '').toLowerCase()
+    const cx = width / 2
+    const cy = height * 0.52
+
+    if(tLower.includes('binary search') || tLower.includes('search') || tLower.includes('tree') || tLower.includes('dsa'))
+    {
+        // Draw Binary Search Tree
+        const nodes = [
+            { x: cx, y: cy - (isMini ? 40 : 70), label: '35', found: false },
+            { x: cx - (isMini ? 75 : 140), y: cy - (isMini ? 6 : 10), label: '18', found: false },
+            { x: cx + (isMini ? 75 : 140), y: cy - (isMini ? 6 : 10), label: '52', found: false },
+            { x: cx - (isMini ? 115 : 210), y: cy + (isMini ? 30 : 50), label: '09', found: false },
+            { x: cx - (isMini ? 40 : 70), y: cy + (isMini ? 30 : 50), label: '24', found: true },
+            { x: cx + (isMini ? 40 : 70), y: cy + (isMini ? 30 : 50), label: '42', found: false },
+            { x: cx + (isMini ? 115 : 210), y: cy + (isMini ? 30 : 50), label: '76', found: false },
+        ]
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)'
+        ctx.lineWidth = isMini ? 1.5 : 2
+        const drawLine = (n1, n2) =>
+        {
+            ctx.beginPath()
+            ctx.moveTo(n1.x, n1.y)
+            ctx.lineTo(n2.x, n2.y)
+            ctx.stroke()
+        }
+        drawLine(nodes[0], nodes[1])
+        drawLine(nodes[0], nodes[2])
+        drawLine(nodes[1], nodes[3])
+        drawLine(nodes[1], nodes[4])
+        drawLine(nodes[2], nodes[5])
+        drawLine(nodes[2], nodes[6])
+
+        nodes.forEach(n =>
+        {
+            ctx.beginPath()
+            ctx.arc(n.x, n.y, isMini ? 13 : 22, 0, Math.PI * 2)
+            ctx.fillStyle = n.found ? 'rgba(245, 158, 11, 0.25)' : 'rgba(6, 182, 212, 0.15)'
+            ctx.fill()
+            ctx.lineWidth = n.found ? 2.5 : 1.5
+            ctx.strokeStyle = n.found ? '#F59E0B' : '#38BDF8'
+            ctx.stroke()
+
+            ctx.font = isMini ? 'bold 9px monospace' : 'bold 14px monospace'
+            ctx.fillStyle = n.found ? '#FCD34D' : '#E0F2FE'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            ctx.fillText(n.label, n.x, n.y)
+        })
+
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)'
+        ctx.strokeStyle = '#F59E0B'
+        ctx.lineWidth = 1
+        const boxW = isMini ? 260 : 420
+        const boxH = isMini ? 26 : 40
+        ctx.fillRect(cx - boxW / 2, height - (isMini ? 36 : 58), boxW, boxH)
+        ctx.strokeRect(cx - boxW / 2, height - (isMini ? 36 : 58), boxW, boxH)
+        ctx.font = isMini ? 'bold 9px monospace' : 'bold 13px monospace'
+        ctx.fillStyle = '#F59E0B'
+        ctx.textAlign = 'center'
+        ctx.fillText('TARGET: 24  |  MID MATCH  |  O(log N)', cx, height - (isMini ? 23 : 38))
+    }
+    else if(tLower.includes('gradient') || tLower.includes('descent') || tLower.includes('loss'))
+    {
+        for(let r = 5; r >= 1; r--)
+        {
+            ctx.beginPath()
+            ctx.ellipse(cx, cy, r * (isMini ? 32 : 58), r * (isMini ? 18 : 32), 0, 0, Math.PI * 2)
+            ctx.strokeStyle = `rgba(249, 115, 22, ${0.15 + r * 0.14})`
+            ctx.lineWidth = isMini ? 1.5 : 2
+            ctx.stroke()
+        }
+        ctx.strokeStyle = '#F59E0B'
+        ctx.lineWidth = isMini ? 2 : 3
+        ctx.beginPath()
+        ctx.moveTo(cx - (isMini ? 90 : 160), cy - (isMini ? 50 : 90))
+        ctx.lineTo(cx - (isMini ? 45 : 80), cy - (isMini ? 25 : 45))
+        ctx.lineTo(cx - (isMini ? 18 : 35), cy - (isMini ? 8 : 16))
+        ctx.lineTo(cx, cy)
+        ctx.stroke()
+
+        ctx.font = isMini ? 'bold 10px monospace' : 'bold 13px monospace'
+        ctx.fillStyle = '#FCD34D'
+        ctx.textAlign = 'center'
+        ctx.fillText('LOSS: 0.0018  •  EPOCHS: 250  •  ADAM', cx, height - (isMini ? 23 : 38))
+    }
+    else if(tLower.includes('vision') || tLower.includes('retinopathy') || tLower.includes('clahe') || tLower.includes('backbone'))
+    {
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)'
+        ctx.lineWidth = 1.5
+        ctx.beginPath()
+        ctx.arc(cx, cy, isMini ? 45 : 85, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.strokeStyle = '#10B981'
+        ctx.lineWidth = 2
+        ctx.strokeRect(cx - (isMini ? 30 : 55), cy - (isMini ? 30 : 55), isMini ? 60 : 110, isMini ? 60 : 110)
+
+        ctx.font = isMini ? 'bold 10px monospace' : 'bold 13px monospace'
+        ctx.fillStyle = '#34D399'
+        ctx.textAlign = 'center'
+        ctx.fillText('CLAHE 8x8  •  ACC: 94.6%  •  EFFICIENTNET', cx, height - (isMini ? 23 : 38))
+    }
+    else if(tLower.includes('chromadb') || tLower.includes('vector') || tLower.includes('hnsw'))
+    {
+        for(let i = 0; i < 20; i++)
+        {
+            const angle = (i / 20) * Math.PI * 2
+            const dist = (isMini ? 30 : 50) + Math.sin(i * 3) * (isMini ? 35 : 60)
+            const px = cx + Math.cos(angle) * dist
+            const py = cy + Math.sin(angle) * (dist * 0.6)
+            ctx.beginPath()
+            ctx.arc(px, py, isMini ? 2.5 : 4, 0, Math.PI * 2)
+            ctx.fillStyle = i % 2 === 0 ? '#A855F7' : '#06B6D4'
+            ctx.fill()
+        }
+        ctx.font = isMini ? 'bold 10px monospace' : 'bold 13px monospace'
+        ctx.fillStyle = '#C084FC'
+        ctx.textAlign = 'center'
+        ctx.fillText('COSINE SIMILARITY: 0.941  •  HNSW INDEX', cx, height - (isMini ? 23 : 38))
+    }
+    else
+    {
+        for(let l = 0; l < 4; l++)
+        {
+            const lx = cx - (isMini ? 80 : 150) + l * (isMini ? 55 : 100)
+            for(let n = 0; n < 3; n++)
+            {
+                const ny = cy - (isMini ? 30 : 50) + n * (isMini ? 30 : 50)
+                ctx.beginPath()
+                ctx.arc(lx, ny, isMini ? 4 : 6, 0, Math.PI * 2)
+                ctx.fillStyle = '#38BDF8'
+                ctx.fill()
+            }
+        }
+        ctx.font = isMini ? 'bold 10px monospace' : 'bold 13px monospace'
+        ctx.fillStyle = '#38BDF8'
+        ctx.textAlign = 'center'
+        ctx.fillText('NEURAL ARCHITECTURE PIPELINE  •  OPTIMIZED', cx, height - (isMini ? 23 : 38))
+    }
+
+    // Title banner
+    ctx.textAlign = 'center'
+    ctx.font = isMini ? 'bold 13px sans-serif' : 'bold 22px sans-serif'
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fillText((title || '').toUpperCase(), cx, isMini ? 56 : 86)
+
+    const texture = new THREE.CanvasTexture(canvas)
+    texture.colorSpace = THREE.SRGBColorSpace
+    texture.flipY = false
+    texture.magFilter = THREE.LinearFilter
+    texture.minFilter = THREE.LinearFilter
+    texture.generateMipmaps = false
+    texture.needsUpdate = true
+    return texture
+}
+
 export class LabArea extends Area
 {
     static DIRECTION_PREVIOUS = 1
@@ -454,8 +672,6 @@ export class LabArea extends Area
         // Get resource and load
         this.images.getResourceAndLoad = (key) =>
         {
-            const path = `lab/images/${key}`
-            
             // Try to retrieve resource
             let resource = this.images.resources.get(key)
 
@@ -463,31 +679,25 @@ export class LabArea extends Area
             if(!resource)
             {
                 resource = {}
-                resource.loaded = false
+                resource.loaded = true
 
-                const loader = this.game.resourcesLoader.getLoader('textureKtx')
-
-                loader.load(
-                    path,
-                    (loadedTexture) =>
-                    {
-                        resource.texture = loadedTexture
-                        resource.colorSpace = THREE.SRGBColorSpace
-                        resource.flipY = false
-                        resource.magFilter = THREE.LinearFilter
-                        resource.minFilter = THREE.LinearFilter
-                        resource.generateMipmaps = false
-
-                        resource.loaded = true
-                        
-                        this.images.loadEnded(key)
-                    }
-                )
+                const project = labData.find((p) => p.image === key || p.imageMini === key) || { title: key || 'Lab Project' }
+                resource.texture = createLabGraphicTexture(project.title, false)
+                resource.colorSpace = THREE.SRGBColorSpace
+                resource.flipY = false
+                resource.magFilter = THREE.LinearFilter
+                resource.minFilter = THREE.LinearFilter
+                resource.generateMipmaps = false
 
                 // Save
                 this.images.resources.set(key, resource)
-            }
 
+                // Trigger load ended
+                setTimeout(() =>
+                {
+                    this.images.loadEnded(key)
+                }, 0)
+            }
 
             return resource
         }
@@ -838,49 +1048,36 @@ export class LabArea extends Area
                         if(mini.startedLoading)
                             return
 
-                        const loader = this.game.resourcesLoader.getLoader('textureKtx')
-
-                        loader.load(
-                            `lab/images/${project.imageMini}`,
-                            (loadedTexture) =>
-                            {
-                                const alpha = uniform(0)
-                                const textureColor = texture(loadedTexture).rgb
-                                gsap.to(alpha, { value: 1, duration: 1, overwrite: true })
-
-                                loadedTexture.colorSpace = THREE.SRGBColorSpace
-                                loadedTexture.flipY = false
-                                loadedTexture.magFilter = THREE.LinearFilter
-                                loadedTexture.minFilter = THREE.LinearFilter
-                                loadedTexture.generateMipmaps = false
-
-                                const material = new MeshDefaultMaterial({
-                                    colorNode: textureColor,
-                                    hasWater: false,
-                                    hasLightBounce: false,
-                                    transparent: true
-                                })
-
-                                const baseOutput = material.outputNode
-                                
-                                material.outputNode = Fn(() =>
-                                {
-                                    return vec4(
-                                        mix(
-                                            baseOutput.rgb,
-                                            textureColor,
-                                            this.shadeMix.images.mixUniform
-                                        ),
-                                        alpha
-                                    )
-                                })()
-
-                                imageMesh.material = material
-                                imageMesh.visible = true
-                            }
-                        )
-
                         mini.startedLoading = true
+
+                        const loadedTexture = createLabGraphicTexture(project.title, true)
+                        const alpha = uniform(0)
+                        const textureColor = texture(loadedTexture).rgb
+                        gsap.to(alpha, { value: 1, duration: 1, overwrite: true })
+
+                        const material = new MeshDefaultMaterial({
+                            colorNode: textureColor,
+                            hasWater: false,
+                            hasLightBounce: false,
+                            transparent: true
+                        })
+
+                        const baseOutput = material.outputNode
+                        
+                        material.outputNode = Fn(() =>
+                        {
+                            return vec4(
+                                mix(
+                                    baseOutput.rgb,
+                                    textureColor,
+                                    this.shadeMix.images.mixUniform
+                                ),
+                                alpha
+                            )
+                        })()
+
+                        imageMesh.material = material
+                        imageMesh.visible = true
                     }
                 }
 

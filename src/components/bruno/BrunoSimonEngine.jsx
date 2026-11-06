@@ -527,15 +527,16 @@ export default function BrunoSimonEngine({
       <button className="js-map-trigger map-trigger hidden" />
 
       {/* 3. MINIMALIST PLAYGROUND HUD OVERLAY */}
-      {/* Top Header Bar */}
+      {/* Top Header Bar - Minimal Uncongested Modern HUD */}
       <div className="fixed top-3 left-3 right-3 z-40 flex items-center justify-between pointer-events-none">
-        {/* Left: 2D Reader & District Navigation Pill */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/75 border border-white/10 backdrop-blur-md shadow-xl pointer-events-auto">
+        {/* Left: 2D Reader & Radar Map */}
+        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/80 border border-white/10 backdrop-blur-md shadow-xl pointer-events-auto">
           <button
             onClick={() => {
               if (onSwitchClassic) onSwitchClassic();
             }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-amber-500/15 border border-white/5 hover:border-amber-500/30 text-slate-300 hover:text-white text-xs font-mono transition-all active:scale-95 cursor-pointer"
+            title="Switch to 2D Recruiter Reader Mode"
           >
             <ArrowLeft className="w-3.5 h-3.5 text-amber-400" />
             <span>2D</span>
@@ -546,52 +547,17 @@ export default function BrunoSimonEngine({
               pauseGame();
               setIsWorldMapOpen(true);
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/15 border border-white/5 hover:border-cyan-500/30 text-cyan-300 hover:text-white text-xs font-mono transition-all active:scale-95 cursor-pointer"
-            title="Tactical World Radar (Press M)"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-950/50 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white text-xs font-mono transition-all active:scale-95 cursor-pointer shadow-sm shadow-cyan-500/10"
+            title="Tactical Radar Map & District Navigation (Press M)"
           >
             <Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
-            <span className="hidden sm:inline">RADAR</span>
+            <span>MAP</span>
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-black/40 rounded text-[10px] text-cyan-400 border border-cyan-500/30">M</kbd>
           </button>
-
-          <div className="w-px h-5 bg-white/10 hidden md:block" />
-
-          {/* District Quick Jumps */}
-          <div className="hidden lg:flex items-center gap-1">
-            {[
-              { id: 'landing', label: 'City' },
-              { id: 'lab', label: 'AI Lab' },
-              { id: 'projects', label: 'Projects' },
-              { id: 'career', label: 'Engineering' },
-              { id: 'achievements', label: 'Honors' },
-              { id: 'altar', label: 'Spaceport' }
-            ].map((btn) => (
-              <button
-                key={btn.id}
-                onClick={() => {
-                  handleFastTravel(btn.id);
-                  if (btn.id === 'projects') {
-                    setTimeout(() => handleOpenLandmark('projects'), 500);
-                  } else if (btn.id === 'lab') {
-                    setTimeout(() => setIsTechLabOpen(true), 500);
-                  } else if (btn.id === 'achievements') {
-                    setTimeout(() => setIsAchievementsOpen(true), 500);
-                  } else if (btn.id === 'career') {
-                    setTimeout(() => handleOpenLandmark('education'), 500);
-                  } else if (btn.id === 'altar') {
-                    setTimeout(() => handleOpenLandmark('contact'), 500);
-                  }
-                }}
-                className="px-2.5 py-1 rounded-lg text-xs font-mono text-slate-400 hover:text-amber-300 hover:bg-white/5 transition-all cursor-pointer"
-                title={`Fast travel to ${btn.label}`}
-              >
-                {btn.label}
-              </button>
-            ))}
-          </div>
         </div>
 
-        {/* Right: Consolidated Tools & Environment Controls Pill */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/75 border border-white/10 backdrop-blur-md shadow-xl pointer-events-auto">
+        {/* Right: Consolidated Tools & Garage Pill */}
+        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/80 border border-white/10 backdrop-blur-md shadow-xl pointer-events-auto">
           {/* Recruiter Fast-Track Dossier */}
           <button
             onClick={() => {
@@ -603,7 +569,7 @@ export default function BrunoSimonEngine({
             title="Recruiter Fast-Track Dossier (Press R or D)"
           >
             <UserCheck className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">DOSSIER</span>
+            <span>DOSSIER</span>
           </button>
 
           {/* Nexus AI Assistant */}
@@ -616,67 +582,23 @@ export default function BrunoSimonEngine({
             title="Nexus AI Assistant (Press A)"
           >
             <Bot className="w-3.5 h-3.5 text-purple-400" />
-            <span className="hidden md:inline">AI</span>
+            <span className="hidden sm:inline">AI</span>
           </button>
 
-          {/* Interactive Tech Lab */}
+          {/* Vehicle Garage & Environment Customizer */}
           <button
             onClick={() => {
               pauseGame();
-              setIsTechLabOpen(true);
+              setIsGarageOpen(true);
             }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-blue-950/60 border border-blue-500/30 hover:border-blue-400 text-blue-200 text-xs font-mono transition-all active:scale-95 cursor-pointer"
-            title="AI & DSA Tech Lab (Press T)"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-950/40 border border-amber-500/30 hover:border-amber-400 text-amber-200 text-xs font-mono transition-all active:scale-95 cursor-pointer"
+            title="Vehicle Garage & Environment Customizer (Press G or P)"
           >
-            <FlaskConical className="w-3.5 h-3.5 text-blue-400" />
-            <span className="hidden md:inline">LAB</span>
+            <Palette className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden md:inline">GARAGE</span>
           </button>
 
           <div className="w-px h-5 bg-white/10" />
-
-          {/* Day / Night Toggle */}
-          <button
-            onClick={handleCycleDay}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
-            title={`Cycle Lighting: ${dayCycleName.toUpperCase()} (Press N)`}
-          >
-            {dayCycleName === 'night' ? (
-              <Moon className="w-4 h-4 text-purple-400" />
-            ) : (
-              <Sun className="w-4 h-4 text-amber-400" />
-            )}
-          </button>
-
-          {/* Weather Toggle */}
-          <button
-            onClick={handleCycleWeather}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-cyan-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
-            title={`Weather: ${weatherName.toUpperCase()} (Shift+W)`}
-          >
-            <CloudRain className="w-4 h-4 text-cyan-400" />
-          </button>
-
-          {/* Vehicle Paint */}
-          <button
-            onClick={handleCyclePaint}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-orange-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
-            title={`Vehicle Paint: ${paintName.toUpperCase()} (Press P)`}
-          >
-            <Palette className="w-4 h-4 text-orange-400" />
-          </button>
-
-          {/* Camera View Mode */}
-          <button
-            onClick={handleToggleCamera}
-            className={`p-1.5 rounded-xl transition-all active:scale-95 cursor-pointer ${
-              isFreeCam
-                ? 'text-emerald-400 bg-emerald-500/10'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
-            }`}
-            title={`Camera: ${isFreeCam ? 'FREE ORBIT' : 'THIRD-PERSON ELEVATED'} (Press C/V)`}
-          >
-            <Camera className="w-4 h-4" />
-          </button>
 
           {/* Sound Mute Toggle */}
           <button
@@ -689,18 +611,6 @@ export default function BrunoSimonEngine({
             ) : (
               <Volume2 className="w-4 h-4 text-amber-400" />
             )}
-          </button>
-
-          {/* Achievements Trophy */}
-          <button
-            onClick={() => {
-              pauseGame();
-              setIsAchievementsOpen(true);
-            }}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-all active:scale-95 cursor-pointer"
-            title="Achievements & Honors"
-          >
-            <Trophy className="w-4 h-4 text-amber-400" />
           </button>
         </div>
       </div>
