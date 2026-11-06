@@ -80,3 +80,4 @@ The **2D Reader Mode** has undergone an end-to-end editorial redesign. Previousl
 * **ClassicPortfolio Chunk Size**: `69.78 kB` (Gzip: `14.32 kB`) — cut down from legacy 135 kB.
 * **3D Background Render Cost**: 0% GPU utilization when out of viewport via `IntersectionObserver` pause gate.
 * **Production Status**: Successfully deployed to `https://nitishpriyan.vercel.app` (HTTP 200 OK).
+

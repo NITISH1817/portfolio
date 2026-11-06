@@ -103,7 +103,7 @@ export class Game
         const compressedTextureFormat = 'texture'
         const compressedTextureExtension = 'png'
 
-        const cb = '?cb=1'
+        const cb = ''
         this.resources = await this.resourcesLoader.load([
             [ 'respawnsReferencesModel',    `respawns/respawnsReferences${compressedModelSuffix}.glb${cb}`, 'gltf' ],
             [ 'behindTheSceneStarsTexture', `behindTheScene/stars.${compressedTextureExtension}${cb}`,      compressedTextureFormat, (resource) => { resource.colorSpace = THREE.SRGBColorSpace; resource.minFilter = THREE.NearestFilter; resource.magFilter = THREE.NearestFilter; resource.generateMipmaps = false; resource.wrapS = THREE.RepeatWrapping; resource.wrapT = THREE.RepeatWrapping; } ],
@@ -209,9 +209,9 @@ export class Game
         if(this.quality.level === 0 && this.rendering.renderer.backend.isWebGPUBackend)
             PreRenderer.render()
 
-        this.ticker.wait(3, () =>
+        this.ticker.wait(1, () =>
         {
-            this.reveal.updateStep(0)
+            this.reveal.updateStep(1)
         })
 
         // Debug achievement

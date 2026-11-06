@@ -655,6 +655,11 @@ export class ProjectsArea extends Area
             let i = 0
             for(const item of this.pagination.items)
             {
+                if(!item || !item.mesh) {
+                    i++
+                    continue
+                }
+
                 if(i <= this.navigation.current.images.length - 1)
                 {
                     if(!item.visible)
@@ -662,7 +667,7 @@ export class ProjectsArea extends Area
                         gsap.to(item.mesh.scale, { x: 1, y: 1, z: 1, duration: 0.5, ease: 'power1.inOut', overwrite: true })
                         item.mesh.visible = true
                         item.visible = true
-                        item.intersect.active = this.state === ProjectsArea.STATE_OPENING || this.state === ProjectsArea.STATE_OPEN
+                        if(item.intersect) item.intersect.active = this.state === ProjectsArea.STATE_OPENING || this.state === ProjectsArea.STATE_OPEN
                     }
                 }
                 else
@@ -671,14 +676,14 @@ export class ProjectsArea extends Area
                     {
                         gsap.to(item.mesh.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 0.5, ease: 'power1.inOut', overwrite: true, onComplete: () =>
                         {
-                            item.mesh.visible = false
+                            if(item?.mesh) item.mesh.visible = false
                         } })
                         item.visible = false
-                        item.intersect.active = false
+                        if(item.intersect) item.intersect.active = false
                     }
                 }
 
-                item.mesh.rotation.z = this.images.index === i ? 0 : Math.PI
+                if(item.mesh) item.mesh.rotation.z = this.images.index === i ? 0 : Math.PI
 
                 i++
             }

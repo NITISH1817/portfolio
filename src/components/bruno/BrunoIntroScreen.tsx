@@ -43,6 +43,34 @@ export default function BrunoIntroScreen({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onStartExploring]);
 
+  // Background warmup: prefetch 3D engine chunks and core assets during idle time
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // 1. Preload 3D engine and Rapier physics chunks in background
+      import('./BrunoSimonEngine');
+      import('../../engine/folio/threejs-override.js');
+      import('../../engine/folio/Game/Game.js');
+      import('@dimforge/rapier3d');
+
+      // 2. Prefetch key 3D GLB assets into browser disk cache
+      const coreAssets = [
+        '/folio-assets/respawns/respawnsReferences-compressed.glb',
+        '/folio-assets/vehicle/default-compressed.glb',
+        '/folio-assets/terrain/terrain-compressed.glb',
+        '/folio-assets/playground/playgroundVisual-compressed.glb',
+        '/folio-assets/palette.png'
+      ];
+      coreAssets.forEach((url) => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = url;
+        document.head.appendChild(link);
+      });
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Subtle mouse tracking for title lighting sheen
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
@@ -282,31 +310,31 @@ export default function BrunoIntroScreen({
         {activeTab === 'controls' ? (
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-[11px] font-mono text-slate-300">
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border border-slate-700/80 shadow-[0_2px_0_rgba(2,6,23,0.9)]">
                 W / ↑
               </span>
               <span>Accelerate</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border border-slate-700/80 shadow-[0_2px_0_rgba(2,6,23,0.9)]">
                 S / ↓
               </span>
               <span>Reverse / Brake</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border border-slate-700/80 shadow-[0_2px_0_rgba(2,6,23,0.9)]">
                 A / D
               </span>
               <span>Steer Left / Right</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border border-slate-700/80 shadow-[0_2px_0_rgba(2,6,23,0.9)]">
                 SPACE
               </span>
               <span>Jump & Drift</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border border-slate-700/80 shadow-[0_2px_0_rgba(2,6,23,0.9)]">
                 SHIFT
               </span>
               <span>Nitro Boost</span>

@@ -27,7 +27,8 @@ import {
   Trophy,
   Gauge,
   Flame,
-  UserCheck
+  UserCheck,
+  X
 } from 'lucide-react';
 import { projects } from '../../data/portfolio';
 
@@ -245,12 +246,12 @@ export default function BrunoSimonEngine({
         // Apply initial warm sunset / dusk preset
         setTimeout(() => {
           if (game.dayCycles?.override?.start && game.dayCycles?.presets?.dusk) {
-            game.dayCycles.override.start(game.dayCycles.presets.dusk, 1.5);
+            game.dayCycles.override.start(game.dayCycles.presets.dusk, 1.0);
           }
           if (game.world?.visualVehicle?.paints?.changeTo) {
             game.world.visualVehicle.paints.changeTo('flames');
           }
-        }, 1200);
+        }, 300);
 
         // Hook Interactive Points into our Modals
         if (game.interactivePoints && game.interactivePoints.events) {

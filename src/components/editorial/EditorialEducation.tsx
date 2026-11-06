@@ -127,3 +127,4 @@ export default function EditorialEducation() {
     </section>
   );
 }
+

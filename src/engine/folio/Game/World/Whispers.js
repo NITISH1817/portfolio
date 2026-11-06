@@ -12,6 +12,8 @@ export class Whispers
     constructor()
     {
         this.game = Game.getInstance()
+        if(!this.game || !this.game.scene)
+            return
 
         this.count = parseInt(import.meta.env.VITE_WHISPERS_COUNT) || 50
 
@@ -30,6 +32,9 @@ export class Whispers
 
     setSounds()
     {
+        if(!this.game?.audio)
+            return
+
         this.sounds = {}
         
         this.sounds.ignite = this.game.audio.register({

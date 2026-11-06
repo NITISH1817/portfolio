@@ -14,7 +14,7 @@ interface ClassicPortfolioProps {
   onExit?: () => void;
 }
 
-export default function ClassicPortfolio({ onReturn3D, onExit }: ClassicPortfolioProps) {
+export default function ClassicPortfolio({ onReturn3D, onExit: _onExit }: ClassicPortfolioProps) {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {

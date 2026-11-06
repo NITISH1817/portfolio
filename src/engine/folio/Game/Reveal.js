@@ -45,120 +45,31 @@ export class Reveal
 
     updateStep(step)
     {
-        const speedMultiplier = location.hash.match(/skip/i) ? 4 : 1
-
-        // Step 0
+        // Step 0 - Fast-track directly to reveal step 1 (no waiting on black circle)
         if(step === 0)
         {
-            // Intro loader => Hide circle
-            this.game.world.intro.circle.hide(() =>
-            {
-                // Grid
-                this.game.world.grid.show()
-
-                // Reveal
-                this.distance.value = 0
-
-                gsap.to(
-                    this.distance,
-                    {
-                        value: 3.5,
-                        ease: 'back.out(1.7)',
-                        duration: 2 / speedMultiplier,
-                        overwrite: true,
-                    }
-                )
-
-                // View
-                this.game.view.zoom.smoothedRatio = 0.6
-                this.game.view.zoom.baseRatio = 0.6
-
-                gsap.to(
-                    this.game.view.zoom,
-                    {
-                        baseRatio: 0.3,
-                        // smoothedRatio: 0.4,
-                        ease: 'power1.inOut',
-                        duration: 1.25 / speedMultiplier,
-                        overwrite: true,
-                    }
-                )
-
-                // Intro loader => Show label and sound button
-                this.game.world.intro.setText()
-                this.game.world.intro.setSoundButton()
-                this.game.ticker.wait(1, () =>
-                {
-                    this.game.world.intro.showLabel()
-                })
-
-                // Cherry trees
-                if(this.game.world.cherryTrees)
-                    this.game.world.cherryTrees.leaves.seeThroughMultiplier = 0.5
-
-                // Click
-                if(location.hash.match(/skip/i))
-                {
+            if (this.game.world?.intro?.circle?.hide) {
+                this.game.world.intro.circle.hide(() => {
                     this.updateStep(1)
-                }
-                else
-                {
-                    // Next function
-                    const next = () =>
-                    {
-                        this.updateStep(1)
-                        this.game.inputs.events.off('introStart', inputCallback)
-                        this.game.rayCursor.removeIntersect(intersect)
-                    }
-
-                    // Input callback
-                    const inputCallback = () =>
-                    {
-                        next()
-                    }
-
-                    // Intsect
-                    const position = this.position.clone()
-                    position.y = 0
-                    
-                    const intersect = this.game.rayCursor.addIntersect({
-                        active: true,
-                        shape: new THREE.Sphere(position, 3.5),
-                        onClick: next,
-                        onEnter: () =>
-                        {
-                            gsap.to(this, { intensityMultiplier: 1.22, duration: 0.2, overwrite: true })
-                        },
-                        onLeave: () =>
-                        {
-                            gsap.to(this, { intensityMultiplier: 1, duration: 0.2, overwrite: true })
-                        }
-                    })
-                    
-                    // Inputs (for gamepad and keyboard)
-                    this.game.inputs.addActions([
-                        { name: 'introStart', categories: [ 'intro' ], keys: [ 'Gamepad.cross', 'Keyboard.Enter', 'Keyboard.ArrowUp', 'Keyboard.ArrowDown', 'Keyboard.KeyW', 'Keyboard.KeyD' ] },
-                    ])
-
-            // { name: 'forward',               categories: [ 'wandering', 'racing', 'cinematic' ], keys: [ 'Keyboard.ArrowUp', 'Keyboard.KeyW', 'Gamepad.up', 'Gamepad.r2' ] },
-            // { name: 'right',                 categories: [ 'wandering', 'racing', 'cinematic' ], keys: [ 'Keyboard.ArrowRight', 'Keyboard.KeyD', 'Gamepad.right' ] },
-                    this.game.inputs.events.on('introStart', inputCallback)
-                }
-            })
+                })
+            } else {
+                this.updateStep(1)
+            }
+            return
         }
         else if(step === 1)
         {
             // Audio
-            this.game.audio.init()
-            this.sound.play()
+            if (this.game.audio?.init) this.game.audio.init()
+            if (this.sound?.play) this.sound.play()
 
-            // Reveal
+            // Immediate fast-reveal wave
             gsap.to(
                 this.distance,
                 {
                     value: 30,
-                    ease: 'back.in(1.3)',
-                    duration: 2 / speedMultiplier,
+                    ease: 'power2.out',
+                    duration: 1.2,
                     overwrite: true,
                     onComplete: () =>
                     {
@@ -168,7 +79,8 @@ export class Reveal
             )
 
             // Intro loader => Hide label
-            this.game.world.intro.hideLabel()
+            if (this.game.world?.intro?.hideLabel)
+                this.game.world.intro.hideLabel()
 
             // Inputs
             this.game.inputs.filters.clear()
@@ -178,14 +90,13 @@ export class Reveal
             this.game.view.focusPoint.isTracking = true
             this.game.view.focusPoint.magnet.active = false
 
-            // View
+            // Smooth camera zoom-in transition
             gsap.to(
                 this.game.view.zoom,
                 {
                     baseRatio: 0,
-                    // smoothedRatio: 0,
-                    ease: 'back.in(1.5)',
-                    duration: 1.75 / speedMultiplier,
+                    ease: 'power2.out',
+                    duration: 1.2,
                     overwrite: true,
                     onComplete: () =>
                     {
@@ -202,7 +113,7 @@ export class Reveal
                     {
                         seeThroughMultiplier: 1,
                         ease: 'power1.inOut',
-                        duration: 2 / speedMultiplier,
+                        duration: 1.2,
                         overwrite: true
                     }
                 )
@@ -210,11 +121,14 @@ export class Reveal
         }
         else if(step === 2)
         {
-            this.game.interactivePoints.recover()
+            if(!this.game || !this.game.world || !this.game.audio)
+                return
+
+            this.game.interactivePoints?.recover()
             
             this.game.world.step(2)
-            this.game.world.grid.destroy()
-            this.game.world.intro.destroy()
+            if(this.game.world.grid) this.game.world.grid.destroy()
+            if(this.game.world.intro) this.game.world.intro.destroy()
             this.game.world.intro = null
 
             this.game.overlay.moveOnTop()
