@@ -56,9 +56,9 @@ export class LandingArea extends Area
             const word2 = 'PRIYAN'
 
             // Direction vector along the authentic plaza edge (matching original Bruno Simon line)
-            // Stretches along the plaza border from [49.8, 0.75, 38.9] to [39.5, 0.75, 43.7]
-            const startPos = new THREE.Vector3(49.8, 0.75, 38.9)
-            const endPos = new THREE.Vector3(39.5, 0.75, 43.7)
+            // Stretches from LEFT to RIGHT in the camera's view: from [39.5, 0.75, 43.7] to [49.8, 0.75, 38.9]
+            const startPos = new THREE.Vector3(39.5, 0.75, 43.7)
+            const endPos = new THREE.Vector3(49.8, 0.75, 38.9)
             const lineDir = endPos.clone().sub(startPos)
             lineDir.normalize()
 
