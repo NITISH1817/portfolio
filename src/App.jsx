@@ -45,28 +45,21 @@ export default function App() {
 
       {/* 2. 2D ACCESSIBLE READER MODE */}
       {isClassicMode ? (
-        <div className="w-full h-full overflow-y-auto bg-slate-950 text-white pt-16">
-          {/* Top Return Banner */}
-          <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 p-1.5 px-4 rounded-2xl bg-[#0F1424]/90 border border-purple-500/40 backdrop-blur-md shadow-xl">
-            <button
-              onClick={() => {
+        <div className="w-full h-full overflow-y-auto bg-[#070B14] text-slate-100">
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-screen text-slate-400 font-mono">
+                Loading Editorial Portfolio...
+              </div>
+            }
+          >
+            <ClassicPortfolio
+              onReturn3D={() => {
                 setIsClassicMode(false);
                 handleStartExploring();
               }}
-              className="px-3.5 py-1.5 rounded-xl bg-linear-to-r from-[#FF9A45] to-[#A855F7] text-slate-950 font-space font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
-            >
-              LAUNCH 3D PLAYGROUND &rarr;
-            </button>
-            <button
-              onClick={() => setIsClassicMode(false)}
-              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs transition-all cursor-pointer"
-            >
-              EXIT 2D MODE
-            </button>
-          </div>
-
-          <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-slate-400 font-mono">Loading Document View...</div>}>
-            <ClassicPortfolio />
+              onExit={() => setIsClassicMode(false)}
+            />
           </Suspense>
         </div>
       ) : !isGameActive ? (
