@@ -74,6 +74,7 @@ export class Intro
 
         // Mesh
         const mesh = new THREE.Mesh(geometry, material)
+        mesh.visible = false
         
         mesh.position.copy(this.center)
         mesh.position.y = 0.001

@@ -43,7 +43,7 @@ export default function BrunoIntroScreen({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onStartExploring]);
 
-  // Background warmup: prefetch 3D engine chunks and core assets during idle time
+  // Immediate background warmup: prefetch 3D engine chunks and core assets
   useEffect(() => {
     const timer = setTimeout(() => {
       // 1. Preload 3D engine and Rapier physics chunks in background
@@ -58,6 +58,8 @@ export default function BrunoIntroScreen({
         '/folio-assets/vehicle/default-compressed.glb',
         '/folio-assets/terrain/terrain-compressed.glb',
         '/folio-assets/playground/playgroundVisual-compressed.glb',
+        '/folio-assets/areas/areas-compressed.glb',
+        '/folio-assets/fonts/helvetiker_bold.typeface.json',
         '/folio-assets/palette.png'
       ];
       coreAssets.forEach((url) => {
@@ -66,7 +68,7 @@ export default function BrunoIntroScreen({
         link.href = url;
         document.head.appendChild(link);
       });
-    }, 600);
+    }, 50);
 
     return () => clearTimeout(timer);
   }, []);

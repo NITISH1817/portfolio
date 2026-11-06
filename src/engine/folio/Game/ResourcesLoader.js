@@ -126,8 +126,16 @@ export class ResourcesLoader
                         },
                         undefined,
                         (err) => {
-                            console.error(`Resources > Couldn't load file ${_file[1]}`, err)
-                            reject(new Error(`Failed to load ${_file[1]}: ${err?.message || err}`))
+                            console.warn(`Resources > Couldn't load file ${_file[1]} — falling back`, err)
+                            let fallback = null
+                            if (_file[2] === 'texture' || _file[2] === 'textureKtx') {
+                                fallback = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1)
+                                fallback.needsUpdate = true
+                            } else {
+                                fallback = { scene: new THREE.Group() }
+                            }
+                            save(_file, fallback)
+                            progress()
                         }
                     )
                 }

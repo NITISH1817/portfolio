@@ -209,10 +209,8 @@ export class Game
         if(this.quality.level === 0 && this.rendering.renderer.backend.isWebGPUBackend)
             PreRenderer.render()
 
-        this.ticker.wait(1, () =>
-        {
-            this.reveal.updateStep(1)
-        })
+        // Instant world reveal
+        this.reveal.updateStep(1)
 
         // Debug achievement
         if(this.debug.active)

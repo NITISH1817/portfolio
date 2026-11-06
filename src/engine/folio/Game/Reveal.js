@@ -13,7 +13,7 @@ export class Reveal
         const respawn = this.game.respawns.getDefault()
         this.position = respawn.position.clone()
         this.position2Uniform = uniform(vec2(this.position.x, this.position.z))
-        this.distance = uniform(0)
+        this.distance = uniform(99999)
         this.thickness = uniform(0.05)
         this.color = uniform(color('#e88eff'))
         this.intensity = uniform(5.5)

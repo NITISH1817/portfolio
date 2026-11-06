@@ -37,7 +37,7 @@ export class CollectibleManager {
                 district: 'Developer City',
                 color: '#8B5CF6',
                 emissive: '#7C3AED',
-                pos: new THREE.Vector3(38, 1.4, 40),
+                pos: new THREE.Vector3(48.5, 1.2, 45.0),
                 description: 'Unlocks Developer Story & Origins'
             },
             {
@@ -90,8 +90,8 @@ export class CollectibleManager {
         crystalDefinitions.forEach((def) => {
             const isAlreadyCollected = this.collectedIds.has(def.id);
 
-            // 3D Crystal Mesh (Faceted Octahedron)
-            const geom = new THREE.OctahedronGeometry(0.55, 0);
+            // 3D Crystal Mesh (Faceted Octahedron, sleek collectible size)
+            const geom = new THREE.OctahedronGeometry(0.28, 0);
             const mat = new THREE.MeshStandardMaterial({
                 color: def.color,
                 emissive: def.emissive,
@@ -107,7 +107,7 @@ export class CollectibleManager {
             this.game.scene.add(mesh);
 
             // Orbiting cyber ring around crystal
-            const ringGeo = new THREE.TorusGeometry(0.75, 0.02, 8, 24);
+            const ringGeo = new THREE.TorusGeometry(0.42, 0.015, 8, 24);
             const ringMat = new THREE.MeshBasicMaterial({ color: def.color, transparent: true, opacity: 0.7 });
             const ringMesh = new THREE.Mesh(ringGeo, ringMat);
             ringMesh.position.copy(def.pos);

@@ -120,31 +120,10 @@ export class InteractionManager {
                 }));
             };
 
-            const interactivePoint = this.game.interactivePoints.create(
-                pos.clone().add(new THREE.Vector3(0, 1.2, 0)),
-                'Lantern (Toggle Light)',
-                InteractivePoints.ALIGN_RIGHT,
-                InteractivePoints.STATE_CONCEALED,
-                () => {
-                    this.game.inputs.interactiveButtons.clearItems();
-                    toggleLight();
-                },
-                () => {
-                    this.game.inputs.interactiveButtons.addItems(['interact']);
-                },
-                () => {
-                    this.game.inputs.interactiveButtons.removeItems(['interact']);
-                },
-                () => {
-                    this.game.inputs.interactiveButtons.removeItems(['interact']);
-                }
-            );
-
             this.interactiveObjects.set(`lantern-${idx}`, {
                 id: `lantern-${idx}`,
                 type: 'lantern',
                 position: pos,
-                interactivePoint,
                 onInteract: toggleLight
             });
         });
@@ -205,31 +184,10 @@ export class InteractionManager {
                 }
             };
 
-            const interactivePoint = this.game.interactivePoints.create(
-                bench.pos.clone().add(new THREE.Vector3(0, 1.2, 0)),
-                'Bench (Sit & Observe)',
-                InteractivePoints.ALIGN_RIGHT,
-                InteractivePoints.STATE_CONCEALED,
-                () => {
-                    this.game.inputs.interactiveButtons.clearItems();
-                    sitOnBench();
-                },
-                () => {
-                    this.game.inputs.interactiveButtons.addItems(['interact']);
-                },
-                () => {
-                    this.game.inputs.interactiveButtons.removeItems(['interact']);
-                },
-                () => {
-                    this.game.inputs.interactiveButtons.removeItems(['interact']);
-                }
-            );
-
             this.interactiveObjects.set(`bench-${idx}`, {
                 id: `bench-${idx}`,
                 type: 'bench',
                 position: bench.pos,
-                interactivePoint,
                 onInteract: sitOnBench
             });
         });

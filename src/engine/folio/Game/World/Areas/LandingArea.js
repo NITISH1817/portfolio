@@ -52,19 +52,14 @@ export class LandingArea extends Area
         const fontLoader = new FontLoader()
         fontLoader.load('/folio-assets/fonts/helvetiker_bold.typeface.json', (font) =>
         {
-            // Words: NITISH and PRIYAN
-            const word1 = 'NITISH'
-            const word2 = 'PRIYAN'
+            const words = ['NITISH', 'PRIYAN']
 
-            // Direction vector along authentic plaza edge matching camera perspective (from LEFT to RIGHT)
-            // Left edge in camera view is near [49.6, 0.75, 39.0], Right edge is near [38.4, 0.75, 44.2]
-            const startPos = new THREE.Vector3(49.6, 0.75, 39.0)
-            const endPos = new THREE.Vector3(38.4, 0.75, 44.2)
-            const lineDir = endPos.clone().sub(startPos)
-            lineDir.normalize()
-
-            // Facing toward the vehicle spawn & main plaza
-            const letterQuat = new THREE.Quaternion(0, 0.2164, 0, 0.9763)
+            // Center of the identity monument in the plaza foreground facing southwest toward camera
+            const centerPos = new THREE.Vector3(41.9, 0.55, 40.4)
+            // Screen-right direction vector in world space: (+0.7071, 0, -0.7071)
+            const lineDir = new THREE.Vector3(0.7071068, 0, -0.7071068)
+            // Orientation to face camera directly (45 degrees rotation around Y):
+            const letterQuat = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI * 0.25)
 
             // Signature ruby-to-crimson gradient material (authentic Bruno Simon Folio aesthetic)
             const letterMaterial = this.game.materials.getFromName('redGradient') || this.game.materials.createGradient(
@@ -78,18 +73,19 @@ export class LandingArea extends Area
             {
                 const geom = new TextGeometry(char, {
                     font: font,
-                    size: 1.25,
-                    depth: 0.32,
-                    curveSegments: 5,
+                    size: 0.88,
+                    depth: 0.24,
+                    curveSegments: 4,
                     bevelEnabled: true,
-                    bevelThickness: 0.045,
-                    bevelSize: 0.035,
+                    bevelThickness: 0.035,
+                    bevelSize: 0.025,
                     bevelSegments: 3
                 })
                 geom.computeBoundingBox()
                 geom.center()
                 const box = geom.boundingBox
                 return {
+                    char,
                     geom,
                     sizeX: box.max.x - box.min.x,
                     sizeY: box.max.y - box.min.y,
@@ -97,64 +93,79 @@ export class LandingArea extends Area
                 }
             }
 
-            const word1Data = word1.split('').map(createLetterGeom)
-            const word2Data = word2.split('').map(createLetterGeom)
+            const kerning = 0.14
+            const wordGap = 0.65
 
-            const charSpacing = 0.88
-            const wordGap = 1.35
+            // Compute total length of "NITISH PRIYAN" for exact plaza centering
+            const word1Data = words[0].split('').map(createLetterGeom)
+            const word2Data = words[1].split('').map(createLetterGeom)
+            const allWordsData = [word1Data, word2Data]
 
-            let currentDist = 0
-
-            const placeLetter = (data) =>
-            {
-                const pos = startPos.clone().addScaledVector(lineDir, currentDist)
-                pos.y = 0.55 + data.sizeY * 0.5
-
-                const letterMesh = new THREE.Mesh(data.geom, letterMaterial)
-                letterMesh.castShadow = true
-                letterMesh.receiveShadow = true
-
-                const letterObject = this.game.objects.add(
-                    {
-                        model: letterMesh,
-                        updateMaterials: false,
-                        castShadow: true,
-                        receiveShadow: true
-                    },
-                    {
-                        type: 'dynamic',
-                        position: pos,
-                        rotation: letterQuat,
-                        friction: 0.8,
-                        mass: 0.35,
-                        sleeping: true,
-                        colliders: [
-                            { shape: 'cuboid', parameters: [ data.sizeX * 0.5, data.sizeY * 0.5, data.sizeZ * 0.5 ] }
-                        ],
-                        onCollision: (force, position) =>
-                        {
-                            this.game.audio?.groups?.get('hitBrick')?.playRandomNext(force, position)
-                        }
-                    }
-                )
-
-                if (letterObject?.physical?.colliders?.[0])
-                {
-                    letterObject.physical.colliders[0].setActiveEvents(this.game.RAPIER.ActiveEvents.CONTACT_FORCE_EVENTS)
-                    letterObject.physical.colliders[0].setContactForceEventThreshold(4)
+            let totalLen = 0
+            let prevSizeX = 0
+            for (let w = 0; w < allWordsData.length; w++) {
+                if (w > 0) totalLen += wordGap
+                for (let i = 0; i < allWordsData[w].length; i++) {
+                    const sX = allWordsData[w][i].sizeX
+                    if (w > 0 || i > 0) totalLen += (prevSizeX + sX) * 0.5 + kerning
+                    prevSizeX = sX
                 }
-
-                currentDist += charSpacing
             }
 
-            // Place 'NITISH'
-            word1Data.forEach(placeLetter)
+            const startPos = centerPos.clone().addScaledVector(lineDir, - totalLen * 0.5)
 
-            // Inter-word gap
-            currentDist += wordGap - charSpacing
+            let currentDist = 0
+            prevSizeX = 0
 
-            // Place 'PRIYAN'
-            word2Data.forEach(placeLetter)
+            for (let w = 0; w < allWordsData.length; w++) {
+                const wordData = allWordsData[w]
+                if (w > 0) currentDist += wordGap
+
+                for (let i = 0; i < wordData.length; i++) {
+                    const data = wordData[i]
+                    if (w > 0 || i > 0) {
+                        currentDist += (prevSizeX + data.sizeX) * 0.5 + kerning
+                    }
+                    prevSizeX = data.sizeX
+
+                    const pos = startPos.clone().addScaledVector(lineDir, currentDist)
+                    pos.y = 0.55 + data.sizeY * 0.5
+
+                    const letterMesh = new THREE.Mesh(data.geom, letterMaterial)
+                    letterMesh.castShadow = true
+                    letterMesh.receiveShadow = true
+
+                    const letterObject = this.game.objects.add(
+                        {
+                            model: letterMesh,
+                            updateMaterials: false,
+                            castShadow: true,
+                            receiveShadow: true
+                        },
+                        {
+                            type: 'dynamic',
+                            position: pos,
+                            rotation: letterQuat,
+                            friction: 0.8,
+                            mass: 0.35,
+                            sleeping: true,
+                            colliders: [
+                                { shape: 'cuboid', parameters: [ data.sizeX * 0.5, data.sizeY * 0.5, data.sizeZ * 0.5 ] }
+                            ],
+                            onCollision: (force, position) =>
+                            {
+                                this.game.audio?.groups?.get('hitBrick')?.playRandomNext(force, position)
+                            }
+                        }
+                    )
+
+                    if (letterObject?.physical?.colliders?.[0])
+                    {
+                        letterObject.physical.colliders[0].setActiveEvents(this.game.RAPIER.ActiveEvents.CONTACT_FORCE_EVENTS)
+                        letterObject.physical.colliders[0].setContactForceEventThreshold(4)
+                    }
+                }
+            }
         })
     }
 
