@@ -6,6 +6,9 @@ import TechLabModal from './modals/TechLabModal';
 import WorldMap from './WorldMap';
 import CommandPalette from './modals/CommandPalette';
 import AchievementsModal from './modals/AchievementsModal';
+import GarageModal from './modals/GarageModal';
+import { vehicleState } from './VehiclePhysics';
+import { InteractionManager } from '../../engine/folio/Game/Interaction/InteractionManager';
 import {
   Volume2,
   VolumeX,
@@ -47,6 +50,9 @@ export default function BrunoSimonEngine({
   const [isWorldMapOpen, setIsWorldMapOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+  const [isGarageOpen, setIsGarageOpen] = useState(false);
+  const [benchScenicData, setBenchScenicData] = useState(null);
+  const [interactionToast, setInteractionToast] = useState(null);
 
   // Audio & Controls
   const [isSoundMuted, setIsSoundMuted] = useState(!soundEnabled);
@@ -81,6 +87,14 @@ export default function BrunoSimonEngine({
     }
   }, []);
 
+  // Feedback toast helper
+  const showFeedbackToast = useCallback((toast) => {
+    setInteractionToast(toast);
+    setTimeout(() => {
+      setInteractionToast((curr) => (curr === toast ? null : curr));
+    }, 3500);
+  }, []);
+
   // Universal close handler
   const handleCloseModal = useCallback(() => {
     setActiveLandmark(null);
@@ -91,6 +105,11 @@ export default function BrunoSimonEngine({
     setIsWorldMapOpen(false);
     setIsCommandPaletteOpen(false);
     setIsAchievementsOpen(false);
+    setIsGarageOpen(false);
+    setBenchScenicData(null);
+    if (InteractionManager.getInstance()) {
+      InteractionManager.getInstance().standUpFromBench();
+    }
     resumeGame();
   }, [resumeGame]);
 
@@ -236,7 +255,13 @@ export default function BrunoSimonEngine({
             const name = item.name.toLowerCase();
             if (game.inputs?.pause) game.inputs.pause();
 
-            if (name.includes('project')) {
+            if (name.includes('map') || name.includes('kiosk')) {
+              setIsWorldMapOpen(true);
+            } else if (name.includes('garage') || name.includes('custom')) {
+              setIsGarageOpen(true);
+            } else if (name.includes('control') || name.includes('command')) {
+              setIsCommandPaletteOpen(true);
+            } else if (name.includes('project')) {
               setSelectedProject(projects[0]);
               setActiveLandmark('projects');
             } else if (name.includes('lab') || name.includes('research')) {
@@ -252,7 +277,12 @@ export default function BrunoSimonEngine({
               name.includes('altar')
             ) {
               setActiveLandmark('contact');
-            } else if (name.includes('recruiter')) {
+            } else if (
+              name.includes('recruiter') ||
+              name.includes('dossier') ||
+              name.includes('avatar') ||
+              name.includes('developer')
+            ) {
               setIsRecruiterOpen(true);
             } else {
               setActiveLandmark('about');
@@ -277,6 +307,20 @@ export default function BrunoSimonEngine({
               lastPos.x = currentPos.x;
               lastPos.y = currentPos.y;
               lastPos.z = currentPos.z;
+
+              // Synchronize live GPS position and heading for Tactical Radar & WorldMap
+              vehicleState.position.x = currentPos.x;
+              vehicleState.position.y = currentPos.y;
+              vehicleState.position.z = currentPos.z;
+              if (game.physicalVehicle.chassis?.physical?.body) {
+                const rot = game.physicalVehicle.chassis.physical.body.rotation();
+                if (rot) {
+                  vehicleState.heading = Math.atan2(
+                    2 * (rot.w * rot.y + rot.x * rot.z),
+                    1 - 2 * (rot.y * rot.y + rot.z * rot.z)
+                  );
+                }
+              }
             }
 
             const rawSpeed = Math.abs(game.physicalVehicle.speed || 0);
@@ -313,12 +357,48 @@ export default function BrunoSimonEngine({
         console.error('Failed to initialize Bruno Simon Folio engine:', err);
       });
 
+    // Window Event Listeners for World Systems & Modals
+    const onOpenWorldMap = () => { pauseGame(); setIsWorldMapOpen(true); };
+    const onOpenGarageModal = () => { pauseGame(); setIsGarageOpen(true); };
+    const onOpenRecruiterModal = () => { pauseGame(); setIsRecruiterOpen(true); };
+    const onOpenTechLabModal = () => { pauseGame(); setIsTechLabOpen(true); };
+    const onOpenCommandPalette = () => { pauseGame(); setIsCommandPaletteOpen(true); };
+    const onBenchSit = (e) => { setBenchScenicData(e.detail); };
+    const onBenchStand = () => { setBenchScenicData(null); };
+    const onInteractionFeedback = (e) => { showFeedbackToast(e.detail); };
+    const onCrystalCollected = (e) => {
+      showFeedbackToast({
+        title: `💎 ${e.detail.name} Collected!`,
+        subtitle: `${e.detail.district} • ${e.detail.description}`
+      });
+    };
+
+    window.addEventListener('open-world-map', onOpenWorldMap);
+    window.addEventListener('open-garage-modal', onOpenGarageModal);
+    window.addEventListener('open-recruiter-modal', onOpenRecruiterModal);
+    window.addEventListener('open-techlab-modal', onOpenTechLabModal);
+    window.addEventListener('open-command-palette', onOpenCommandPalette);
+    window.addEventListener('bench-sit', onBenchSit);
+    window.addEventListener('bench-stand', onBenchStand);
+    window.addEventListener('interaction-feedback', onInteractionFeedback);
+    window.addEventListener('crystal-collected', onCrystalCollected);
+
     const hintTimer = setTimeout(() => setShowControlsHint(false), 9000);
 
     return () => {
       isMounted = false;
       cancelAnimationFrame(animId);
       clearTimeout(hintTimer);
+      window.removeEventListener('open-world-map', onOpenWorldMap);
+      window.removeEventListener('open-garage-modal', onOpenGarageModal);
+      window.removeEventListener('open-recruiter-modal', onOpenRecruiterModal);
+      window.removeEventListener('open-techlab-modal', onOpenTechLabModal);
+      window.removeEventListener('open-command-palette', onOpenCommandPalette);
+      window.removeEventListener('bench-sit', onBenchSit);
+      window.removeEventListener('bench-stand', onBenchStand);
+      window.removeEventListener('interaction-feedback', onInteractionFeedback);
+      window.removeEventListener('crystal-collected', onCrystalCollected);
+
       if (gameRef.current?.destroy) {
         try {
           gameRef.current.destroy();
@@ -367,8 +447,9 @@ export default function BrunoSimonEngine({
         handleToggleCamera();
       } else if (e.key === 'n' || e.key === 'N') {
         handleCycleDay();
-      } else if (e.key === 'p' || e.key === 'P') {
-        handleCyclePaint();
+      } else if (e.key === 'p' || e.key === 'P' || e.key === 'g' || e.key === 'G') {
+        pauseGame();
+        setIsGarageOpen((v) => !v);
       } else if (e.key === 'w' || e.key === 'W') {
         if (e.shiftKey) handleCycleWeather();
       } else if (e.key === 'h' || e.key === 'H') {
@@ -741,6 +822,78 @@ export default function BrunoSimonEngine({
         isOpen={isAchievementsOpen}
         onClose={handleCloseModal}
       />
+
+      {/* Functional Vehicle Garage & Customizer */}
+      <GarageModal
+        isOpen={isGarageOpen}
+        onClose={handleCloseModal}
+        currentPaint={paintName}
+        onSelectPaint={(paintId) => {
+          setPaintName(paintId);
+          if (gameRef.current?.world?.visualVehicle?.paints?.changeTo) {
+            gameRef.current.world.visualVehicle.paints.changeTo(paintId);
+          }
+        }}
+        dayCycleName={dayCycleName}
+        onCycleDay={handleCycleDay}
+        weatherName={weatherName}
+        onCycleWeather={handleCycleWeather}
+        isFreeCam={isFreeCam}
+        onToggleCamera={handleToggleCamera}
+        onRespawn={handleRespawn}
+        telemetry={telemetry}
+      />
+
+      {/* Scenic Bench Observation Mode Overlay */}
+      {benchScenicData && (
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-40 w-11/12 max-w-lg p-5 rounded-3xl bg-slate-950/90 border border-cyan-500/40 backdrop-blur-xl shadow-2xl text-white space-y-2.5 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
+                {benchScenicData.title}
+              </h4>
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              SCENIC OBSERVATION
+            </span>
+          </div>
+          <p className="text-xs text-slate-200 italic font-serif leading-relaxed">
+            {benchScenicData.quote}
+          </p>
+          <p className="text-[11px] text-slate-400 leading-normal">
+            {benchScenicData.lore}
+          </p>
+          <div className="pt-2 flex items-center justify-between border-t border-white/10 text-[11px] font-mono">
+            <span className="text-cyan-400">Nitish Priyan • Digital Universe</span>
+            <button
+              onClick={() => {
+                if (InteractionManager.getInstance()) {
+                  InteractionManager.getInstance().standUpFromBench();
+                } else {
+                  setBenchScenicData(null);
+                }
+              }}
+              className="px-3.5 py-1.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold active:scale-95 transition-all cursor-pointer shadow-md"
+            >
+              Stand Up & Drive [ESC]
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Interaction Feedback Toast */}
+      {interactionToast && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-950/90 border border-amber-400/50 backdrop-blur-md shadow-2xl text-white animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+          <div>
+            <p className="text-xs font-bold text-amber-300 font-space">{interactionToast.title}</p>
+            {interactionToast.subtitle && (
+              <p className="text-[11px] text-slate-300 font-mono mt-0.5">{interactionToast.subtitle}</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

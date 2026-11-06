@@ -370,3 +370,4 @@ export default function DeveloperAvatar3D({ mouseTracking = true }: { mouseTrack
     </group>
   );
 }
+

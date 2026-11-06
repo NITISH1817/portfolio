@@ -41,64 +41,64 @@ export default function WorldMap({
   // Authoritative 6 portfolio landmarks with exact 3D coordinates & non-overlapping label alignments
   const landmarks: LandmarkData[] = [
     {
+      id: 'landing',
+      name: 'Developer City',
+      category: 'Identity & Monument',
+      worldPos: [38, 1.2, 42],
+      color: '#8B5CF6',
+      icon: '🏙️',
+      labelOffset: { x: 5, y: 7, align: 'left' },
+      description: 'Central plaza, NITISH PRIYAN 3D monument, 3D developer avatar, Map kiosk, and recruiter fast-track brief.'
+    },
+    {
+      id: 'lab',
+      name: 'AI Research Lab',
+      category: 'Machine Learning & Vision',
+      worldPos: [-28, 1.2, 15],
+      color: '#06B6D4',
+      icon: '🧪',
+      labelOffset: { x: -6, y: 0, align: 'right' },
+      description: 'Predictive ML models, Diabetic Retinopathy Vision AI, MLOps drift monitoring, and Gemini AI legal research.'
+    },
+    {
       id: 'projects',
-      name: 'Projects Exhibition',
-      category: 'Featured Apps',
+      name: 'Project Universe',
+      category: 'Flagship Creations',
       worldPos: [0, 1.2, -36],
       color: '#3B82F6',
       icon: '🚀',
       labelOffset: { x: 0, y: -8, align: 'center' },
-      description: 'Lexora, Govt Scheme Recommender, Project Zero, Movie Rec, WaterGrievance.'
+      description: 'GovScheme (Patent Filed), NEXORA (129/129 Tests), and Student Performance MLOps platform.'
     },
     {
-      id: 'resume',
-      name: 'Resume Archives',
-      category: 'Credentials',
-      worldPos: [36, 1.2, -31],
-      color: '#06B6D4',
-      icon: '📄',
-      labelOffset: { x: 5, y: -7, align: 'left' },
-      description: 'Full developer CV, educational background, and downloadable resume PDF.'
-    },
-    {
-      id: 'skills',
-      name: 'Skills Playground',
-      category: 'Technical Stack',
-      worldPos: [38, 1.2, -2],
+      id: 'career',
+      name: 'Engineering District',
+      category: 'Java & Systems Stack',
+      worldPos: [36, 1.2, -2],
       color: '#EC4899',
       icon: '⚡',
       labelOffset: { x: 6, y: 0, align: 'left' },
-      description: 'Interactive Java, Python, C++, React, FastAPI, ML & smashable skill blocks.'
+      description: 'Enterprise Java SE 17, 250+ LeetCode DSA, PostgreSQL, Docker, and REST API architectures.'
     },
     {
-      id: 'experience',
-      name: 'Experience & Honors',
-      category: 'Achievements',
+      id: 'achievements',
+      name: 'Achievement Arena',
+      category: 'Verified Credentials',
       worldPos: [34, 1.2, 31],
       color: '#F59E0B',
       icon: '🏆',
       labelOffset: { x: 5, y: 7, align: 'left' },
-      description: 'Oracle Java SE 17 Certified, AWS Cloud, SIH 2025 Finalist, 250+ LeetCode DSA.'
-    },
-    {
-      id: 'about',
-      name: 'About Me Pavilion',
-      category: 'Identity',
-      worldPos: [-34, 1.2, 25],
-      color: '#8B5CF6',
-      icon: '👤',
-      labelOffset: { x: -5, y: 7, align: 'right' },
-      description: 'Career journey, engineering philosophy, problem solving & ambitions.'
+      description: 'Oracle Certified Associate Java SE 17, AWS Cloud Practitioner, Cisco Cybersecurity, and SIH 2025.'
     },
     {
       id: 'contact',
-      name: 'Contact Station',
-      category: 'Communication',
+      name: 'Contact Spaceport',
+      category: 'Communications & Resume',
       worldPos: [-42, 1.2, -8],
       color: '#10B981',
       icon: '📡',
       labelOffset: { x: -6, y: 0, align: 'right' },
-      description: 'Transmission terminal with direct email, GitHub, LinkedIn & live contact form.'
+      description: 'Transmission terminal with direct email, GitHub, LinkedIn, and direct verified resume PDF download.'
     }
   ];
 

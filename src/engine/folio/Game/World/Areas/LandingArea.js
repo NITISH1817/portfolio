@@ -421,14 +421,13 @@ export class LandingArea extends Area
         // Interactive point
         const interactivePoint = this.game.interactivePoints.create(
             this.references.items.get('kioskInteractivePoint')[0].position,
-            'Map',
+            'World Map',
             InteractivePoints.ALIGN_RIGHT,
             InteractivePoints.STATE_CONCEALED,
             () =>
             {
                 this.game.inputs.interactiveButtons.clearItems()
-                this.game.modals.open('map')
-                // interactivePoint.hide()
+                window.dispatchEvent(new CustomEvent('open-world-map'))
             },
             () =>
             {
@@ -443,11 +442,6 @@ export class LandingArea extends Area
                 this.game.inputs.interactiveButtons.removeItems(['interact'])
             }
         )
-
-        // this.game.map.items.get('map').events.on('close', () =>
-        // {
-        //     interactivePoint.show()
-        // })
     }
 
     setControls()
@@ -455,14 +449,13 @@ export class LandingArea extends Area
         // Interactive point
         const interactivePoint = this.game.interactivePoints.create(
             this.references.items.get('controlsInteractivePoint')[0].position,
-            'Controls',
+            'Controls & Commands',
             InteractivePoints.ALIGN_RIGHT,
             InteractivePoints.STATE_CONCEALED,
             () =>
             {
                 this.game.inputs.interactiveButtons.clearItems()
-                this.game.menu.open('controls')
-                interactivePoint.hide()
+                window.dispatchEvent(new CustomEvent('open-command-palette'))
             },
             () =>
             {
