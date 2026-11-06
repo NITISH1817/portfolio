@@ -81,7 +81,7 @@ export default function BrunoIntroScreen({
           <div>
             <div className="text-xs font-black tracking-widest text-white uppercase font-mono flex items-center gap-2">
               NITISH PRIYAN R S
-              <span className="px-1.5 py-0.2 rounded bg-amber-500/20 text-[#FFB370] text-[9px] border border-amber-500/30">
+              <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-[#FFB370] text-[9px] border border-amber-500/30">
                 ACTIVE
               </span>
             </div>
@@ -282,31 +282,31 @@ export default function BrunoIntroScreen({
         {activeTab === 'controls' ? (
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-[11px] font-mono text-slate-300">
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-slate-700 border-b border-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
                 W / ↑
               </span>
               <span>Accelerate</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-slate-700 border-b border-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
                 S / ↓
               </span>
               <span>Reverse / Brake</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-slate-700 border-b border-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
                 A / D
               </span>
               <span>Steer Left / Right</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-slate-700 border-b border-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
                 SPACE
               </span>
               <span>Jump & Drift</span>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/70 border border-slate-800/70 backdrop-blur-md">
-              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-slate-700 border-b border-slate-950 shadow-inner">
+              <span className="px-2 py-0.5 rounded bg-slate-800 text-white font-bold border-t border-t-slate-700 border-b-2 border-b-slate-950 shadow-inner">
                 SHIFT
               </span>
               <span>Nitro Boost</span>
