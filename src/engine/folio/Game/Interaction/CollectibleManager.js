@@ -214,11 +214,13 @@ export class CollectibleManager {
         }));
 
         // Trigger in-game notification
-        if (this.game.notifications) {
-            this.game.notifications.create({
-                title: `💎 ${crystal.name} Discovered!`,
-                text: `${crystal.district} // ${crystal.description}`
-            });
+        if (this.game.notifications?.show) {
+            this.game.notifications.show(
+                `<div class="top"><div class="title">💎 ${crystal.name} Discovered!</div></div><div class="bottom"><div class="description">${crystal.district} // ${crystal.description}</div></div>`,
+                'collectible',
+                3
+            );
         }
     }
 }
+

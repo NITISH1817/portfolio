@@ -313,3 +313,4 @@ export class InteractionManager {
         // Can be called per-tick if needed
     }
 }
+

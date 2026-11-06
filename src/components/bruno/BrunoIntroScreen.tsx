@@ -127,11 +127,11 @@ export default function BrunoIntroScreen({
         {/* Subtitle */}
         <p className="text-base sm:text-lg font-medium text-slate-300 tracking-wide mb-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
           <span>Computer Science Student</span>
-          <span className="text-purple-400 font-bold">&bull;</span>
+          <span className="text-purple-400 font-bold">{"•"}</span>
           <span>Software Engineer</span>
-          <span className="text-purple-400 font-bold">&bull;</span>
+          <span className="text-purple-400 font-bold">{"•"}</span>
           <span>Java Developer</span>
-          <span className="text-purple-400 font-bold">&bull;</span>
+          <span className="text-purple-400 font-bold">{"•"}</span>
           <span>AI/ML Engineer</span>
         </p>
 

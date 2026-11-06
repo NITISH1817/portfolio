@@ -53,6 +53,10 @@ export default function BrunoSimonEngine({
   const [isGarageOpen, setIsGarageOpen] = useState(false);
   const [benchScenicData, setBenchScenicData] = useState(null);
   const [interactionToast, setInteractionToast] = useState(null);
+  const [activeWaypoint, setActiveWaypoint] = useState(null);
+  const [waypointDistance, setWaypointDistance] = useState(0);
+  const activeWaypointRef = useRef(null);
+  activeWaypointRef.current = activeWaypoint;
 
   // Audio & Controls
   const [isSoundMuted, setIsSoundMuted] = useState(!soundEnabled);
@@ -312,6 +316,21 @@ export default function BrunoSimonEngine({
               vehicleState.position.x = currentPos.x;
               vehicleState.position.y = currentPos.y;
               vehicleState.position.z = currentPos.z;
+
+              if (activeWaypointRef.current) {
+                const wp = activeWaypointRef.current;
+                const dist = Math.round(Math.hypot(wp.worldPos[0] - currentPos.x, wp.worldPos[2] - currentPos.z));
+                setWaypointDistance(dist);
+                if (dist < 6) {
+                  showFeedbackToast({
+                    title: `🏆 Destination Reached!`,
+                    subtitle: `Arrived at ${wp.name}`
+                  });
+                  carAudio.playChime();
+                  setActiveWaypoint(null);
+                }
+              }
+
               if (game.physicalVehicle.chassis?.physical?.body) {
                 const rot = game.physicalVehicle.chassis.physical.body.rotation();
                 if (rot) {
@@ -373,6 +392,17 @@ export default function BrunoSimonEngine({
       });
     };
 
+    const onSetWaypoint = (e) => {
+      setActiveWaypoint(e.detail);
+      showFeedbackToast({
+        title: `📍 Route Set: ${e.detail.name}`,
+        subtitle: `Follow navigation heading • ${e.detail.category}`
+      });
+    };
+    const onClearWaypoint = () => {
+      setActiveWaypoint(null);
+    };
+
     window.addEventListener('open-world-map', onOpenWorldMap);
     window.addEventListener('open-garage-modal', onOpenGarageModal);
     window.addEventListener('open-recruiter-modal', onOpenRecruiterModal);
@@ -382,6 +412,8 @@ export default function BrunoSimonEngine({
     window.addEventListener('bench-stand', onBenchStand);
     window.addEventListener('interaction-feedback', onInteractionFeedback);
     window.addEventListener('crystal-collected', onCrystalCollected);
+    window.addEventListener('set-navigation-waypoint', onSetWaypoint);
+    window.addEventListener('clear-navigation-waypoint', onClearWaypoint);
 
     const hintTimer = setTimeout(() => setShowControlsHint(false), 9000);
 
@@ -398,6 +430,8 @@ export default function BrunoSimonEngine({
       window.removeEventListener('bench-stand', onBenchStand);
       window.removeEventListener('interaction-feedback', onInteractionFeedback);
       window.removeEventListener('crystal-collected', onCrystalCollected);
+      window.removeEventListener('set-navigation-waypoint', onSetWaypoint);
+      window.removeEventListener('clear-navigation-waypoint', onClearWaypoint);
 
       if (gameRef.current?.destroy) {
         try {
@@ -670,6 +704,25 @@ export default function BrunoSimonEngine({
           </button>
         </div>
       </div>
+
+      {/* Floating Active Navigation Waypoint HUD */}
+      {activeWaypoint && (
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-slate-950/90 border border-cyan-500/50 backdrop-blur-md shadow-[0_0_30px_rgba(6,182,212,0.35)] font-mono text-xs text-white pointer-events-auto animate-in slide-in-from-top-4 duration-200">
+          <span className="text-base">{activeWaypoint.icon}</span>
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-cyan-300 uppercase">{activeWaypoint.name}</span>
+            <span className="text-slate-500">•</span>
+            <span className="text-amber-400 font-bold">{waypointDistance}m</span>
+          </div>
+          <button
+            onClick={() => setActiveWaypoint(null)}
+            className="ml-2 p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+            title="Cancel Route"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* Bottom Telemetry HUD */}
       <div className="fixed bottom-4 left-4 z-40 pointer-events-none">
