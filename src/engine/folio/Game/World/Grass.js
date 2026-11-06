@@ -200,13 +200,12 @@ export class Grass
     {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.frustumCulled = false
-        this.mesh.receiveShadow = true
-        // this.mesh.visible = false
-        this.game.scene.add(this.mesh)
+        this.mesh.receiveShadow = false
+        this.mesh.visible = false
     }
 
     update()
     {
-        this.center.value.set(this.game.view.optimalArea.position.x, this.game.view.optimalArea.position.z)
+        // Grass disabled per user direction: keeps ground clean, open and unobstructed
     }
 }
