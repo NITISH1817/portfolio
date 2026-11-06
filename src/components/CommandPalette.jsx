@@ -91,7 +91,7 @@ export default function CommandPalette() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="w-full max-w-xl bg-[var(--bg-primary)] border border-white/20 shadow-2xl rounded-xl overflow-hidden relative z-10 flex flex-col"
+            className="w-full max-w-xl bg-(--bg-primary) border border-white/20 shadow-2xl rounded-xl overflow-hidden relative z-10 flex flex-col"
           >
             <div className="flex items-center px-4 py-4 border-b border-white/10">
               <Search className="w-5 h-5 text-gray-400 mr-3" />
@@ -136,7 +136,7 @@ export default function CommandPalette() {
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-[10px] text-gray-500 uppercase tracking-widest">{cmd.section}</span>
-                      {index === selectedIndex && <ArrowRight className="w-4 h-4 text-[var(--accent)]" />}
+                      {index === selectedIndex && <ArrowRight className="w-4 h-4 text-(--accent)" />}
                     </div>
                   </div>
                 ))

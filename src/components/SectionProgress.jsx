@@ -49,12 +49,12 @@ export default function SectionProgress() {
           data-cursor="menu"
         >
           <span 
-            className={`absolute right-8 text-[9px] font-bold tracking-widest uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-2 ${activeIndex === idx ? 'text-[var(--accent)]' : 'text-white'}`}
+            className={`absolute right-8 text-[9px] font-bold tracking-widest uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-2 ${activeIndex === idx ? 'text-(--accent)' : 'text-white'}`}
           >
             {section.name}
           </span>
           <div className="w-6 flex justify-end">
-             <span className={`text-[10px] font-bold transition-colors duration-300 ${activeIndex === idx ? 'text-[var(--accent)]' : 'text-gray-500 hover:text-white'}`}>
+             <span className={`text-[10px] font-bold transition-colors duration-300 ${activeIndex === idx ? 'text-(--accent)' : 'text-gray-500 hover:text-white'}`}>
                0{idx + 1}
              </span>
           </div>

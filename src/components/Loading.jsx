@@ -36,29 +36,29 @@ export default function Loading({ onComplete }) {
   };
 
   return (
-    <div className="loading-overlay fixed inset-0 z-[10000] bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col items-center justify-center pointer-events-auto">
+    <div className="loading-overlay fixed inset-0 z-[10000] bg-(--bg-primary) text-(--text-primary) flex flex-col items-center justify-center pointer-events-auto">
       <div className="text-center">
         <h1 className="text-section-title mb-8 tracking-tighter">NITISH.DEV</h1>
         
-        <div className="h-24 mb-12 font-mono text-sm tracking-widest text-[var(--text-secondary)]">
+        <div className="h-24 mb-12 font-mono text-sm tracking-widest text-(--text-secondary)">
           {step < messages.length ? (
             <p className="animate-pulse">{messages[step]}...</p>
           ) : (
-            <p className="text-[var(--accent)]">SYSTEM READY</p>
+            <p className="text-(--accent)">SYSTEM READY</p>
           )}
         </div>
 
         {step >= messages.length || skipped ? (
           <button 
             onClick={handleEnter}
-            className="px-8 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] font-mono text-sm tracking-widest hover:bg-[var(--accent)] transition-colors"
+            className="px-8 py-3 bg-(--text-primary) text-(--bg-primary) font-mono text-sm tracking-widest hover:bg-(--accent) transition-colors"
           >
             ENTER EXPERIENCE
           </button>
         ) : (
           <button 
             onClick={handleEnter}
-            className="px-8 py-3 border border-[var(--text-primary)] font-mono text-sm tracking-widest hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-colors"
+            className="px-8 py-3 border border-(--text-primary) font-mono text-sm tracking-widest hover:bg-(--text-primary) hover:text-(--bg-primary) transition-colors"
           >
             SKIP
           </button>

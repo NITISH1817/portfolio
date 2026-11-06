@@ -32,14 +32,14 @@ export default function IntroStatement() {
   }, []);
 
   return (
-    <section className="product-section min-h-[60vh] flex items-center justify-center bg-[var(--bg-primary)]" ref={containerRef}>
+    <section className="product-section min-h-[60vh] flex items-center justify-center bg-(--bg-primary)" ref={containerRef}>
       <div className="w-full max-w-[1200px]" ref={textRef}>
-        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-[var(--text-primary)] uppercase">I BUILD</h2></div>
-        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-[var(--text-primary)] uppercase">SOFTWARE</h2></div>
-        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-[var(--text-primary)] uppercase">SYSTEMS</h2></div>
-        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-[var(--text-primary)] uppercase">AND</h2></div>
-        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-[var(--accent)] uppercase">AI-POWERED</h2></div>
-        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-[var(--text-primary)] uppercase">PRODUCTS.</h2></div>
+        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-(--text-primary) uppercase">I BUILD</h2></div>
+        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-(--text-primary) uppercase">SOFTWARE</h2></div>
+        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-(--text-primary) uppercase">SYSTEMS</h2></div>
+        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-(--text-primary) uppercase">AND</h2></div>
+        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-(--accent) uppercase">AI-POWERED</h2></div>
+        <div className="overflow-hidden py-1"><h2 className="reveal-line text-statement font-bold text-(--text-primary) uppercase">PRODUCTS.</h2></div>
       </div>
     </section>
   );

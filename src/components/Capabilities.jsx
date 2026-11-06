@@ -48,11 +48,11 @@ export default function Capabilities() {
       <div className="w-full flex flex-col items-start gap-16 max-w-[1440px] mx-auto relative z-10">
         
         <div className="w-full flex flex-col gap-2">
-          <p className="text-metadata text-[var(--text-secondary)]">02</p>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--text-primary)]">CAPABILITIES</h2>
+          <p className="text-metadata text-(--text-secondary)">02</p>
+          <h2 className="text-3xl font-bold tracking-tight text-(--text-primary)">CAPABILITIES</h2>
         </div>
         
-        <div className="w-full flex flex-col border-t border-[var(--border-color)]">
+        <div className="w-full flex flex-col border-t border-(--border-color)">
           {capabilities.map((cap, i) => (
             <div 
               key={i}
@@ -63,15 +63,15 @@ export default function Capabilities() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 
                 <div className="flex items-center gap-8 md:gap-16">
-                  <span className="text-metadata text-[var(--text-secondary)] w-6 group-hover:text-[var(--accent)] transition-colors">
+                  <span className="text-metadata text-(--text-secondary) w-6 group-hover:text-(--accent) transition-colors">
                     0{i + 1}
                   </span>
-                  <h3 className="text-2xl md:text-4xl font-bold tracking-tighter text-[var(--text-primary)] uppercase transition-transform duration-500 ease-out group-hover:translate-x-4">
+                  <h3 className="text-2xl md:text-4xl font-bold tracking-tighter text-(--text-primary) uppercase transition-transform duration-500 ease-out group-hover:translate-x-4">
                     {cap.title}
                   </h3>
                 </div>
 
-                <div className="hidden md:flex items-center text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors duration-500 group-hover:translate-x-2">
+                <div className="hidden md:flex items-center text-(--text-secondary) group-hover:text-(--accent) transition-colors duration-500 group-hover:translate-x-2">
                   <span className="text-lg font-light">→</span>
                 </div>
 
@@ -89,22 +89,22 @@ export default function Capabilities() {
                     <div className="flex flex-col md:flex-row gap-12 pb-4">
                       
                       <div className="w-full md:w-1/2 flex flex-col gap-6">
-                        <p className="text-body text-[var(--text-secondary)]">
+                        <p className="text-body text-(--text-secondary)">
                           {cap.description}
                         </p>
                         <div className="flex flex-col gap-2">
-                          <p className="text-metadata text-[var(--text-primary)]">EVIDENCE</p>
-                          <p className="text-sm font-bold text-[var(--accent)] uppercase">{cap.evidence}</p>
+                          <p className="text-metadata text-(--text-primary)">EVIDENCE</p>
+                          <p className="text-sm font-bold text-(--accent) uppercase">{cap.evidence}</p>
                         </div>
                       </div>
 
                       <div className="w-full md:w-1/2 flex flex-col gap-4">
-                        <p className="text-metadata text-[var(--text-primary)]">TECHNOLOGY</p>
+                        <p className="text-metadata text-(--text-primary)">TECHNOLOGY</p>
                         <div className="flex flex-col gap-2">
                           {cap.tech.map((t, idx) => (
                             <span 
                               key={idx} 
-                              className="text-sm font-bold uppercase tracking-widest text-[var(--text-secondary)] border-b border-[var(--border-color)] pb-1 w-fit"
+                              className="text-sm font-bold uppercase tracking-widest text-(--text-secondary) border-b border-(--border-color) pb-1 w-fit"
                             >
                               {t}
                             </span>
@@ -118,7 +118,7 @@ export default function Capabilities() {
               </AnimatePresence>
               
               {/* Animated Accent Line */}
-              <div className="absolute bottom-0 left-0 h-[1px] bg-[var(--accent)] w-0 group-hover:w-full transition-all duration-700 ease-out" />
+              <div className="absolute bottom-0 left-0 h-[1px] bg-(--accent) w-0 group-hover:w-full transition-all duration-700 ease-out" />
             </div>
           ))}
         </div>

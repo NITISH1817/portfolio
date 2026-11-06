@@ -148,7 +148,7 @@ export default function Cursor() {
       
       {/* Outer Ring with Label */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none rounded-full flex items-center justify-center border border-[var(--text-secondary)] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none rounded-full flex items-center justify-center border border-(--text-secondary) mix-blend-difference"
         style={{
           zIndex: 100,
           x: ringX,
@@ -164,7 +164,7 @@ export default function Cursor() {
           <motion.span 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-[9px] font-bold tracking-widest text-[var(--text-primary)] absolute whitespace-nowrap"
+            className="text-[9px] font-bold tracking-widest text-(--text-primary) absolute whitespace-nowrap"
           >
             {label}
           </motion.span>
@@ -173,7 +173,7 @@ export default function Cursor() {
 
       {/* Inner Dot with Velocity Deformation */}
       <motion.div
-        className="fixed top-0 left-0 bg-[var(--text-primary)] rounded-full pointer-events-none mix-blend-difference"
+        className="fixed top-0 left-0 bg-(--text-primary) rounded-full pointer-events-none mix-blend-difference"
         style={{
           zIndex: 101,
           x: smoothX,

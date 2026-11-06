@@ -240,7 +240,7 @@ export default function BrunoZones({
                 anchorY="middle"
                 fontWeight="bold"
               >
-                {proj.category}
+                {(proj as any).category || (proj.technologies && proj.technologies[0]) || 'ENGINEERING'}
               </Text>
 
               {/* Brief Description */}

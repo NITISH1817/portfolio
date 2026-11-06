@@ -23,13 +23,13 @@ export default function ResumeViewer({ onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 bg-[var(--bg-primary)]/95 backdrop-blur-xl flex flex-col pointer-events-auto"
+      className="fixed inset-0 bg-(--bg-primary)/95 backdrop-blur-xl flex flex-col pointer-events-auto"
       style={{ zIndex: 200 }}
     >
       
       {/* Top Bar */}
-      <div className="w-full h-20 border-b border-[var(--border-color)] flex justify-between items-center px-6 md:px-12 shrink-0 bg-[var(--bg-primary)]">
-        <h3 className="text-lg font-bold tracking-tight text-[var(--text-primary)] uppercase">
+      <div className="w-full h-20 border-b border-(--border-color) flex justify-between items-center px-6 md:px-12 shrink-0 bg-(--bg-primary)">
+        <h3 className="text-lg font-bold tracking-tight text-(--text-primary) uppercase">
           RESUME PREVIEW
         </h3>
         
@@ -37,13 +37,13 @@ export default function ResumeViewer({ onClose }) {
           <a 
             href="/resume/Nitish_Priyan_Resume_Blue.pdf" 
             download
-            className="hidden md:block text-sm font-bold uppercase tracking-widest text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors border-b border-transparent hover:border-[var(--accent)] pb-1"
+            className="hidden md:block text-sm font-bold uppercase tracking-widest text-(--text-primary) hover:text-(--accent) transition-colors border-b border-transparent hover:border-(--accent) pb-1"
           >
             DOWNLOAD PDF
           </a>
           <button 
             onClick={onClose}
-            className="text-sm font-bold uppercase tracking-widest text-[var(--text-primary)] hover:text-red-500 transition-colors border-b border-transparent hover:border-red-500 pb-1"
+            className="text-sm font-bold uppercase tracking-widest text-(--text-primary) hover:text-red-500 transition-colors border-b border-transparent hover:border-red-500 pb-1"
           >
             CLOSE (ESC)
           </button>
@@ -56,11 +56,11 @@ export default function ResumeViewer({ onClose }) {
         <iframe 
           src="/resume/Nitish_Priyan_Resume_Blue.pdf#toolbar=0&navpanes=0" 
           title="Resume PDF"
-          className="w-full h-full max-w-5xl bg-white shadow-2xl border border-[var(--border-color)]"
+          className="w-full h-full max-w-5xl bg-white shadow-2xl border border-(--border-color)"
         />
         
         {/* Mobile Fallback Overlay if iframe fails to render well on small screens */}
-        <div className="md:hidden absolute inset-0 bg-[var(--bg-primary)] flex flex-col items-center justify-center p-8 text-center z-10 pointer-events-none opacity-0">
+        <div className="md:hidden absolute inset-0 bg-(--bg-primary) flex flex-col items-center justify-center p-8 text-center z-10 pointer-events-none opacity-0">
            {/* Usually mobile browsers handle PDF iframes poorly. The user can just click download. */}
         </div>
       </div>

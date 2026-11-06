@@ -79,8 +79,8 @@ export default function District1CentralSpire({ onEnter, onLeave, onInteract }: 
                 emissiveIntensity={2.8}
               />
             </mesh>
-            <mesh position={[0, 14.5, x]}>
-              <planeGeometry args={[26, 0.35]} rotation={[0, Math.PI / 2, 0]} />
+            <mesh position={[0, 14.5, x]} rotation={[0, Math.PI / 2, 0]}>
+              <planeGeometry args={[26, 0.35]} />
               <meshStandardMaterial
                 color="#A855F7"
                 emissive="#A855F7"

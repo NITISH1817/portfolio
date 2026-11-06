@@ -67,6 +67,13 @@ export default function AdvancedCursor() {
     return 1 + Math.min(magnitude * 0.1, 1);
   });
 
+  const ringX = useTransform(smoothX, x => x - 16);
+  const ringY = useTransform(smoothY, y => y - 16);
+  const dotX = useTransform(cursorX, x => x - 4);
+  const dotY = useTransform(cursorY, y => y - 4);
+  const labelX = useTransform(smoothX, x => x + 20);
+  const labelY = useTransform(smoothY, y => y - 5);
+
   if (typeof window !== "undefined" && window.innerWidth < 768) return null; // Disable on mobile
 
   return (
@@ -75,8 +82,8 @@ export default function AdvancedCursor() {
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/30 pointer-events-none z-[9999]"
         style={{
-          x: useTransform(smoothX, x => x - 16),
-          y: useTransform(smoothY, y => y - 16),
+          x: ringX,
+          y: ringY,
           scale: scale,
           rotate: rotation,
           scaleX: stretch
@@ -87,8 +94,8 @@ export default function AdvancedCursor() {
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full bg-white pointer-events-none z-[9999]"
         style={{
-          x: useTransform(cursorX, x => x - 4),
-          y: useTransform(cursorY, y => y - 4),
+          x: dotX,
+          y: dotY,
         }}
       />
 
@@ -96,8 +103,8 @@ export default function AdvancedCursor() {
       <motion.div
         className="fixed top-0 left-0 text-[10px] font-bold tracking-widest text-[#F4F7FB] pointer-events-none z-[9999] whitespace-nowrap drop-shadow-md"
         style={{
-          x: useTransform(smoothX, x => x + 20),
-          y: useTransform(smoothY, y => y - 5),
+          x: labelX,
+          y: labelY,
           opacity: hoveredLabel ? 1 : 0
         }}
       >

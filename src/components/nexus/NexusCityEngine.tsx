@@ -217,7 +217,7 @@ export default function NexusCityEngine({
           <NexusFollowCamera cameraMode={cameraMode} />
 
           {/* Restrained Cinematic Post-Processing */}
-          <EffectComposer multisampling={2} disableNormalPass>
+          <EffectComposer multisampling={2} enableNormalPass={false}>
             <Bloom
               luminanceThreshold={0.88}
               luminanceSmoothing={0.25}

@@ -250,8 +250,8 @@ interface SavedState {
   unlockedAchievements: string[];
   discoveredLandmarks: Record<string, boolean>;
   timeOfDay: 'day' | 'sunset' | 'night';
-  weather: 'clear' | 'rain' | 'mist';
-  vehicleColor: string;
+  weather?: 'clear' | 'rain' | 'mist';
+  vehicleColor?: string;
   audioEnabled: boolean;
   xp: number;
 }
@@ -381,6 +381,8 @@ export interface GameStoreState {
 const initial = loadInitialState();
 
 export const useGameStore = create<GameStoreState>((set, get) => ({
+  weather: 'clear',
+  vehicleColor: '#DC2626',
   ...initial,
   nitroEnergy: 100,
   isNitroActive: false,

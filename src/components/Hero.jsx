@@ -41,22 +41,22 @@ export default function Hero() {
           </h1>
           
           <motion.div className="flex flex-col gap-6 max-w-lg mt-4" style={{ x: xOffsetSmall }}>
-            <p className="text-metadata text-[var(--text-secondary)]">
+            <p className="text-metadata text-(--text-secondary)">
               Computer Science & Engineering Student
             </p>
             
-            <div className="text-body font-bold uppercase tracking-tight flex flex-col gap-1 text-[var(--text-secondary)]">
-              <p className="text-[var(--text-primary)]">Software Engineer</p>
+            <div className="text-body font-bold uppercase tracking-tight flex flex-col gap-1 text-(--text-secondary)">
+              <p className="text-(--text-primary)">Software Engineer</p>
               <p>Java Developer</p>
               <p>AI / ML Engineer</p>
             </div>
           </motion.div>
 
-          <div className="mt-16 flex flex-col gap-2 border-l border-[var(--border-color)] pl-4">
-            <p className="text-metadata text-[var(--text-secondary)]">
+          <div className="mt-16 flex flex-col gap-2 border-l border-(--border-color) pl-4">
+            <p className="text-metadata text-(--text-secondary)">
               Bannari Amman Institute of Technology
             </p>
-            <p className="text-metadata text-[var(--text-secondary)]">
+            <p className="text-metadata text-(--text-secondary)">
               Batch 2028
             </p>
           </div>

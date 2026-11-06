@@ -148,7 +148,6 @@ export default function BrunoPlaygroundEngine({
           <LandmarkOverlay
             landmarkId={activeLandmarkId}
             initialProject={selectedProject}
-            selectedProject={selectedProject}
             onClose={() => {
               setActiveLandmarkId(null);
               setSelectedProject(null);

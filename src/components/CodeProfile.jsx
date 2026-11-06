@@ -28,10 +28,10 @@ export default function CodeProfile() {
   }, []);
 
   return (
-    <section className="immersive-section text-[var(--text-primary)] pointer-events-none relative py-32">
+    <section className="immersive-section text-(--text-primary) pointer-events-none relative py-32">
       <div className="max-w-7xl mx-auto w-full pointer-events-auto">
         <h2 className="text-section-title">GITHUB</h2>
-        <p className="text-metadata mt-4 text-[var(--accent)] mb-16">08 — CODE</p>
+        <p className="text-metadata mt-4 text-(--accent) mb-16">08 — CODE</p>
         
         {loading ? (
           <div className="font-mono text-gray-500 mb-12">CONNECTING TO GITHUB...</div>
@@ -47,10 +47,10 @@ export default function CodeProfile() {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block border-t border-white/20 pt-4 hover:border-[var(--accent)] group transition-colors"
+                className="block border-t border-white/20 pt-4 hover:border-(--accent) group transition-colors"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold group-hover:text-[var(--accent)] transition-colors">{repo.name}</h3>
+                  <h3 className="text-2xl font-bold group-hover:text-(--accent) transition-colors">{repo.name}</h3>
                   <span className="font-mono text-xs text-gray-500">{repo.language || 'Code'}</span>
                 </div>
                 <p className="text-gray-400 font-mono text-sm line-clamp-2">{repo.description || 'No description provided.'}</p>
@@ -63,7 +63,7 @@ export default function CodeProfile() {
           href="https://github.com/NITISH1817" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-4 text-2xl font-mono border-b border-white hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all pb-2"
+          className="inline-flex items-center gap-4 text-2xl font-mono border-b border-white hover:text-(--accent) hover:border-(--accent) transition-all pb-2"
         >
           VIEW GITHUB ↗
         </a>

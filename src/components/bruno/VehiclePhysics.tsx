@@ -414,8 +414,8 @@ export default function VehiclePhysics({
             <boxGeometry args={[1.65, 0.22, 0.2]} />
             <meshStandardMaterial color="#1E232A" roughness={0.7} metalness={0.4} />
           </mesh>
-          <mesh position={[0, 0.44, 1.48]} castShadow>
-            <cylinderGeometry args={[0.055, 0.055, 1.45, 12]} rotation={[0, 0, Math.PI / 2]} />
+          <mesh position={[0, 0.44, 1.48]} rotation={[0, 0, Math.PI / 2]} castShadow>
+            <cylinderGeometry args={[0.055, 0.055, 1.45, 12]} />
             <meshStandardMaterial color="#CBD5E1" roughness={0.15} metalness={0.9} />
           </mesh>
 
@@ -513,8 +513,8 @@ export default function VehiclePhysics({
           {/* 4 LED High-Power Auxiliary Roof Projectors */}
           {[-0.45, -0.15, 0.15, 0.45].map((x, i) => (
             <group key={i} position={[x, 1.12, 0.52]}>
-              <mesh castShadow>
-                <cylinderGeometry args={[0.09, 0.09, 0.12, 12]} rotation={[Math.PI / 2, 0, 0]} />
+              <mesh rotation={[Math.PI / 2, 0, 0]} castShadow>
+                <cylinderGeometry args={[0.09, 0.09, 0.12, 12]} />
                 <meshStandardMaterial color="#1E293B" metalness={0.8} />
               </mesh>
               <mesh position={[0, 0, 0.06]}>

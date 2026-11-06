@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Sparkles, Navigation, Zap, Compass, ChevronRight, Award, FileText, Monitor, Gamepad2, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
-import { carAudio } from './CarAudio';
+import { Volume2, VolumeX, Sparkles, ChevronRight, Monitor, ShieldCheck } from 'lucide-react';
 
 interface BrunoIntroScreenProps {
   onStartExploring: () => void;
@@ -126,8 +125,14 @@ export default function BrunoIntroScreen({
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg font-medium text-slate-300 tracking-wide mb-6">
-          Computer Science Student <span className="text-purple-400 font-bold">•</span> Software Engineer <span className="text-purple-400 font-bold">•</span> Java Developer <span className="text-purple-400 font-bold">•</span> AI/ML Engineer
+        <p className="text-base sm:text-lg font-medium text-slate-300 tracking-wide mb-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+          <span>Computer Science Student</span>
+          <span className="text-purple-400 font-bold">&bull;</span>
+          <span>Software Engineer</span>
+          <span className="text-purple-400 font-bold">&bull;</span>
+          <span>Java Developer</span>
+          <span className="text-purple-400 font-bold">&bull;</span>
+          <span>AI/ML Engineer</span>
         </p>
 
         {/* Core Pillars Feature Grid */}

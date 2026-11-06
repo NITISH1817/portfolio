@@ -122,7 +122,7 @@ export default function Terminal() {
             <div className="flex-1 overflow-y-auto p-4 scrollbar-hide flex flex-col gap-2">
               {history.map((entry, i) => (
                 <div key={i} className={`
-                  ${entry.type === 'system' ? 'text-[var(--accent)] opacity-80' : ''}
+                  ${entry.type === 'system' ? 'text-(--accent) opacity-80' : ''}
                   ${entry.type === 'input' ? 'text-white' : ''}
                   ${entry.type === 'output' ? 'text-gray-400' : ''}
                   ${entry.type === 'error' ? 'text-red-400' : ''}
