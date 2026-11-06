@@ -10,6 +10,7 @@ export const profile = {
     "AI/ML Engineer"
   ],
   role: identityData.role,
+  tagline: identityData.tagline,
   location: identityData.location,
   phone: identityData.phone,
   email: identityData.email,

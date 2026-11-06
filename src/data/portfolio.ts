@@ -2,6 +2,7 @@ export interface IdentityData {
   name: string;
   shortName: string;
   role: string;
+  tagline: string;
   location: string;
   batch: string;
   cgpa: string;
@@ -73,7 +74,8 @@ export interface Achievement {
 export const identityData: IdentityData = {
   name: "NITISH PRIYAN R S",
   shortName: "NITISH PRIYAN",
-  role: "Computer Science & Engineering Student | Software Engineer | Java Developer | AI/ML Engineer",
+  role: "Software Engineer | Java Developer | AI/ML Engineer",
+  tagline: "Building intelligent software, AI systems and interactive digital experiences.",
   location: "Tamil Nadu, India",
   batch: "Batch of 2028",
   cgpa: "7.8",

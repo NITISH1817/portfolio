@@ -17,6 +17,7 @@ export class LandingArea extends Area
         this.localTime = uniform(0)
 
         this.setLetters()
+        this.setDeveloperAvatar()
         this.setKiosk()
         this.setControls()
         this.setBonfire()
@@ -155,6 +156,264 @@ export class LandingArea extends Area
             // Place 'PRIYAN'
             word2Data.forEach(placeLetter)
         })
+    }
+
+    setDeveloperAvatar()
+    {
+        const avatarGroup = new THREE.Group()
+
+        // 1. Pedestal Base
+        const pedestalBaseGeo = new THREE.CylinderGeometry(0.85, 0.95, 0.12, 32)
+        const pedestalBaseMat = new MeshDefaultMaterial({
+            colorNode: color(0x120F24),
+            hasWater: false,
+            hasLightBounce: true
+        })
+        const pedestalBaseMesh = new THREE.Mesh(pedestalBaseGeo, pedestalBaseMat)
+        pedestalBaseMesh.position.y = 0.06
+        avatarGroup.add(pedestalBaseMesh)
+
+        // Pedestal Glowing Rings
+        const ringCyanGeo = new THREE.RingGeometry(0.78, 0.84, 32)
+        const ringCyanMat = new THREE.MeshBasicMaterial({ color: 0x00F0FF, side: THREE.DoubleSide })
+        const ringCyanMesh = new THREE.Mesh(ringCyanGeo, ringCyanMat)
+        ringCyanMesh.rotation.x = -Math.PI * 0.5
+        ringCyanMesh.position.y = 0.125
+        avatarGroup.add(ringCyanMesh)
+
+        const ringOrangeGeo = new THREE.RingGeometry(0.54, 0.58, 32)
+        const ringOrangeMat = new THREE.MeshBasicMaterial({ color: 0xFF7A29, side: THREE.DoubleSide })
+        const ringOrangeMesh = new THREE.Mesh(ringOrangeGeo, ringOrangeMat)
+        ringOrangeMesh.rotation.x = -Math.PI * 0.5
+        ringOrangeMesh.position.y = 0.126
+        avatarGroup.add(ringOrangeMesh)
+
+        // 2. Avatar Character Root Group
+        const characterGroup = new THREE.Group()
+        characterGroup.position.y = 0.12
+        avatarGroup.add(characterGroup)
+
+        // Materials
+        const skinMat = new MeshDefaultMaterial({ colorNode: color(0xF2C29E), hasWater: false, hasLightBounce: true })
+        const hoodieMat = new MeshDefaultMaterial({ colorNode: color(0x161324), hasWater: false, hasLightBounce: true })
+        const hairMat = new MeshDefaultMaterial({ colorNode: color(0x191526), hasWater: false, hasLightBounce: true })
+        const pantsMat = new MeshDefaultMaterial({ colorNode: color(0x1E192E), hasWater: false, hasLightBounce: true })
+        const sneakerMat = new MeshDefaultMaterial({ colorNode: color(0xFFFFFF), hasWater: false, hasLightBounce: true })
+        const cyanBasicMat = new THREE.MeshBasicMaterial({ color: 0x00F0FF })
+        const orangeBasicMat = new THREE.MeshBasicMaterial({ color: 0xFF7A29 })
+        const purpleBasicMat = new THREE.MeshBasicMaterial({ color: 0x8B5CF6 })
+
+        // Torso Group (for breathing animation)
+        const torsoGroup = new THREE.Group()
+        torsoGroup.position.set(0, 1.15, 0)
+        characterGroup.add(torsoGroup)
+
+        // Hoodie body
+        const torsoMesh = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.6, 0.34), hoodieMat)
+        torsoMesh.castShadow = true
+        torsoGroup.add(torsoMesh)
+
+        // Hoodie cyan zipper
+        const zipperMesh = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.56, 0.01), cyanBasicMat)
+        zipperMesh.position.set(0, 0, 0.175)
+        torsoGroup.add(zipperMesh)
+
+        // Hoodie orange side accents
+        const accentLeft = new THREE.Mesh(new THREE.BoxGeometry(0.025, 0.48, 0.2), orangeBasicMat)
+        accentLeft.position.set(-0.27, 0, 0.08)
+        torsoGroup.add(accentLeft)
+
+        const accentRight = new THREE.Mesh(new THREE.BoxGeometry(0.025, 0.48, 0.2), orangeBasicMat)
+        accentRight.position.set(0.27, 0, 0.08)
+        torsoGroup.add(accentRight)
+
+        // Folded hood on back
+        const hoodMesh = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.2, 0.16), hoodieMat)
+        hoodMesh.position.set(0, 0.22, -0.16)
+        hoodMesh.rotation.x = 0.35
+        torsoGroup.add(hoodMesh)
+
+        // Head Group (for subtle tracking/bobbing)
+        const headGroup = new THREE.Group()
+        headGroup.position.set(0, 1.72, 0)
+        characterGroup.add(headGroup)
+
+        // Neck
+        const neckMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.1, 0.14, 12), skinMat)
+        neckMesh.position.set(0, -0.22, 0)
+        headGroup.add(neckMesh)
+
+        // Cranium
+        const headMesh = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.42, 0.36), skinMat)
+        headMesh.castShadow = true
+        headGroup.add(headMesh)
+
+        // Hair
+        const hairMesh = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.2, 0.4), hairMat)
+        hairMesh.position.set(0, 0.16, -0.02)
+        headGroup.add(hairMesh)
+
+        const fringeMesh = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, 0.14), hairMat)
+        fringeMesh.position.set(0, 0.22, 0.16)
+        fringeMesh.rotation.x = 0.2
+        headGroup.add(fringeMesh)
+
+        // Smart Glasses (Cyan glow)
+        const glassesFrameLeft = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.09, 0.02), cyanBasicMat)
+        glassesFrameLeft.position.set(-0.1, 0.02, 0.19)
+        headGroup.add(glassesFrameLeft)
+
+        const glassesFrameRight = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.09, 0.02), cyanBasicMat)
+        glassesFrameRight.position.set(0.1, 0.02, 0.19)
+        headGroup.add(glassesFrameRight)
+
+        const glassesBridge = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.02, 0.02), cyanBasicMat)
+        glassesBridge.position.set(0, 0.03, 0.19)
+        headGroup.add(glassesBridge)
+
+        // Headphones around neck
+        const headphoneArch = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.03, 8, 24, Math.PI), hoodieMat)
+        headphoneArch.rotation.x = Math.PI * 0.5
+        headphoneArch.position.set(0, -0.24, 0)
+        headGroup.add(headphoneArch)
+
+        const earcupLeft = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.06, 16), purpleBasicMat)
+        earcupLeft.position.set(-0.28, -0.22, 0)
+        earcupLeft.rotation.z = Math.PI * 0.5
+        headGroup.add(earcupLeft)
+
+        const earcupRight = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.06, 16), cyanBasicMat)
+        earcupRight.position.set(0.28, -0.22, 0)
+        earcupRight.rotation.z = Math.PI * 0.5
+        headGroup.add(earcupRight)
+
+        // Arms & Hands
+        const armLeft = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.42, 0.16), hoodieMat)
+        armLeft.position.set(-0.35, 1.05, 0.1)
+        armLeft.rotation.x = 0.4
+        characterGroup.add(armLeft)
+
+        const armRight = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.42, 0.16), hoodieMat)
+        armRight.position.set(0.35, 1.05, 0.16)
+        armRight.rotation.x = 0.7
+        characterGroup.add(armRight)
+
+        // Hands
+        const handLeft = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.1, 0.06), skinMat)
+        handLeft.position.set(-0.34, 0.85, 0.24)
+        characterGroup.add(handLeft)
+
+        const handRight = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.1, 0.06), skinMat)
+        handRight.position.set(0.34, 0.9, 0.32)
+        characterGroup.add(handRight)
+
+        // Legs
+        const legLeft = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.55, 0.2), pantsMat)
+        legLeft.position.set(-0.15, 0.45, 0)
+        characterGroup.add(legLeft)
+
+        const legRight = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.55, 0.2), pantsMat)
+        legRight.position.set(0.15, 0.45, 0)
+        characterGroup.add(legRight)
+
+        // Modern Sneakers
+        const sneakerLeft = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.1, 0.28), sneakerMat)
+        sneakerLeft.position.set(-0.15, 0.05, 0.04)
+        characterGroup.add(sneakerLeft)
+
+        const sneakerRight = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.1, 0.28), sneakerMat)
+        sneakerRight.position.set(0.15, 0.05, 0.04)
+        characterGroup.add(sneakerRight)
+
+        // 3. Floating Levitating Holographic Tablet
+        const hologramGroup = new THREE.Group()
+        hologramGroup.position.set(0, 1.25, 0.44)
+        characterGroup.add(hologramGroup)
+
+        const tabletGlassMat = new THREE.MeshBasicMaterial({
+            color: 0x00E5FF,
+            transparent: true,
+            opacity: 0.55,
+            side: THREE.DoubleSide
+        })
+        const tabletMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.52, 0.34), tabletGlassMat)
+        tabletMesh.rotation.x = -0.3
+        hologramGroup.add(tabletMesh)
+
+        // Rotating Cyber Rings
+        const ring1 = new THREE.Mesh(new THREE.TorusGeometry(0.36, 0.008, 8, 32), cyanBasicMat)
+        hologramGroup.add(ring1)
+
+        const ring2 = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.006, 8, 32), purpleBasicMat)
+        hologramGroup.add(ring2)
+
+        // 4. Place into Game World & Rapier Physics
+        const avatarWorldPos = new THREE.Vector3(37.2, 0.55, 44.2)
+        const avatarQuat = new THREE.Quaternion(0, 0.2164, 0, 0.9763)
+
+        this.game.objects.add(
+            {
+                model: avatarGroup,
+                updateMaterials: false,
+                castShadow: true,
+                receiveShadow: true
+            },
+            {
+                type: 'fixed',
+                position: avatarWorldPos,
+                rotation: avatarQuat,
+                colliders: [
+                    { shape: 'cylinder', parameters: [ 0.6, 0.95 ] }
+                ]
+            }
+        )
+
+        // 5. Interactive Proximity Marker
+        this.game.interactivePoints.create(
+            avatarWorldPos.clone().add(new THREE.Vector3(0, 2.1, 0)),
+            'Developer (Dossier)',
+            InteractivePoints.ALIGN_RIGHT,
+            InteractivePoints.STATE_CONCEALED,
+            () =>
+            {
+                this.game.inputs.interactiveButtons.clearItems()
+                window.dispatchEvent(new CustomEvent('open-recruiter-modal'))
+            },
+            () =>
+            {
+                this.game.inputs.interactiveButtons.addItems(['interact'])
+            },
+            () =>
+            {
+                this.game.inputs.interactiveButtons.removeItems(['interact'])
+            },
+            () =>
+            {
+                this.game.inputs.interactiveButtons.removeItems(['interact'])
+            }
+        )
+
+        // 6. Animation updater
+        this.avatarAnimation = {
+            time: 0,
+            update: (delta) =>
+            {
+                this.avatarAnimation.time += delta
+                const t = this.avatarAnimation.time
+
+                // Natural idle breathing
+                torsoGroup.position.y = 1.15 + Math.sin(t * 1.8) * 0.025
+                headGroup.position.y = 1.72 + Math.sin(t * 1.8) * 0.02
+                headGroup.rotation.y = Math.sin(t * 0.8) * 0.12
+
+                // Levitating tablet & rotating hologram rings
+                hologramGroup.position.y = 1.25 + Math.sin(t * 2.2) * 0.035
+                ring1.rotation.z += delta * 0.7
+                ring1.rotation.x += delta * 0.3
+                ring2.rotation.z -= delta * 0.5
+                ring2.rotation.y += delta * 0.4
+            }
+        }
     }
 
     setKiosk()
@@ -392,5 +651,10 @@ export class LandingArea extends Area
     update()
     {
         this.localTime.value += this.game.ticker.deltaScaled * 0.1
+
+        if (this.avatarAnimation)
+        {
+            this.avatarAnimation.update(this.game.ticker.deltaScaled)
+        }
     }
 }

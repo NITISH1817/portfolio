@@ -80,9 +80,9 @@ export default function RecruiterModal({
   };
 
   const featuredProjects = [
-    projects.find((p) => p.id === 'proj-setu') || projects[0],
-    projects.find((p) => p.id === 'proj-lexora') || projects[1],
-    projects.find((p) => p.id === 'proj-edu-prediction') || projects[2]
+    projects.find((p) => p.id === 'proj-govscheme') || projects[0],
+    projects.find((p) => p.id === 'proj-nexora') || projects[1],
+    projects.find((p) => p.id === 'proj-mlops') || projects[2]
   ];
 
   return (
@@ -99,14 +99,14 @@ export default function RecruiterModal({
                 RECRUITER FAST-TRACK BRIEF
               </span>
               <span className="text-[10px] font-mono text-purple-300">
-                BATCH 2028 // FULL STACK & AI/ML
+                BATCH 2028 // SOFTWARE & AI/ML
               </span>
             </div>
             <h2 className="font-space text-2xl sm:text-3xl font-extrabold text-white mt-1">
               NITISH PRIYAN R S
             </h2>
-            <p className="text-xs sm:text-sm text-purple-200 font-inter font-medium">
-              Computer Science & Engineering Student • Full Stack Developer • AI/ML Engineer
+            <p className="text-xs sm:text-sm text-cyan-200 font-inter font-medium">
+              Software Engineer | Java Developer | AI/ML Engineer
             </p>
           </div>
 

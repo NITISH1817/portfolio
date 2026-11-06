@@ -9,7 +9,8 @@ const text = `
                                                                         
 ╔═ Developer ═══════════════════════════════════════════════════════════╗
 ║ Nitish Priyan R S
-║ Computer Science & Engineering Student | Software Engineer | Java Developer | AI/ML Engineer
+║ Software Engineer | Java Developer | AI/ML Engineer
+║ Building intelligent software, AI systems and interactive digital experiences.
 ║ Bannari Amman Institute of Technology (B.E. CSE, Batch 2028 | CGPA: 7.8)
 ║ Location: Tamil Nadu, India | Phone: +91 9442497220
 ╚═══════════════════════════════════════════════════════════════════════╝
